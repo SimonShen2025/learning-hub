@@ -1,10 +1,19 @@
 import type { CourseDetail } from "@/lib/content";
+import { CourseProgress } from "@/components/course-progress";
 
 interface CourseInfoProps {
   course: CourseDetail;
 }
 
-function InfoItem({ label, value, bold }: { label: string; value: string; bold?: boolean }) {
+function InfoItem({
+  label,
+  value,
+  bold,
+}: {
+  label: string;
+  value: string;
+  bold?: boolean;
+}) {
   if (!value) return null;
   return (
     <div className="flex flex-col gap-0.5">
@@ -15,7 +24,7 @@ function InfoItem({ label, value, bold }: { label: string; value: string; bold?:
 }
 
 export function CourseInfo({ course }: CourseInfoProps) {
-  const hasExtendedInfo =
+  const hasCourseInfo =
     course.instructor ||
     course.lastUpdated ||
     course.language ||
@@ -44,7 +53,7 @@ export function CourseInfo({ course }: CourseInfoProps) {
         </a>
       )}
 
-      {hasExtendedInfo && (
+      {hasCourseInfo && (
         <div className="mt-4 rounded-xl border border-violet-100 dark:border-violet-900/50 shadow-sm p-5 bg-gradient-to-br from-violet-50 to-indigo-50 dark:from-violet-950/50 dark:to-indigo-950/50">
           {course.description && (
             <p className="text-sm text-foreground mb-4 leading-relaxed">
@@ -79,6 +88,13 @@ export function CourseInfo({ course }: CourseInfoProps) {
           </dl>
         </div>
       )}
+
+      <CourseProgress
+        courseSlug={course.slug}
+        startDate={course.startDate ?? ""}
+        endDate={course.endDate ?? ""}
+        notes={course.notes ?? ""}
+      />
     </div>
   );
 }

@@ -26,6 +26,9 @@ export interface CourseDetail {
   totalHours?: number;
   level?: string;
   description?: string;
+  startDate?: string;
+  endDate?: string;
+  notes?: string;
 }
 
 export interface Section {
@@ -217,5 +220,8 @@ export function getCourseDetail(courseSlug: string): CourseDetail | null {
     totalHours: meta.totalHours,
     level: meta.level,
     description: meta.description,
+    startDate: meta.startDate,
+    endDate: meta.endDate,
+    notes: meta.notes,
   };
 }

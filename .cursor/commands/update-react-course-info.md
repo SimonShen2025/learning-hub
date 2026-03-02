@@ -23,6 +23,9 @@ content/react-complete-guide/_course.json
 | Total Hours | `totalHours` | number | Total video hours |
 | Level | `level` | string | Difficulty level (e.g. `"Beginner"`, `"Intermediate"`, `"All Levels"`) |
 | Description | `description` | string | A short 1-2 sentence summary of what the course covers |
+| Started | `startDate` | string | When the user started learning this course, in `YYYY-MM-DD` format (e.g. `"2026-03-01"`) |
+| Finished | `endDate` | string | When the user finished this course, in `YYYY-MM-DD` format (e.g. `"2026-04-15"`, or empty string if still in progress) |
+| Notes | `notes` | string | Personal notes from the user about the course — keep the user's wording |
 
 ## Rules
 
