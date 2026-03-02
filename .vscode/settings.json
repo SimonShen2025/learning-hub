@@ -1,0 +1,6 @@
+{
+  // Enable Copilot to read *.instructions.md files
+  "github.copilot.chat.codeGeneration.useInstructionFiles": true,
+  // Enable *.prompt.md files to appear as slash commands in Copilot Chat
+  "chat.promptFiles": true
+}
