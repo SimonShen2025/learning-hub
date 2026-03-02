@@ -9,17 +9,21 @@ export interface Course {
   title: string;
   platform: string;
   url: string;
+  status: CourseStatus;
   startDate?: string;
   endDate?: string;
   sectionCount: number;
   lectureCount: number;
 }
 
+export type CourseStatus = "learning" | "on_hold" | "complete";
+
 export interface CourseDetail {
   slug: string;
   title: string;
   platform: string;
   url: string;
+  status: CourseStatus;
   instructor?: string;
   lastUpdated?: string;
   language?: string;
@@ -74,6 +78,22 @@ function parseLectureFile(fileName: string): { id: number; slug: string } {
   return { id: parseInt(match[1], 10), slug: base };
 }
 
+function isValidDateString(value?: string): boolean {
+  if (!value) return false;
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+  const parsed = new Date(`${value}T00:00:00`);
+  return !isNaN(parsed.getTime());
+}
+
+function resolveCourseStatus(meta: {
+  endDate?: string;
+  status?: string;
+}): CourseStatus {
+  if (isValidDateString(meta.endDate)) return "complete";
+  if (meta.status === "on_hold") return "on_hold";
+  return "learning";
+}
+
 export function getCourses(): Course[] {
   if (!fs.existsSync(CONTENT_DIR)) return [];
 
@@ -95,6 +115,7 @@ export function getCourses(): Course[] {
       title: meta.title,
       platform: meta.platform,
       url: meta.url,
+      status: resolveCourseStatus(meta),
       startDate: meta.startDate,
       endDate: meta.endDate,
       sectionCount: sections.length,
@@ -193,7 +214,9 @@ export function getLecture(
   };
 }
 
-export function getCourse(courseSlug: string): Omit<Course, "sectionCount" | "lectureCount"> | null {
+export function getCourse(
+  courseSlug: string,
+): Pick<CourseDetail, "slug" | "title" | "platform" | "url" | "status"> | null {
   const metaPath = path.join(CONTENT_DIR, courseSlug, "_course.json");
   if (!fs.existsSync(metaPath)) return null;
 
@@ -203,6 +226,7 @@ export function getCourse(courseSlug: string): Omit<Course, "sectionCount" | "le
     title: meta.title,
     platform: meta.platform,
     url: meta.url,
+    status: resolveCourseStatus(meta),
   };
 }
 
@@ -216,6 +240,7 @@ export function getCourseDetail(courseSlug: string): CourseDetail | null {
     title: meta.title,
     platform: meta.platform,
     url: meta.url,
+    status: resolveCourseStatus(meta),
     instructor: meta.instructor,
     lastUpdated: meta.lastUpdated,
     language: meta.language,

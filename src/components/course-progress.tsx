@@ -1,9 +1,11 @@
 "use client";
 
 import { useState, useRef } from "react";
+import type { CourseStatus } from "@/lib/content";
 
 interface CourseProgressProps {
   courseSlug: string;
+  status: CourseStatus;
   startDate: string;
   endDate: string;
   notes: string;
@@ -20,17 +22,27 @@ function formatDisplay(dateStr: string): string {
   });
 }
 
+function isValidDate(dateStr: string): boolean {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) return false;
+  const d = new Date(dateStr + "T00:00:00");
+  return !isNaN(d.getTime());
+}
+
 export function CourseProgress({
   courseSlug,
+  status: initialStatus,
   startDate: initialStart,
   endDate: initialEnd,
   notes: initialNotes,
 }: CourseProgressProps) {
+  const [status, setStatus] = useState<CourseStatus>(initialStatus);
   const [startDate, setStartDate] = useState(initialStart);
   const [endDate, setEndDate] = useState(initialEnd);
   const [notes, setNotes] = useState(initialNotes);
   const [editingNotes, setEditingNotes] = useState(false);
   const notesRef = useRef<HTMLTextAreaElement>(null);
+
+  const computedStatus: CourseStatus = isValidDate(endDate) ? "complete" : status;
 
   async function save(updates: Record<string, string>) {
     await fetch(`/api/courses/${courseSlug}/meta`, {
@@ -46,6 +58,12 @@ export function CourseProgress({
     save({ [field]: value });
   }
 
+  function handleStatusChange(value: CourseStatus) {
+    if (value === "complete") return;
+    setStatus(value);
+    save({ status: value });
+  }
+
   function handleNotesSave() {
     setEditingNotes(false);
     save({ notes });
@@ -54,6 +72,26 @@ export function CourseProgress({
   return (
     <>
       <dl className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+        <div className="flex flex-col gap-0.5">
+          <dt className="text-xs text-muted-foreground">Status</dt>
+          <dd className="text-sm">
+            {computedStatus === "complete" ? (
+              <span className="rounded-full px-2 py-0.5 text-xs font-medium bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300">
+                Complete
+              </span>
+            ) : (
+              <select
+                value={computedStatus}
+                onChange={(e) => handleStatusChange(e.target.value as CourseStatus)}
+                className="rounded-md border bg-background px-2 py-1 text-xs shadow-xs focus-visible:ring-violet-500 focus-visible:ring-2 focus-visible:ring-offset-2"
+              >
+                <option value="learning">Learning</option>
+                <option value="on_hold">On Hold</option>
+              </select>
+            )}
+          </dd>
+        </div>
+
         <div className="flex flex-col gap-0.5">
           <dt className="text-xs text-muted-foreground">Started</dt>
           <dd className="flex items-center gap-2">

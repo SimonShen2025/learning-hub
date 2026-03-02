@@ -1,0 +1,18 @@
+{
+  "slug": "prompt-studio-mastery",
+  "title": "Prompt Studio Mastery",
+  "platform": "self-learning",
+  "url": "https://prompt-studio-ebon.vercel.app/dashboard",
+  "status": "learning",
+  "instructor": "Internal Team",
+  "lastUpdated": "2026-03-01",
+  "language": "English",
+  "rating": 5,
+  "totalStudents": 1,
+  "totalHours": 12,
+  "level": "Intermediate",
+  "description": "Learn how to manage, version, and share prompts effectively with a practical workflow.",
+  "startDate": "2026-03-12",
+  "endDate": "",
+  "notes": "Focus on prompt versioning and team workflow."
+}

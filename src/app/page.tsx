@@ -1,5 +1,5 @@
 import { getCourses } from "@/lib/content";
-import { CourseCard } from "@/components/course-card";
+import { HomeCoursesPanel } from "@/components/home-courses-panel";
 
 export default function HomePage() {
   const courses = getCourses();
@@ -41,16 +41,7 @@ export default function HomePage() {
           </p>
         </div>
       ) : (
-        <>
-          <h2 className="text-xs font-semibold tracking-tight text-violet-600 uppercase mb-4">
-            Courses
-          </h2>
-          <div className="grid gap-4 sm:grid-cols-2">
-            {courses.map((course) => (
-              <CourseCard key={course.slug} {...course} />
-            ))}
-          </div>
-        </>
+        <HomeCoursesPanel courses={courses} />
       )}
     </div>
   );

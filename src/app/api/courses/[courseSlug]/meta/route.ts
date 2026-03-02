@@ -18,7 +18,7 @@ export async function PATCH(
   const existing = JSON.parse(fs.readFileSync(metaPath, "utf-8"));
   const updates = await request.json();
 
-  const allowedKeys = ["startDate", "endDate", "notes"];
+  const allowedKeys = ["status", "startDate", "endDate", "notes"];
   for (const key of Object.keys(updates)) {
     if (allowedKeys.includes(key)) {
       existing[key] = updates[key];

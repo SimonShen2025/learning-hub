@@ -24,6 +24,24 @@ function InfoItem({
 }
 
 export function CourseInfo({ course }: CourseInfoProps) {
+  const statusConfig = {
+    learning: {
+      label: "Learning",
+      className:
+        "bg-violet-100 text-violet-700 dark:bg-violet-900/30 dark:text-violet-300",
+    },
+    on_hold: {
+      label: "On Hold",
+      className:
+        "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300",
+    },
+    complete: {
+      label: "Complete",
+      className:
+        "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300",
+    },
+  };
+
   const hasCourseInfo =
     course.instructor ||
     course.lastUpdated ||
@@ -39,6 +57,11 @@ export function CourseInfo({ course }: CourseInfoProps) {
         <h1 className="text-3xl font-bold tracking-tight">{course.title}</h1>
         <span className="rounded-full px-2 py-0.5 text-xs font-medium bg-violet-100 text-violet-700 dark:bg-violet-900/30 dark:text-violet-300 border-0 capitalize">
           {course.platform}
+        </span>
+        <span
+          className={`rounded-full px-2 py-0.5 text-xs font-medium ${statusConfig[course.status].className}`}
+        >
+          {statusConfig[course.status].label}
         </span>
       </div>
 
@@ -119,6 +142,7 @@ export function CourseInfo({ course }: CourseInfoProps) {
         <div className="border-t border-violet-100 dark:border-violet-900/50 p-5">
           <CourseProgress
             courseSlug={course.slug}
+            status={course.status}
             startDate={course.startDate ?? ""}
             endDate={course.endDate ?? ""}
             notes={course.notes ?? ""}
