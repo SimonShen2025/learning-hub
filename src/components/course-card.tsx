@@ -4,16 +4,27 @@ interface CourseCardProps {
   slug: string;
   title: string;
   platform: string;
-  sectionCount: number;
-  lectureCount: number;
+  startDate?: string;
+  endDate?: string;
+}
+
+function formatDate(value?: string): string {
+  if (!value) return "--";
+  const parsed = new Date(`${value}T00:00:00`);
+  if (isNaN(parsed.getTime())) return "--";
+  return parsed.toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
 }
 
 export function CourseCard({
   slug,
   title,
   platform,
-  sectionCount,
-  lectureCount,
+  startDate,
+  endDate,
 }: CourseCardProps) {
   return (
     <Link href={`/courses/${slug}`}>
@@ -31,9 +42,15 @@ export function CourseCard({
           {title}
         </h3>
 
-        <div className="flex gap-4 text-sm text-muted-foreground">
-          <span>{sectionCount} sections</span>
-          <span>{lectureCount} lectures</span>
+        <div className="grid grid-cols-2 gap-3 text-sm">
+          <div>
+            <p className="text-xs text-muted-foreground">Started</p>
+            <p className="font-medium">{formatDate(startDate)}</p>
+          </div>
+          <div>
+            <p className="text-xs text-muted-foreground">Finished</p>
+            <p className="font-medium">{formatDate(endDate)}</p>
+          </div>
         </div>
       </div>
     </Link>

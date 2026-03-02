@@ -9,6 +9,8 @@ export interface Course {
   title: string;
   platform: string;
   url: string;
+  startDate?: string;
+  endDate?: string;
   sectionCount: number;
   lectureCount: number;
 }
@@ -93,6 +95,8 @@ export function getCourses(): Course[] {
       title: meta.title,
       platform: meta.platform,
       url: meta.url,
+      startDate: meta.startDate,
+      endDate: meta.endDate,
       sectionCount: sections.length,
       lectureCount,
     });

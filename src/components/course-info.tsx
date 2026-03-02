@@ -54,47 +54,77 @@ export function CourseInfo({ course }: CourseInfoProps) {
       )}
 
       {hasCourseInfo && (
-        <div className="mt-4 rounded-xl border border-violet-100 dark:border-violet-900/50 shadow-sm p-5 bg-gradient-to-br from-violet-50 to-indigo-50 dark:from-violet-950/50 dark:to-indigo-950/50">
-          {course.description && (
-            <p className="text-sm text-foreground mb-4 leading-relaxed">
-              {course.description}
-            </p>
-          )}
-          <dl className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-            <InfoItem label="Instructor" value={course.instructor ?? ""} />
-            <InfoItem
-              label="Last Updated"
-              value={course.lastUpdated ?? ""}
-              bold
-            />
-            <InfoItem label="Language" value={course.language ?? ""} />
-            <InfoItem
-              label="Rating"
-              value={course.rating ? `${course.rating} / 5` : ""}
-            />
-            <InfoItem
-              label="Students"
-              value={
-                course.totalStudents
-                  ? course.totalStudents.toLocaleString()
-                  : ""
-              }
-            />
-            <InfoItem
-              label="Total Hours"
-              value={course.totalHours ? `${course.totalHours}h` : ""}
-            />
-            <InfoItem label="Level" value={course.level ?? ""} />
-          </dl>
-        </div>
+        <details className="group mt-4 rounded-xl border border-violet-100 dark:border-violet-900/50 shadow-sm overflow-hidden">
+          <summary className="flex cursor-pointer list-none items-center justify-between px-5 py-3 text-xs font-semibold tracking-tight text-violet-600 uppercase bg-violet-50/70 dark:bg-violet-950/30 [&::-webkit-details-marker]:hidden">
+            Course Details
+            <svg
+              className="h-4 w-4 text-muted-foreground transition-transform duration-200 group-open:rotate-180"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div className="border-t border-violet-100 dark:border-violet-900/50 p-5 bg-gradient-to-br from-violet-50 to-indigo-50 dark:from-violet-950/50 dark:to-indigo-950/50">
+            {course.description && (
+              <p className="text-sm text-foreground mb-4 leading-relaxed">
+                {course.description}
+              </p>
+            )}
+            <dl className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+              <InfoItem label="Instructor" value={course.instructor ?? ""} />
+              <InfoItem
+                label="Last Updated"
+                value={course.lastUpdated ?? ""}
+                bold
+              />
+              <InfoItem label="Language" value={course.language ?? ""} />
+              <InfoItem
+                label="Rating"
+                value={course.rating ? `${course.rating} / 5` : ""}
+              />
+              <InfoItem
+                label="Students"
+                value={
+                  course.totalStudents
+                    ? course.totalStudents.toLocaleString()
+                    : ""
+                }
+              />
+              <InfoItem
+                label="Total Hours"
+                value={course.totalHours ? `${course.totalHours}h` : ""}
+              />
+              <InfoItem label="Level" value={course.level ?? ""} />
+            </dl>
+          </div>
+        </details>
       )}
 
-      <CourseProgress
-        courseSlug={course.slug}
-        startDate={course.startDate ?? ""}
-        endDate={course.endDate ?? ""}
-        notes={course.notes ?? ""}
-      />
+      <details className="group mt-4 rounded-xl border border-violet-100 dark:border-violet-900/50 shadow-sm overflow-hidden">
+        <summary className="flex cursor-pointer list-none items-center justify-between px-5 py-3 text-xs font-semibold tracking-tight text-indigo-600 dark:text-indigo-400 uppercase bg-background [&::-webkit-details-marker]:hidden">
+          My Progress
+          <svg
+            className="h-4 w-4 text-muted-foreground transition-transform duration-200 group-open:rotate-180"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+        <div className="border-t border-violet-100 dark:border-violet-900/50 p-5">
+          <CourseProgress
+            courseSlug={course.slug}
+            startDate={course.startDate ?? ""}
+            endDate={course.endDate ?? ""}
+            notes={course.notes ?? ""}
+          />
+        </div>
+      </details>
     </div>
   );
 }

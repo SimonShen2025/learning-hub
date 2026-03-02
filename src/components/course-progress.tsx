@@ -52,11 +52,7 @@ export function CourseProgress({
   }
 
   return (
-    <div className="mt-4 rounded-xl border border-violet-100 dark:border-violet-900/50 shadow-sm p-5">
-      <h2 className="text-xs font-semibold tracking-tight text-indigo-600 dark:text-indigo-400 uppercase mb-3">
-        My Progress
-      </h2>
-
+    <>
       <dl className="grid grid-cols-2 sm:grid-cols-3 gap-4">
         <div className="flex flex-col gap-0.5">
           <dt className="text-xs text-muted-foreground">Started</dt>
@@ -160,6 +156,6 @@ export function CourseProgress({
           </dd>
         )}
       </div>
-    </div>
+    </>
   );
 }
