@@ -51,8 +51,8 @@ export function CourseCard({
   };
 
   return (
-    <Link href={`/courses/${slug}`}>
-      <div className="group relative rounded-xl border shadow-sm transition-all hover:shadow-lg hover:border-violet-200 dark:hover:border-violet-800 border-violet-100 dark:border-violet-900/50 p-6">
+    <Link href={`/courses/${slug}`} className="block h-full">
+      <div className="group relative h-full rounded-xl border shadow-sm transition-all hover:shadow-lg hover:border-violet-200 dark:hover:border-violet-800 border-violet-100 dark:border-violet-900/50 p-6 flex flex-col">
         <span
           className={`absolute right-4 top-4 rounded-full px-2 py-0.5 text-xs font-medium ${statusConfig[status].className}`}
         >
@@ -67,11 +67,11 @@ export function CourseCard({
           </span>
         </div>
 
-        <h3 className="text-xl font-bold mb-3 group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors">
+        <h3 className="text-xl font-bold mb-3 min-h-14 leading-snug group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors">
           {title}
         </h3>
 
-        <div className="grid grid-cols-2 gap-3 text-sm">
+        <div className="grid grid-cols-2 gap-3 text-sm mt-auto">
           <div>
             <p className="text-xs text-muted-foreground">Started</p>
             <p className="font-medium">{formatDate(startDate)}</p>
