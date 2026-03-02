@@ -1,14 +1,14 @@
 {
+  "slug": "react-complete-guide",
   "title": "React - The Complete Guide (incl. Next.js, Redux)",
   "platform": "udemy",
-  "slug": "react-complete-guide",
   "url": "https://www.udemy.com/course/react-the-complete-guide-incl-redux/",
-  "instructor": "",
-  "lastUpdated": "",
-  "language": "",
-  "rating": null,
-  "totalStudents": null,
-  "totalHours": null,
-  "level": "",
-  "description": ""
+  "instructor": "Maximilian Schwarzmüller",
+  "lastUpdated": "January 2026",
+  "language": "English",
+  "rating": 4.7,
+  "totalStudents": 1009937,
+  "totalHours": 71.5,
+  "level": "All Levels",
+  "description": "Learn React from the ground up, covering all core basics, Hooks, Redux, React Router, Next.js 14+, authentication, unit testing, and TypeScript integration. Fully updated for React 19, this course takes you from zero knowledge to advanced React developer through hands-on demo projects and real-world patterns."
 }
