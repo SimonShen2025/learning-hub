@@ -59,7 +59,6 @@ export default async function SectionPage({ params }: Props) {
               <LectureCard
                 key={lecture.slug}
                 courseSlug={courseSlug}
-                sectionSlug={sectionSlug}
                 {...lecture}
               />
             ))}

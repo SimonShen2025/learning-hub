@@ -13,6 +13,21 @@ export interface Course {
   lectureCount: number;
 }
 
+export interface CourseDetail {
+  slug: string;
+  title: string;
+  platform: string;
+  url: string;
+  instructor?: string;
+  lastUpdated?: string;
+  language?: string;
+  rating?: number;
+  totalStudents?: number;
+  totalHours?: number;
+  level?: string;
+  description?: string;
+}
+
 export interface Section {
   slug: string;
   number: number;
@@ -181,5 +196,26 @@ export function getCourse(courseSlug: string): Omit<Course, "sectionCount" | "le
     title: meta.title,
     platform: meta.platform,
     url: meta.url,
+  };
+}
+
+export function getCourseDetail(courseSlug: string): CourseDetail | null {
+  const metaPath = path.join(CONTENT_DIR, courseSlug, "_course.json");
+  if (!fs.existsSync(metaPath)) return null;
+
+  const meta = JSON.parse(fs.readFileSync(metaPath, "utf-8"));
+  return {
+    slug: courseSlug,
+    title: meta.title,
+    platform: meta.platform,
+    url: meta.url,
+    instructor: meta.instructor,
+    lastUpdated: meta.lastUpdated,
+    language: meta.language,
+    rating: meta.rating,
+    totalStudents: meta.totalStudents,
+    totalHours: meta.totalHours,
+    level: meta.level,
+    description: meta.description,
   };
 }
