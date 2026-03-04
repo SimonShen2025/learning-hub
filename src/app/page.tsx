@@ -1,5 +1,6 @@
 import { getCourses } from "@/lib/content";
 import { HomeCoursesPanel } from "@/components/home-courses-panel";
+import { WorkflowGuide } from "@/components/workflow-guide";
 
 export default function HomePage() {
   const courses = getCourses();
@@ -16,6 +17,10 @@ export default function HomePage() {
           Course notes and study materials, organised by course, section, and
           lecture.
         </p>
+      </div>
+
+      <div className="mb-8">
+        <WorkflowGuide />
       </div>
 
       {courses.length === 0 ? (
