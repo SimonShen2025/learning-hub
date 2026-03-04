@@ -1,0 +1,218 @@
+{
+  "slug": "aws-solutions-architect-associate",
+  "title": "Ultimate AWS Certified Solutions Architect Associate 2026",
+  "platform": "udemy",
+  "url": "https://www.udemy.com/course/aws-certified-solutions-architect-associate-saa-c03/",
+  "status": "not-started",
+  "instructor": "Stephane Maarek",
+  "lastUpdated": "2/2026",
+  "language": "English",
+  "rating": 4.7,
+  "totalStudents": 1243968,
+  "totalHours": 27,
+  "level": "All Levels",
+  "description": "Pass the AWS Certified Solutions Architect Associate SAA-C03 exam with full practice exam, 800+ slides, and hands-on AWS experience covering all key services and solution architectures.",
+  "startDate": "",
+  "endDate": "",
+  "notes": "",
+  "sections": [
+    {
+      "number": 1,
+      "title": "Introduction - AWS Certified Solutions Architect Associate",
+      "slug": "introduction",
+      "lectures": 6
+    },
+    {
+      "number": 2,
+      "title": "Code & Slides Download",
+      "slug": "code-slides-download",
+      "lectures": 1
+    },
+    {
+      "number": 3,
+      "title": "Getting started with AWS",
+      "slug": "getting-started-with-aws",
+      "lectures": 3
+    },
+    {
+      "number": 4,
+      "title": "IAM & AWS CLI",
+      "slug": "iam-aws-cli",
+      "lectures": 20
+    },
+    {
+      "number": 5,
+      "title": "EC2 Fundamentals",
+      "slug": "ec2-fundamentals",
+      "lectures": 16
+    },
+    {
+      "number": 6,
+      "title": "EC2 - Solutions Architect Associate Level",
+      "slug": "ec2-solutions-architect-level",
+      "lectures": 9
+    },
+    {
+      "number": 7,
+      "title": "EC2 Instance Storage",
+      "slug": "ec2-instance-storage",
+      "lectures": 14
+    },
+    {
+      "number": 8,
+      "title": "High Availability and Scalability: ELB & ASG",
+      "slug": "elb-asg",
+      "lectures": 17
+    },
+    {
+      "number": 9,
+      "title": "AWS Fundamentals: RDS + Aurora + ElastiCache",
+      "slug": "rds-aurora-elasticache",
+      "lectures": 14
+    },
+    {
+      "number": 10,
+      "title": "Route 53",
+      "slug": "route-53",
+      "lectures": 20
+    },
+    {
+      "number": 11,
+      "title": "Classic Solutions Architecture Discussions",
+      "slug": "classic-solutions-architecture",
+      "lectures": 7
+    },
+    {
+      "number": 12,
+      "title": "Amazon S3 Introduction",
+      "slug": "amazon-s3-introduction",
+      "lectures": 14
+    },
+    {
+      "number": 13,
+      "title": "Advanced Amazon S3",
+      "slug": "advanced-amazon-s3",
+      "lectures": 8
+    },
+    {
+      "number": 14,
+      "title": "Amazon S3 Security",
+      "slug": "amazon-s3-security",
+      "lectures": 15
+    },
+    {
+      "number": 15,
+      "title": "CloudFront & AWS Global Accelerator",
+      "slug": "cloudfront-global-accelerator",
+      "lectures": 7
+    },
+    {
+      "number": 16,
+      "title": "AWS Storage Extras",
+      "slug": "aws-storage-extras",
+      "lectures": 10
+    },
+    {
+      "number": 17,
+      "title": "Decoupling applications: SQS, SNS, Kinesis, Active MQ",
+      "slug": "sqs-sns-kinesis-active-mq",
+      "lectures": 16
+    },
+    {
+      "number": 18,
+      "title": "Containers on AWS: ECS, Fargate, ECR & EKS",
+      "slug": "containers-ecs-fargate-ecr-eks",
+      "lectures": 13
+    },
+    {
+      "number": 19,
+      "title": "Serverless Overviews from a Solution Architect Perspective",
+      "slug": "serverless-overviews",
+      "lectures": 18
+    },
+    {
+      "number": 20,
+      "title": "Serverless Solution Architecture Discussions",
+      "slug": "serverless-solution-architecture",
+      "lectures": 4
+    },
+    {
+      "number": 21,
+      "title": "Databases in AWS",
+      "slug": "databases-in-aws",
+      "lectures": 10
+    },
+    {
+      "number": 22,
+      "title": "Data & Analytics",
+      "slug": "data-analytics",
+      "lectures": 12
+    },
+    {
+      "number": 23,
+      "title": "Machine Learning",
+      "slug": "machine-learning",
+      "lectures": 12
+    },
+    {
+      "number": 24,
+      "title": "AWS Monitoring & Audit: CloudWatch, CloudTrail & Config",
+      "slug": "cloudwatch-cloudtrail-config",
+      "lectures": 18
+    },
+    {
+      "number": 25,
+      "title": "Identity and Access Management (IAM) - Advanced",
+      "slug": "iam-advanced",
+      "lectures": 10
+    },
+    {
+      "number": 26,
+      "title": "AWS Security & Encryption: KMS, SSM Parameter Store, Shield, WAF",
+      "slug": "security-encryption-kms-ssm-waf",
+      "lectures": 21
+    },
+    {
+      "number": 27,
+      "title": "Networking - VPC",
+      "slug": "networking-vpc",
+      "lectures": 37
+    },
+    {
+      "number": 28,
+      "title": "Disaster Recovery & Migrations",
+      "slug": "disaster-recovery-migrations",
+      "lectures": 11
+    },
+    {
+      "number": 29,
+      "title": "More Solution Architectures",
+      "slug": "more-solution-architectures",
+      "lectures": 5
+    },
+    {
+      "number": 30,
+      "title": "Other Services",
+      "slug": "other-services",
+      "lectures": 15
+    },
+    {
+      "number": 31,
+      "title": "WhitePapers and Architectures - AWS Certified Solutions Architect Associate",
+      "slug": "whitepapers-architectures",
+      "lectures": 4
+    },
+    {
+      "number": 32,
+      "title": "Preparing for the Exam + Practice Exam - AWS Certified Solutions Architect Assoc",
+      "slug": "exam-preparation-practice-exam",
+      "lectures": 8
+    },
+    {
+      "number": 33,
+      "title": "Congratulations - AWS Certified Solutions Architect Associate",
+      "slug": "congratulations",
+      "lectures": 3
+    }
+  ]
+}
