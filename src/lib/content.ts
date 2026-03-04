@@ -254,3 +254,60 @@ export function getCourseDetail(courseSlug: string): CourseDetail | null {
     notes: meta.notes,
   };
 }
+
+export interface CourseExport {
+  exportedAt: string;
+  course: CourseDetail;
+  stats: {
+    sectionCount: number;
+    lectureCount: number;
+    tagCloud: Record<string, number>;
+  };
+  sections: Array<{
+    slug: string;
+    number: number;
+    title: string;
+    lectures: Lecture[];
+  }>;
+}
+
+export function getFullCourseExport(courseSlug: string): CourseExport | null {
+  const course = getCourseDetail(courseSlug);
+  if (!course) return null;
+
+  const sections = getSections(courseSlug);
+  const tagCloud: Record<string, number> = {};
+  let lectureCount = 0;
+
+  const sectionsWithLectures = sections.map((section) => {
+    const lectureMetas = getLectures(courseSlug, section.slug);
+    const lectures: Lecture[] = lectureMetas.map((meta) => {
+      const lecture = getLecture(courseSlug, section.slug, meta.slug);
+      if (lecture) {
+        for (const tag of lecture.tags) {
+          tagCloud[tag] = (tagCloud[tag] ?? 0) + 1;
+        }
+      }
+      lectureCount++;
+      return lecture ?? { ...meta, content: "" };
+    });
+
+    return {
+      slug: section.slug,
+      number: section.number,
+      title: section.title,
+      lectures,
+    };
+  });
+
+  return {
+    exportedAt: new Date().toISOString(),
+    course,
+    stats: {
+      sectionCount: sections.length,
+      lectureCount,
+      tagCloud,
+    },
+    sections: sectionsWithLectures,
+  };
+}

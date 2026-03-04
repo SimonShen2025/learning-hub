@@ -1,5 +1,6 @@
 import type { CourseDetail } from "@/lib/content";
 import { CourseProgress } from "@/components/course-progress";
+import { ExportCourseButton } from "@/components/export-course-button";
 
 interface CourseInfoProps {
   course: CourseDetail;
@@ -63,6 +64,7 @@ export function CourseInfo({ course }: CourseInfoProps) {
         >
           {statusConfig[course.status].label}
         </span>
+        <ExportCourseButton courseSlug={course.slug} />
       </div>
 
       {course.url && (
