@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 interface LectureItem {
@@ -25,17 +25,74 @@ interface SectionListProps {
 }
 
 export function SectionList({ courseSlug, sections }: SectionListProps) {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [openSectionSlug, setOpenSectionSlug] = useState<string | null>(null);
+  const [restoreTarget, setRestoreTarget] = useState<{
+    sectionSlug: string;
+    lectureSlug?: string;
+  } | null>(null);
+
+  const openSectionKey = `learningHub.course.${courseSlug}.openSection`;
+  const lastLectureKey = `learningHub.course.${courseSlug}.lastLecture`;
+
+  useEffect(() => {
+    const storedSection = window.sessionStorage.getItem(openSectionKey);
+    const storedLecture = window.sessionStorage.getItem(lastLectureKey);
+    if (!storedSection) return;
+    if (!sections.some((section) => section.slug === storedSection)) return;
+
+    setOpenSectionSlug(storedSection);
+    setRestoreTarget({
+      sectionSlug: storedSection,
+      lectureSlug: storedLecture ?? undefined,
+    });
+  }, [openSectionKey, lastLectureKey, sections]);
+
+  useEffect(() => {
+    if (openSectionSlug) {
+      window.sessionStorage.setItem(openSectionKey, openSectionSlug);
+      return;
+    }
+    window.sessionStorage.removeItem(openSectionKey);
+  }, [openSectionSlug, openSectionKey]);
+
+  useEffect(() => {
+    if (!restoreTarget) return;
+    if (openSectionSlug !== restoreTarget.sectionSlug) return;
+
+    const timer = window.setTimeout(() => {
+      const lectureId = restoreTarget.lectureSlug
+        ? `lecture-${courseSlug}-${restoreTarget.sectionSlug}-${restoreTarget.lectureSlug}`
+        : null;
+      const sectionId = `section-${courseSlug}-${restoreTarget.sectionSlug}`;
+      const targetElement =
+        (lectureId ? document.getElementById(lectureId) : null) ??
+        document.getElementById(sectionId);
+
+      if (targetElement) {
+        const top = targetElement.getBoundingClientRect().top + window.scrollY - 90;
+        window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+      }
+      setRestoreTarget(null);
+    }, 80);
+
+    return () => window.clearTimeout(timer);
+  }, [restoreTarget, openSectionSlug, courseSlug]);
 
   return (
     <div className="divide-y divide-violet-100 dark:divide-violet-900/50 rounded-xl border border-violet-100 dark:border-violet-900/50 shadow-sm overflow-hidden">
-      {sections.map((section, i) => {
-        const isOpen = openIndex === i;
+      {sections.map((section) => {
+        const isOpen = openSectionSlug === section.slug;
         return (
-          <div key={section.slug}>
+          <div
+            key={section.slug}
+            id={`section-${courseSlug}-${section.slug}`}
+          >
             <button
               type="button"
-              onClick={() => setOpenIndex(isOpen ? null : i)}
+              onClick={() => {
+                setOpenSectionSlug(isOpen ? null : section.slug);
+                window.sessionStorage.removeItem(lastLectureKey);
+              }}
               className="flex w-full items-center gap-4 p-4 text-left transition-colors hover:bg-violet-50/50 dark:hover:bg-violet-900/10"
             >
               <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-violet-600 to-indigo-600 text-sm font-bold text-white">
@@ -79,9 +136,22 @@ export function SectionList({ courseSlug, sections }: SectionListProps) {
                   ) : (
                     <ul>
                       {section.lectures.map((lecture) => (
-                        <li key={lecture.slug}>
+                        <li
+                          key={lecture.slug}
+                          id={`lecture-${courseSlug}-${section.slug}-${lecture.slug}`}
+                        >
                           <Link
                             href={`/courses/${courseSlug}/${section.slug}/${lecture.slug}`}
+                            onClick={() => {
+                              window.sessionStorage.setItem(
+                                openSectionKey,
+                                section.slug,
+                              );
+                              window.sessionStorage.setItem(
+                                lastLectureKey,
+                                lecture.slug,
+                              );
+                            }}
                             className="group flex items-center gap-3 px-4 py-3 transition-colors hover:bg-violet-100/50 dark:hover:bg-violet-900/20"
                           >
                             <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-violet-100 dark:bg-violet-900/30 text-[10px] font-bold text-violet-700 dark:text-violet-300">
