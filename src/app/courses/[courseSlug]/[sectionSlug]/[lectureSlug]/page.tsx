@@ -3,6 +3,7 @@ import Link from "next/link";
 import { getCourse, getSections, getLecture, getLectures } from "@/lib/content";
 import { Breadcrumb } from "@/components/breadcrumb";
 import { MarkdownRenderer } from "@/components/markdown-renderer";
+import { LectureNote } from "@/components/lecture-note";
 
 interface Props {
   params: Promise<{
@@ -73,6 +74,13 @@ export default async function LecturePage({ params }: Props) {
             ))}
           </div>
         </header>
+
+        <LectureNote
+          courseSlug={courseSlug}
+          sectionSlug={sectionSlug}
+          lectureSlug={lectureSlug}
+          initialNote={lecture.note ?? ""}
+        />
 
         <div className="rounded-xl border border-violet-100 dark:border-violet-900/50 shadow-sm p-6 lg:p-8">
           <MarkdownRenderer content={lecture.content} />

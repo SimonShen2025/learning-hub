@@ -57,6 +57,7 @@ export interface LectureMeta {
 
 export interface Lecture extends LectureMeta {
   content: string;
+  note?: string;
 }
 
 function parseSectionFolder(folderName: string): {
@@ -211,6 +212,7 @@ export function getLecture(
     date: data.date ?? "",
     tags: data.tags ?? [],
     content,
+    note: data.note ?? "",
   };
 }
 
