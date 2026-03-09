@@ -5,6 +5,7 @@ import { Breadcrumb } from "@/components/breadcrumb";
 import { MarkdownRenderer } from "@/components/markdown-renderer";
 import { LectureNote } from "@/components/lecture-note";
 import { StarToggle } from "@/components/star-toggle";
+import { KeyboardNav } from "@/components/keyboard-nav";
 
 interface Props {
   params: Promise<{
@@ -141,6 +142,11 @@ export default async function LecturePage({ params }: Props) {
           <div />
         )}
       </nav>
+
+      <KeyboardNav
+        prevHref={prevLecture ? `/courses/${courseSlug}/${sectionSlug}/${prevLecture.slug}` : null}
+        nextHref={nextLecture ? `/courses/${courseSlug}/${sectionSlug}/${nextLecture.slug}` : null}
+      />
     </div>
   );
 }
