@@ -42,6 +42,8 @@ export interface Section {
   number: number;
   title: string;
   lectureCount: number;
+  important?: boolean;
+  note?: string;
 }
 
 export interface LectureMeta {
@@ -53,6 +55,7 @@ export interface LectureMeta {
   sectionSlug: string;
   date: string;
   tags: string[];
+  important?: boolean;
 }
 
 export interface Lecture extends LectureMeta {
@@ -143,11 +146,23 @@ export function getSections(courseSlug: string): Section[] {
       .readdirSync(sectionDir)
       .filter((f) => f.endsWith(".md"));
 
+    const sectionMetaPath = path.join(sectionDir, "_section.json");
+    let sectionMeta: { important?: boolean; note?: string } = {};
+    if (fs.existsSync(sectionMetaPath)) {
+      try {
+        sectionMeta = JSON.parse(fs.readFileSync(sectionMetaPath, "utf-8"));
+      } catch {
+        /* ignore malformed json */
+      }
+    }
+
     sections.push({
       slug: entry.name,
       number: parsed.number,
       title: parsed.title,
       lectureCount: lectures.length,
+      important: sectionMeta.important ?? false,
+      note: sectionMeta.note ?? "",
     });
   }
 
@@ -179,6 +194,7 @@ export function getLectures(
       sectionSlug,
       date: data.date ?? "",
       tags: data.tags ?? [],
+      important: data.important ?? false,
     });
   }
 
@@ -211,6 +227,7 @@ export function getLecture(
     sectionSlug,
     date: data.date ?? "",
     tags: data.tags ?? [],
+    important: data.important ?? false,
     content,
     note: data.note ?? "",
   };

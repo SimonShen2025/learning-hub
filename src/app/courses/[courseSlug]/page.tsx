@@ -22,6 +22,7 @@ export default async function CoursePage({ params }: Props) {
       lectureId: l.lectureId,
       date: l.date,
       tags: l.tags,
+      important: l.important,
     })),
   }));
 

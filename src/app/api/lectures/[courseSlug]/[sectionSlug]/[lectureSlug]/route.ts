@@ -36,6 +36,9 @@ export async function PATCH(
   if ("note" in updates) {
     data.note = updates.note;
   }
+  if ("important" in updates) {
+    data.important = updates.important;
+  }
 
   const updated = matter.stringify(content, data);
   fs.writeFileSync(filePath, updated, "utf-8");

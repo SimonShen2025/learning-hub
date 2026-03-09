@@ -4,6 +4,7 @@ import { getCourse, getSections, getLecture, getLectures } from "@/lib/content";
 import { Breadcrumb } from "@/components/breadcrumb";
 import { MarkdownRenderer } from "@/components/markdown-renderer";
 import { LectureNote } from "@/components/lecture-note";
+import { StarToggle } from "@/components/star-toggle";
 
 interface Props {
   params: Promise<{
@@ -53,9 +54,14 @@ export default async function LecturePage({ params }: Props) {
             <span className="flex h-8 w-8 items-center justify-center rounded-md bg-gradient-to-br from-violet-600 to-indigo-600 text-white text-xs font-bold">
               {lecture.lectureId}
             </span>
-            <h1 className="text-3xl font-bold tracking-tight">
+            <h1 className="text-3xl font-bold tracking-tight flex-1">
               {lecture.title}
             </h1>
+            <StarToggle
+              initialValue={lecture.important ?? false}
+              apiUrl={`/api/lectures/${courseSlug}/${sectionSlug}/${lectureSlug}`}
+              size="md"
+            />
           </div>
 
           <div className="flex flex-wrap items-center gap-2 ml-11">
