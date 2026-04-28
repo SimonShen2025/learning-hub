@@ -1,0 +1,74 @@
+{
+  "slug": "playwright-zero-to-hero",
+  "title": "Playwright: Web Automation Testing From Zero to Hero",
+  "platform": "udemy",
+  "url": "https://www.udemy.com/course/playwright-from-zero-to-hero/",
+  "status": "not-started",
+  "instructor": "Artem Bondar",
+  "lastUpdated": "4/2026",
+  "language": "English",
+  "rating": 4.7,
+  "totalStudents": 55259,
+  "totalHours": 12.5,
+  "level": "All levels",
+  "description": "Complete Playwright test automation course with TypeScript. Best practices, API testing, Page Objects, Advanced features.",
+  "startDate": "",
+  "endDate": "",
+  "notes": "",
+  "sections": [
+    {
+      "number": 1,
+      "title": "Preparation",
+      "slug": "preparation",
+      "lectures": 4
+    },
+    {
+      "number": 2,
+      "title": "JavaScript Fundamentals",
+      "slug": "javascript-fundamentals",
+      "lectures": 12
+    },
+    {
+      "number": 3,
+      "title": "Playwright Hands-On Overview",
+      "slug": "playwright-hands-on-overview",
+      "lectures": 6
+    },
+    {
+      "number": 4,
+      "title": "Interaction with Web Elements",
+      "slug": "interaction-with-web-elements",
+      "lectures": 10
+    },
+    {
+      "number": 5,
+      "title": "UI Components",
+      "slug": "ui-components",
+      "lectures": 12
+    },
+    {
+      "number": 6,
+      "title": "Page Object Model",
+      "slug": "page-object-model",
+      "lectures": 8
+    },
+    {
+      "number": 7,
+      "title": "Working with APIs",
+      "slug": "working-with-apis",
+      "lectures": 8
+    },
+    {
+      "number": 8,
+      "title": "Advanced",
+      "slug": "advanced",
+      "lectures": 16
+    },
+    {
+      "number": 9,
+      "title": "One More Thing...",
+      "slug": "one-more-thing",
+      "lectures": 1
+    }
+  ]
+}
