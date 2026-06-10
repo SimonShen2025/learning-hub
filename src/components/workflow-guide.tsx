@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 
 const LANG_KEY = "learningHub.guide.lang";
 
@@ -47,6 +47,42 @@ const STEPS: Step[] = [
     code: "/batch-summarise-transcripts",
   },
 ];
+
+function CopyBlock({ code }: { code: string }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = useCallback(() => {
+    navigator.clipboard.writeText(code).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  }, [code]);
+
+  return (
+    <div className="relative mt-1.5">
+      <pre className="overflow-x-auto rounded-md bg-blue-900/90 px-3 py-2 pr-10 text-xs text-blue-100 dark:bg-blue-950">
+        <code>{code}</code>
+      </pre>
+      <button
+        onClick={handleCopy}
+        className="absolute right-2 top-1/2 -translate-y-1/2 rounded p-1 text-blue-300 transition-colors hover:bg-blue-800 hover:text-white"
+        aria-label="Copy to clipboard"
+        title="Copy"
+      >
+        {copied ? (
+          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+          </svg>
+        ) : (
+          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+            <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
+          </svg>
+        )}
+      </button>
+    </div>
+  );
+}
 
 export function WorkflowGuide() {
   const [lang, setLang] = useState<Lang>("en");
@@ -138,9 +174,7 @@ export function WorkflowGuide() {
                   {step.description[lang]}
                 </p>
                 {step.code && (
-                  <pre className="mt-1.5 overflow-x-auto rounded-md bg-blue-900/90 px-3 py-2 text-xs text-blue-100 dark:bg-blue-950">
-                    <code>{step.code}</code>
-                  </pre>
+                  <CopyBlock code={step.code} />
                 )}
               </div>
             </li>
