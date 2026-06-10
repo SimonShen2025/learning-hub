@@ -1,0 +1,80 @@
+{
+  "slug": "azure-ai-fundamentals",
+  "title": "AI-900 & AI-901-Microsoft Azure AI Fundamental Certification",
+  "platform": "udemy",
+  "url": "https://www.udemy.com/course/exam-microsoft-azure-4/",
+  "status": "not-started",
+  "instructor": "Alan Rodrigues",
+  "lastUpdated": "2026-06",
+  "language": "English",
+  "rating": 4.5,
+  "totalStudents": 38340,
+  "totalHours": 11.2,
+  "level": "All Levels",
+  "description": "Comprehensive preparation course for both the AI-900 (retiring June 2026) and new AI-901 Azure AI Fundamentals exams. Covers core AI concepts, responsible AI principles, machine learning, computer vision, NLP, generative AI, and hands-on labs using Microsoft Foundry and Azure AI services.",
+  "startDate": "",
+  "endDate": "",
+  "notes": "",
+  "sections": [
+    {
+      "number": 1,
+      "title": "AI-901 - Identify AI concepts and capabilities",
+      "slug": "ai-901-identify-ai-concepts",
+      "lectures": 21
+    },
+    {
+      "number": 2,
+      "title": "AI-901 - Implement AI solutions - Microsoft Foundry",
+      "slug": "ai-901-implement-solutions-foundry",
+      "lectures": 26
+    },
+    {
+      "number": 3,
+      "title": "AI-901 - Implement AI solutions - Azure AI Services",
+      "slug": "ai-901-implement-solutions-azure-ai-services",
+      "lectures": 21
+    },
+    {
+      "number": 4,
+      "title": "AI-900 - Introduction and basics on Azure",
+      "slug": "ai-900-introduction-azure",
+      "lectures": 7
+    },
+    {
+      "number": 5,
+      "title": "AI-900 - Describe AI workloads and considerations",
+      "slug": "ai-900-ai-workloads-considerations",
+      "lectures": 13
+    },
+    {
+      "number": 6,
+      "title": "AI-900 - Describe fundamental principles of machine learning on Azure",
+      "slug": "ai-900-machine-learning-azure",
+      "lectures": 25
+    },
+    {
+      "number": 7,
+      "title": "AI-900 - Describe features of computer vision workloads on Azure",
+      "slug": "ai-900-computer-vision-workloads",
+      "lectures": 16
+    },
+    {
+      "number": 8,
+      "title": "AI-900 - Describe features of Natural Language Processing and Conversational AI",
+      "slug": "ai-900-nlp-conversational-ai",
+      "lectures": 20
+    },
+    {
+      "number": 9,
+      "title": "AI-900 - Describe features of generative AI workloads on Azure",
+      "slug": "ai-900-generative-ai-workloads",
+      "lectures": 23
+    },
+    {
+      "number": 10,
+      "title": "Practice Section",
+      "slug": "practice-section",
+      "lectures": 1
+    }
+  ]
+}
