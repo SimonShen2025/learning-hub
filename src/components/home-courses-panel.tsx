@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import type { Course, CourseStatus } from "@/lib/content";
 import { CourseCard } from "@/components/course-card";
+import { usePersistentValue } from "@/lib/use-persistent-value";
 
 type FilterOption = CourseStatus | "all";
 type SortOption =
@@ -36,30 +37,16 @@ function dateToNumber(value?: string): number {
 }
 
 export function HomeCoursesPanel({ courses }: { courses: Course[] }) {
-  const [filter, setFilter] = useState<FilterOption>("learning");
-  const [sort, setSort] = useState<SortOption>("start_date_desc");
-
-  useEffect(() => {
-    const storedFilter = localStorage.getItem(FILTER_KEY);
-    const storedSort = localStorage.getItem(SORT_KEY);
-    if (
-      storedFilter &&
-      FILTER_OPTIONS.some((item) => item.value === storedFilter)
-    ) {
-      setFilter(storedFilter as FilterOption);
-    }
-    if (storedSort && SORT_OPTIONS.some((item) => item.value === storedSort)) {
-      setSort(storedSort as SortOption);
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem(FILTER_KEY, filter);
-  }, [filter]);
-
-  useEffect(() => {
-    localStorage.setItem(SORT_KEY, sort);
-  }, [sort]);
+  const [filter, setFilter] = usePersistentValue<FilterOption>(
+    FILTER_KEY,
+    "learning",
+    { isValid: (raw) => FILTER_OPTIONS.some((item) => item.value === raw) },
+  );
+  const [sort, setSort] = usePersistentValue<SortOption>(
+    SORT_KEY,
+    "start_date_desc",
+    { isValid: (raw) => SORT_OPTIONS.some((item) => item.value === raw) },
+  );
 
   const filterCounts = useMemo(() => {
     const counts: Record<FilterOption, number> = {

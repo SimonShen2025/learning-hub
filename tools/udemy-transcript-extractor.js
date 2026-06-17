@@ -49,7 +49,6 @@
     // Parse WebVTT caption file into plain text (removing timestamps and metadata)
     const lines = vttText.split("\n");
     const textLines = [];
-    let skipNext = false;
 
     for (const line of lines) {
       const trimmed = line.trim();
@@ -150,7 +149,7 @@
         `✅ Found course: "${courseData.title}" (ID: ${courseId})`
       );
     }
-  } catch (e) {
+  } catch {
     console.warn("Could not fetch course by slug, trying alternative...");
   }
 
@@ -163,7 +162,7 @@
         courseId = parseInt(idMatch[1], 10);
         console.log(`✅ Found course ID from page data: ${courseId}`);
       }
-    } catch (e) {
+    } catch {
       // ignore
     }
   }
@@ -180,7 +179,6 @@
   console.log("📚 Fetching curriculum...");
 
   const allItems = [];
-  let useSubscriberApi = true;
 
   // Try subscriber API first (has asset/caption info inline)
   // Fall back to public API if it fails (e.g. 504 on Udemy Business)
@@ -209,7 +207,6 @@
     if (allItems.length === 0) {
       // Subscriber API failed completely, fall back to public API
       console.warn(`⚠️ Subscriber API failed (${e.message}). Falling back to public curriculum API...`);
-      useSubscriberApi = false;
       nextUrl = publicUrl;
 
       while (nextUrl) {
@@ -302,7 +299,7 @@
               `/api-2.0/users/me/subscribed-courses/${courseId}/lectures/${lecture.id}/supplementary-assets/${enCaption.id}/?fields[caption]=url,data,file_name`
             );
             captionUrl = captionData.url || captionData.data;
-          } catch (e) {
+          } catch {
             captionUrl = enCaption.source || enCaption.data || null;
           }
         }
@@ -320,7 +317,7 @@
               captionUrl = enCap.url || enCap.source || null;
             }
           }
-        } catch (e) {
+        } catch {
           // No captions available for this lecture
         }
       }
@@ -342,7 +339,7 @@
               `${progress} ⚠️ Failed to download caption: ${lecture.title}`
             );
           }
-        } catch (e) {
+        } catch {
           lecture.transcript = null;
           errors++;
           console.log(

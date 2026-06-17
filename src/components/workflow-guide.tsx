@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useState, useCallback } from "react";
+import { usePersistentValue } from "@/lib/use-persistent-value";
 
 const LANG_KEY = "learningHub.guide.lang";
 
@@ -85,19 +86,13 @@ function CopyBlock({ code }: { code: string }) {
 }
 
 export function WorkflowGuide() {
-  const [lang, setLang] = useState<Lang>("en");
+  const [lang, setLang] = usePersistentValue<Lang>(LANG_KEY, "en", {
+    isValid: (raw) => raw === "en" || raw === "zh",
+  });
   const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    const stored = localStorage.getItem(LANG_KEY);
-    if (stored === "en" || stored === "zh") {
-      setLang(stored);
-    }
-  }, []);
 
   function switchLang(newLang: Lang) {
     setLang(newLang);
-    localStorage.setItem(LANG_KEY, newLang);
   }
 
   return (

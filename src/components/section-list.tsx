@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { StarToggle } from "@/components/star-toggle";
 import { SectionNote } from "@/components/section-note";
+import { usePersistentValue } from "@/lib/use-persistent-value";
 
 interface LectureItem {
   slug: string;
@@ -30,45 +31,34 @@ interface SectionListProps {
 }
 
 export function SectionList({ courseSlug, sections }: SectionListProps) {
-  const [openSectionSlug, setOpenSectionSlug] = useState<string | null>(null);
-  const [restoreTarget, setRestoreTarget] = useState<{
-    sectionSlug: string;
-    lectureSlug?: string;
-  } | null>(null);
-
   const openSectionKey = `learningHub.course.${courseSlug}.openSection`;
   const lastLectureKey = `learningHub.course.${courseSlug}.lastLecture`;
 
+  const [openSectionSlug, setOpenSectionSlug] = usePersistentValue<string>(
+    openSectionKey,
+    "",
+    {
+      storage: "session",
+      isValid: (raw) => sections.some((section) => section.slug === raw),
+    },
+  );
+
+  const didRestoreScroll = useRef(false);
+
   useEffect(() => {
+    if (didRestoreScroll.current) return;
     const storedSection = window.sessionStorage.getItem(openSectionKey);
-    const storedLecture = window.sessionStorage.getItem(lastLectureKey);
     if (!storedSection) return;
     if (!sections.some((section) => section.slug === storedSection)) return;
 
-    setOpenSectionSlug(storedSection);
-    setRestoreTarget({
-      sectionSlug: storedSection,
-      lectureSlug: storedLecture ?? undefined,
-    });
-  }, [openSectionKey, lastLectureKey, sections]);
-
-  useEffect(() => {
-    if (openSectionSlug) {
-      window.sessionStorage.setItem(openSectionKey, openSectionSlug);
-      return;
-    }
-    window.sessionStorage.removeItem(openSectionKey);
-  }, [openSectionSlug, openSectionKey]);
-
-  useEffect(() => {
-    if (!restoreTarget) return;
-    if (openSectionSlug !== restoreTarget.sectionSlug) return;
+    didRestoreScroll.current = true;
+    const storedLecture = window.sessionStorage.getItem(lastLectureKey);
 
     const timer = window.setTimeout(() => {
-      const lectureId = restoreTarget.lectureSlug
-        ? `lecture-${courseSlug}-${restoreTarget.sectionSlug}-${restoreTarget.lectureSlug}`
+      const lectureId = storedLecture
+        ? `lecture-${courseSlug}-${storedSection}-${storedLecture}`
         : null;
-      const sectionId = `section-${courseSlug}-${restoreTarget.sectionSlug}`;
+      const sectionId = `section-${courseSlug}-${storedSection}`;
       const targetElement =
         (lectureId ? document.getElementById(lectureId) : null) ??
         document.getElementById(sectionId);
@@ -77,11 +67,10 @@ export function SectionList({ courseSlug, sections }: SectionListProps) {
         const top = targetElement.getBoundingClientRect().top + window.scrollY - 90;
         window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
       }
-      setRestoreTarget(null);
     }, 80);
 
     return () => window.clearTimeout(timer);
-  }, [restoreTarget, openSectionSlug, courseSlug]);
+  }, [courseSlug, openSectionKey, lastLectureKey, sections]);
 
   return (
     <div className="divide-y divide-violet-100 dark:divide-violet-900/50 rounded-xl border border-violet-100 dark:border-violet-900/50 shadow-sm overflow-hidden">
@@ -95,7 +84,7 @@ export function SectionList({ courseSlug, sections }: SectionListProps) {
             <button
               type="button"
               onClick={() => {
-                setOpenSectionSlug(isOpen ? null : section.slug);
+                setOpenSectionSlug(isOpen ? "" : section.slug);
                 window.sessionStorage.removeItem(lastLectureKey);
               }}
               className="flex w-full items-center gap-4 p-4 text-left transition-colors hover:bg-violet-50/50 dark:hover:bg-violet-900/10"
