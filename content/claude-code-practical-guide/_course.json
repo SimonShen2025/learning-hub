@@ -1,0 +1,38 @@
+{
+  "slug": "claude-code-practical-guide",
+  "title": "Claude Code - The Practical Guide",
+  "platform": "udemy",
+  "url": "https://www.udemy.com/course/claude-code-the-practical-guide/",
+  "status": "not-started",
+  "instructor": "Maximilian Schwarzmüller",
+  "lastUpdated": "4/2026",
+  "language": "English",
+  "rating": 4.6,
+  "totalStudents": 64354,
+  "totalHours": 3.2,
+  "level": "All Levels",
+  "description": "Boost your agentic engineering game by mastering Claude Code's basic and advanced features. Learn context engineering, subagents, skills, MCPs, hooks, plugins, and build real projects with Claude Code in the CLI and web.",
+  "startDate": "",
+  "endDate": "",
+  "notes": "",
+  "sections": [
+    {
+      "number": 1,
+      "title": "Getting Started",
+      "slug": "getting-started",
+      "lectures": 18
+    },
+    {
+      "number": 2,
+      "title": "Key Features & Efficient Usage",
+      "slug": "key-features-efficient-usage",
+      "lectures": 27
+    },
+    {
+      "number": 3,
+      "title": "Beyond Local CLI Usage",
+      "slug": "beyond-local-cli-usage",
+      "lectures": 9
+    }
+  ]
+}
