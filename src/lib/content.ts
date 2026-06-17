@@ -330,3 +330,81 @@ export function getFullCourseExport(courseSlug: string): CourseExport | null {
     sections: sectionsWithLectures,
   };
 }
+
+export interface CompleteCourseResult {
+  endDate: string;
+  sectionsProcessed: number;
+  lecturesTrimmed: number;
+  sectionNotesCleared: number;
+}
+
+/** Mark course complete and strip section/lecture study notes from disk. */
+export function completeCourseContent(
+  courseSlug: string,
+  endDate: string,
+): CompleteCourseResult | null {
+  const metaPath = path.join(CONTENT_DIR, courseSlug, "_course.json");
+  if (!fs.existsSync(metaPath)) return null;
+
+  let lecturesTrimmed = 0;
+  let sectionNotesCleared = 0;
+  const sections = getSections(courseSlug);
+
+  for (const section of sections) {
+    const sectionDir = path.join(CONTENT_DIR, courseSlug, section.slug);
+    if (!fs.existsSync(sectionDir)) continue;
+
+    const sectionMetaPath = path.join(sectionDir, "_section.json");
+    if (fs.existsSync(sectionMetaPath)) {
+      try {
+        const sectionMeta = JSON.parse(
+          fs.readFileSync(sectionMetaPath, "utf-8"),
+        ) as { note?: string; important?: boolean };
+        if (sectionMeta.note || sectionMeta.important) {
+          delete sectionMeta.note;
+          sectionMeta.important = false;
+          fs.writeFileSync(
+            sectionMetaPath,
+            JSON.stringify(sectionMeta, null, 2) + "\n",
+            "utf-8",
+          );
+          sectionNotesCleared++;
+        }
+      } catch {
+        /* ignore malformed section meta */
+      }
+    }
+
+    const files = fs
+      .readdirSync(sectionDir)
+      .filter((f) => f.endsWith(".md"));
+
+    for (const file of files) {
+      const filePath = path.join(sectionDir, file);
+      const raw = fs.readFileSync(filePath, "utf-8");
+      const { data, content } = matter(raw);
+      const hasBody = content.trim().length > 0;
+      const hasNote = typeof data.note === "string" && data.note.length > 0;
+
+      if (!hasBody && !hasNote) continue;
+
+      delete data.note;
+      fs.writeFileSync(filePath, matter.stringify("", data), "utf-8");
+      lecturesTrimmed++;
+    }
+  }
+
+  const meta = JSON.parse(fs.readFileSync(metaPath, "utf-8")) as Record<
+    string,
+    unknown
+  >;
+  meta.endDate = endDate;
+  fs.writeFileSync(metaPath, JSON.stringify(meta, null, 2) + "\n", "utf-8");
+
+  return {
+    endDate,
+    sectionsProcessed: sections.length,
+    lecturesTrimmed,
+    sectionNotesCleared,
+  };
+}

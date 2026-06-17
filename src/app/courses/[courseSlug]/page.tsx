@@ -14,6 +14,7 @@ export default async function CoursePage({ params }: Props) {
   if (!course) notFound();
 
   const sections = getSections(courseSlug);
+  const lectureCount = sections.reduce((sum, s) => sum + s.lectureCount, 0);
   const sectionsWithLectures = sections.map((section) => ({
     ...section,
     lectures: getLectures(courseSlug, section.slug).map((l) => ({
@@ -35,7 +36,11 @@ export default async function CoursePage({ params }: Props) {
         ]}
       />
 
-      <CourseInfo course={course} />
+      <CourseInfo
+        course={course}
+        sectionCount={sections.length}
+        lectureCount={lectureCount}
+      />
 
       {sections.length === 0 ? (
         <div className="rounded-xl border-dashed border-2 p-8 text-center">

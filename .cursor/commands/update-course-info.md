@@ -19,9 +19,9 @@ The user will paste information about a course. Determine which course it belong
 | Total Hours | `totalHours` | number | Total video hours |
 | Level | `level` | string | e.g. `"Beginner"`, `"Intermediate"`, `"All Levels"` |
 | Description | `description` | string | 1-2 sentence summary |
-| Status | `status` | enum | `"learning"` or `"on_hold"` (set **Finished** / `endDate`, or choose **Complete** in the UI, to mark complete) |
+| Status | `status` | enum | `"learning"` or `"on_hold"` (choosing **Complete** in the UI opens a confirmation dialog, sets `endDate`, and removes section/lecture study notes from disk) |
 | Started | `startDate` | string | `YYYY-MM-DD` format |
-| Finished | `endDate` | string | `YYYY-MM-DD` format, or empty string if in progress |
+| Finished | `endDate` | string | `YYYY-MM-DD` format, or empty string if in progress. Setting this on an incomplete course also triggers the complete confirmation |
 | Notes | `notes` | string | Personal notes — keep the user's wording |
 
 ## Rules

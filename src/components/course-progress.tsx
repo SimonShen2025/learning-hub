@@ -1,7 +1,9 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import type { CourseStatus } from "@/lib/content";
+import { CompleteCourseDialog } from "@/components/complete-course-dialog";
 
 interface CourseProgressProps {
   courseSlug: string;
@@ -9,6 +11,8 @@ interface CourseProgressProps {
   startDate: string;
   endDate: string;
   notes: string;
+  sectionCount: number;
+  lectureCount: number;
 }
 
 function formatDisplay(dateStr: string): string {
@@ -28,19 +32,31 @@ function isValidDate(dateStr: string): boolean {
   return !isNaN(d.getTime());
 }
 
+function todayIsoDate(): string {
+  return new Date().toISOString().slice(0, 10);
+}
+
 export function CourseProgress({
   courseSlug,
   status: initialStatus,
   startDate: initialStart,
   endDate: initialEnd,
   notes: initialNotes,
+  sectionCount,
+  lectureCount,
 }: CourseProgressProps) {
+  const router = useRouter();
   const [status, setStatus] = useState<CourseStatus>(initialStatus);
   const [startDate, setStartDate] = useState(initialStart);
   const [endDate, setEndDate] = useState(initialEnd);
   const [notes, setNotes] = useState(initialNotes);
   const [editingNotes, setEditingNotes] = useState(false);
+  const [completeDialogOpen, setCompleteDialogOpen] = useState(false);
+  const [pendingCompleteDate, setPendingCompleteDate] = useState(todayIsoDate());
+  const [completing, setCompleting] = useState(false);
+  const [completeError, setCompleteError] = useState("");
   const notesRef = useRef<HTMLTextAreaElement>(null);
+  const finishDateInputRef = useRef<HTMLInputElement>(null);
 
   const computedStatus: CourseStatus = isValidDate(endDate) ? "complete" : status;
 
@@ -52,17 +68,32 @@ export function CourseProgress({
     });
   }
 
+  function openCompleteDialog(date: string) {
+    setCompleteError("");
+    setPendingCompleteDate(date);
+    setCompleteDialogOpen(true);
+  }
+
   function handleDateChange(field: "startDate" | "endDate", value: string) {
-    if (field === "startDate") setStartDate(value);
-    else setEndDate(value);
-    save({ [field]: value });
+    if (field === "startDate") {
+      setStartDate(value);
+      save({ startDate: value });
+      return;
+    }
+
+    if (value && !isValidDate(endDate) && isValidDate(value)) {
+      openCompleteDialog(value);
+      finishDateInputRef.current?.blur();
+      return;
+    }
+
+    setEndDate(value);
+    save({ endDate: value });
   }
 
   function handleStatusChange(value: CourseStatus) {
     if (value === "complete") {
-      const today = new Date().toISOString().slice(0, 10);
-      setEndDate(today);
-      save({ endDate: today });
+      openCompleteDialog(todayIsoDate());
       return;
     }
 
@@ -79,6 +110,46 @@ export function CourseProgress({
     setStatus("learning");
     setEndDate("");
     save({ status: "learning", endDate: "" });
+    router.refresh();
+  }
+
+  function handleCompleteCancel() {
+    setCompleteDialogOpen(false);
+    setCompleteError("");
+    if (finishDateInputRef.current) {
+      finishDateInputRef.current.value = endDate;
+    }
+  }
+
+  async function handleCompleteConfirm() {
+    if (!isValidDate(pendingCompleteDate)) {
+      setCompleteError("Please choose a valid finish date.");
+      return;
+    }
+
+    setCompleting(true);
+    setCompleteError("");
+    try {
+      const res = await fetch(`/api/courses/${courseSlug}/complete`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ endDate: pendingCompleteDate }),
+      });
+      if (!res.ok) {
+        const data = (await res.json().catch(() => null)) as {
+          error?: string;
+        } | null;
+        throw new Error(data?.error || "Failed to complete course");
+      }
+
+      setEndDate(pendingCompleteDate);
+      setCompleteDialogOpen(false);
+      router.refresh();
+    } catch (e) {
+      setCompleteError((e as Error).message || "Failed to complete course");
+    } finally {
+      setCompleting(false);
+    }
   }
 
   function handleNotesSave() {
@@ -88,6 +159,18 @@ export function CourseProgress({
 
   return (
     <>
+      <CompleteCourseDialog
+        open={completeDialogOpen}
+        sectionCount={sectionCount}
+        lectureCount={lectureCount}
+        endDate={pendingCompleteDate}
+        loading={completing}
+        error={completeError}
+        onEndDateChange={setPendingCompleteDate}
+        onCancel={handleCompleteCancel}
+        onConfirm={handleCompleteConfirm}
+      />
+
       <dl className="grid grid-cols-2 sm:grid-cols-3 gap-4">
         <div className="flex flex-col gap-0.5">
           <dt className="text-xs text-muted-foreground">Status</dt>
@@ -108,7 +191,9 @@ export function CourseProgress({
             ) : (
               <select
                 value={computedStatus}
-                onChange={(e) => handleStatusChange(e.target.value as CourseStatus)}
+                onChange={(e) =>
+                  handleStatusChange(e.target.value as CourseStatus)
+                }
                 className="rounded-md border bg-background px-2 py-1 text-xs shadow-xs focus-visible:ring-violet-500 focus-visible:ring-2 focus-visible:ring-offset-2"
               >
                 <option value="learning">Learning</option>
@@ -153,6 +238,7 @@ export function CourseProgress({
             <span className="text-sm">{formatDisplay(endDate)}</span>
             <label className="relative cursor-pointer">
               <input
+                ref={finishDateInputRef}
                 type="date"
                 value={endDate}
                 onChange={(e) => handleDateChange("endDate", e.target.value)}

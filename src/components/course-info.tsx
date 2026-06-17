@@ -4,6 +4,8 @@ import { ExportCourseButton } from "@/components/export-course-button";
 
 interface CourseInfoProps {
   course: CourseDetail;
+  sectionCount: number;
+  lectureCount: number;
 }
 
 function InfoItem({
@@ -24,7 +26,7 @@ function InfoItem({
   );
 }
 
-export function CourseInfo({ course }: CourseInfoProps) {
+export function CourseInfo({ course, sectionCount, lectureCount }: CourseInfoProps) {
   const statusConfig = {
     learning: {
       label: "Learning",
@@ -148,6 +150,8 @@ export function CourseInfo({ course }: CourseInfoProps) {
             startDate={course.startDate ?? ""}
             endDate={course.endDate ?? ""}
             notes={course.notes ?? ""}
+            sectionCount={sectionCount}
+            lectureCount={lectureCount}
           />
         </div>
       </details>
