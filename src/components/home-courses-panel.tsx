@@ -61,6 +61,19 @@ export function HomeCoursesPanel({ courses }: { courses: Course[] }) {
     localStorage.setItem(SORT_KEY, sort);
   }, [sort]);
 
+  const filterCounts = useMemo(() => {
+    const counts: Record<FilterOption, number> = {
+      all: courses.length,
+      learning: 0,
+      on_hold: 0,
+      complete: 0,
+    };
+    for (const course of courses) {
+      counts[course.status]++;
+    }
+    return counts;
+  }, [courses]);
+
   const visibleCourses = useMemo(() => {
     const filtered =
       filter === "all"
@@ -93,13 +106,22 @@ export function HomeCoursesPanel({ courses }: { courses: Course[] }) {
                 key={option.value}
                 type="button"
                 onClick={() => setFilter(option.value)}
-                className={`w-full rounded-md px-3 py-2 text-left text-sm transition-colors ${
+                className={`flex w-full items-center justify-between gap-2 rounded-md px-3 py-2 text-left text-sm transition-colors ${
                   filter === option.value
                     ? "bg-violet-100 text-violet-700 dark:bg-violet-900/30 dark:text-violet-300 font-medium"
                     : "hover:bg-accent"
                 }`}
               >
-                {option.label}
+                <span>{option.label}</span>
+                <span
+                  className={`tabular-nums text-xs ${
+                    filter === option.value
+                      ? "text-violet-600 dark:text-violet-300"
+                      : "text-muted-foreground"
+                  }`}
+                >
+                  {filterCounts[option.value]}
+                </span>
               </button>
             ))}
           </div>
