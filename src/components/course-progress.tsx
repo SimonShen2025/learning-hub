@@ -59,9 +59,26 @@ export function CourseProgress({
   }
 
   function handleStatusChange(value: CourseStatus) {
-    if (value === "complete") return;
+    if (value === "complete") {
+      const today = new Date().toISOString().slice(0, 10);
+      setEndDate(today);
+      save({ endDate: today });
+      return;
+    }
+
     setStatus(value);
-    save({ status: value });
+    if (isValidDate(endDate)) {
+      setEndDate("");
+      save({ status: value, endDate: "" });
+    } else {
+      save({ status: value });
+    }
+  }
+
+  function handleReopen() {
+    setStatus("learning");
+    setEndDate("");
+    save({ status: "learning", endDate: "" });
   }
 
   function handleNotesSave() {
@@ -76,8 +93,17 @@ export function CourseProgress({
           <dt className="text-xs text-muted-foreground">Status</dt>
           <dd className="text-sm">
             {computedStatus === "complete" ? (
-              <span className="rounded-full px-2 py-0.5 text-xs font-medium bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300">
-                Complete
+              <span className="inline-flex items-center gap-2">
+                <span className="rounded-full px-2 py-0.5 text-xs font-medium bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300">
+                  Complete
+                </span>
+                <button
+                  type="button"
+                  onClick={handleReopen}
+                  className="text-xs text-muted-foreground hover:text-violet-600 underline-offset-2 hover:underline"
+                >
+                  Reopen
+                </button>
               </span>
             ) : (
               <select
@@ -87,6 +113,7 @@ export function CourseProgress({
               >
                 <option value="learning">Learning</option>
                 <option value="on_hold">On Hold</option>
+                <option value="complete">Complete</option>
               </select>
             )}
           </dd>

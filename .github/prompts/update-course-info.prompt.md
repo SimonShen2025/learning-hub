@@ -22,7 +22,7 @@ The user will paste information about a course. Determine which course it belong
 | Total Hours | `totalHours` | number | Total video hours |
 | Level | `level` | string | e.g. `"Beginner"`, `"Intermediate"`, `"All Levels"` |
 | Description | `description` | string | 1-2 sentence summary |
-| Status | `status` | enum | `"learning"` or `"on_hold"` (if a valid `endDate` exists, treated as `"complete"` automatically) |
+| Status | `status` | enum | `"learning"` or `"on_hold"` (set **Finished** / `endDate`, or choose **Complete** in the UI, to mark complete) |
 | Started | `startDate` | string | `YYYY-MM-DD` format |
 | Finished | `endDate` | string | `YYYY-MM-DD` format, or empty string if in progress |
 | Notes | `notes` | string | Personal notes — keep the user's wording |
