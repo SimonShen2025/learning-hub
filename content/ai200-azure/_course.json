@@ -1,0 +1,86 @@
+{
+  "slug": "ai200-azure",
+  "title": "AI-200: Azure AI Cloud Developer Associate Exam",
+  "platform": "udemy",
+  "url": "https://www.udemy.com/course/ai200-azure/",
+  "status": "not-started",
+  "instructor": "Scott Duffy",
+  "lastUpdated": "5/2026",
+  "language": "English",
+  "rating": 3.0,
+  "totalStudents": 192,
+  "totalHours": 3.9,
+  "level": "All Levels",
+  "description": "The most complete course available on the Microsoft Azure AI developer exam AI-200. Covers container hosting, Cosmos DB, PostgreSQL, Redis, event-driven AI, Azure Functions, security, and monitoring for the Azure AI Cloud Developer Associate certification.",
+  "startDate": "",
+  "endDate": "",
+  "notes": "",
+  "sections": [
+    {
+      "number": 1,
+      "title": "Introduction",
+      "slug": "introduction",
+      "lectures": 1
+    },
+    {
+      "number": 2,
+      "title": "Implement container application hosting",
+      "slug": "container-application-hosting",
+      "lectures": 3
+    },
+    {
+      "number": 3,
+      "title": "Implement container-orchestrated solutions",
+      "slug": "container-orchestrated-solutions",
+      "lectures": 4
+    },
+    {
+      "number": 4,
+      "title": "Develop AI solutions by using Azure Cosmos DB for NoSQL",
+      "slug": "cosmos-db-nosql",
+      "lectures": 4
+    },
+    {
+      "number": 5,
+      "title": "Develop AI solutions by using Azure Database for PostgreSQL",
+      "slug": "azure-database-postgresql",
+      "lectures": 6
+    },
+    {
+      "number": 6,
+      "title": "Integrate Azure Managed Redis in AI solutions",
+      "slug": "azure-managed-redis",
+      "lectures": 2
+    },
+    {
+      "number": 7,
+      "title": "Develop event- and message-based AI solutions",
+      "slug": "event-message-based-ai",
+      "lectures": 2
+    },
+    {
+      "number": 8,
+      "title": "Develop and implement Azure Functions",
+      "slug": "azure-functions",
+      "lectures": 2
+    },
+    {
+      "number": 9,
+      "title": "Implement secure Azure solutions",
+      "slug": "secure-azure-solutions",
+      "lectures": 2
+    },
+    {
+      "number": 10,
+      "title": "Monitor and troubleshoot Azure solutions",
+      "slug": "monitor-troubleshoot-azure",
+      "lectures": 2
+    },
+    {
+      "number": 11,
+      "title": "Thank You!",
+      "slug": "thank-you",
+      "lectures": 1
+    }
+  ]
+}
