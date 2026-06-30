@@ -1,0 +1,38 @@
+{
+  "slug": "ai-103-azure-agent-developer",
+  "title": "AI-103: Azure AI App and Agent Developer - Complete Course",
+  "platform": "udemy",
+  "url": "https://www.udemy.com/course/ai-103-azure-ai-app-and-agent-developer-complete-course/",
+  "status": "not-started",
+  "instructor": "Luke Ginn",
+  "lastUpdated": "6/2026",
+  "language": "English",
+  "rating": 4.6,
+  "totalStudents": 1899,
+  "totalHours": 18.3,
+  "level": "",
+  "description": "Master the 2026 Agentic Shift: Build, deploy, and scale production-ready AI agents using Azure, Python, and RAG. Covers multi-agent orchestration, Agentic RAG, Foundry Trace, Entra Agent ID, and AI-103 exam readiness.",
+  "startDate": "",
+  "endDate": "",
+  "notes": "",
+  "sections": [
+    {
+      "number": 1,
+      "title": "Theory",
+      "slug": "theory",
+      "lectures": 21
+    },
+    {
+      "number": 2,
+      "title": "Code Walkthroughs",
+      "slug": "code-walkthroughs",
+      "lectures": 20
+    },
+    {
+      "number": 3,
+      "title": "Exam Questions",
+      "slug": "exam-questions",
+      "lectures": 0
+    }
+  ]
+}
