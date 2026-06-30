@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { isValidIsoDate, nowNzIsoTimestamp } from "@/lib/date";
 
 const CONTENT_DIR = path.join(process.cwd(), "content");
 
@@ -84,9 +85,7 @@ function parseLectureFile(fileName: string): { id: number; slug: string } {
 
 function isValidDateString(value?: string): boolean {
   if (!value) return false;
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
-  const parsed = new Date(`${value}T00:00:00`);
-  return !isNaN(parsed.getTime());
+  return isValidIsoDate(value);
 }
 
 function resolveCourseStatus(meta: {
@@ -320,7 +319,7 @@ export function getFullCourseExport(courseSlug: string): CourseExport | null {
   });
 
   return {
-    exportedAt: new Date().toISOString(),
+    exportedAt: nowNzIsoTimestamp(),
     course,
     stats: {
       sectionCount: sections.length,

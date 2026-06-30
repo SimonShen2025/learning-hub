@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { CourseStatus } from "@/lib/content";
+import { formatIsoDateDisplay } from "@/lib/date";
 
 interface CourseCardProps {
   slug: string;
@@ -10,16 +11,6 @@ interface CourseCardProps {
   endDate?: string;
 }
 
-function formatDate(value?: string): string {
-  if (!value) return "--";
-  const parsed = new Date(`${value}T00:00:00`);
-  if (isNaN(parsed.getTime())) return "--";
-  return parsed.toLocaleDateString("en-GB", {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-  });
-}
 
 export function CourseCard({
   slug,
@@ -74,11 +65,11 @@ export function CourseCard({
         <div className="grid grid-cols-2 gap-3 text-sm mt-auto">
           <div>
             <p className="text-xs text-muted-foreground">Started</p>
-            <p className="font-medium">{formatDate(startDate)}</p>
+            <p className="font-medium">{formatIsoDateDisplay(startDate)}</p>
           </div>
           <div>
             <p className="text-xs text-muted-foreground">Finished</p>
-            <p className="font-medium">{formatDate(endDate)}</p>
+            <p className="font-medium">{formatIsoDateDisplay(endDate)}</p>
           </div>
         </div>
       </div>

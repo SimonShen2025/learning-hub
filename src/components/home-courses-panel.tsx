@@ -2,6 +2,7 @@
 
 import { useMemo } from "react";
 import type { Course, CourseStatus } from "@/lib/content";
+import { isoDateToSortKey } from "@/lib/date";
 import { CourseCard } from "@/components/course-card";
 import { usePersistentValue } from "@/lib/use-persistent-value";
 
@@ -29,12 +30,6 @@ const SORT_OPTIONS: Array<{ value: SortOption; label: string }> = [
   { value: "title_desc", label: "Title (Z-A)" },
 ];
 
-function dateToNumber(value?: string): number {
-  if (!value) return 0;
-  const parsed = new Date(`${value}T00:00:00`);
-  if (isNaN(parsed.getTime())) return 0;
-  return parsed.getTime();
-}
 
 export function HomeCoursesPanel({ courses }: { courses: Course[] }) {
   const [filter, setFilter] = usePersistentValue<FilterOption>(
@@ -69,10 +64,10 @@ export function HomeCoursesPanel({ courses }: { courses: Course[] }) {
 
     const sorted = [...filtered].sort((a, b) => {
       if (sort === "start_date_desc") {
-        return dateToNumber(b.startDate) - dateToNumber(a.startDate);
+        return isoDateToSortKey(b.startDate) - isoDateToSortKey(a.startDate);
       }
       if (sort === "start_date_asc") {
-        return dateToNumber(a.startDate) - dateToNumber(b.startDate);
+        return isoDateToSortKey(a.startDate) - isoDateToSortKey(b.startDate);
       }
       if (sort === "title_asc") return a.title.localeCompare(b.title);
       return b.title.localeCompare(a.title);

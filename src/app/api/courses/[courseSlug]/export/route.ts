@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getFullCourseExport } from "@/lib/content";
+import { todayFilenameDate } from "@/lib/date";
 
 export async function GET(
   _request: NextRequest,
@@ -12,7 +13,7 @@ export async function GET(
     return NextResponse.json({ error: "Course not found" }, { status: 404 });
   }
 
-  const filename = `${courseSlug}-export-${new Date().toISOString().slice(0, 10)}.json`;
+  const filename = `${courseSlug}-export-${todayFilenameDate()}.json`;
 
   return new NextResponse(JSON.stringify(data, null, 2), {
     headers: {

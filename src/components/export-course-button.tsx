@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { todayFilenameDate } from "@/lib/date";
 
 interface ExportCourseButtonProps {
   courseSlug: string;
@@ -20,7 +21,7 @@ export function ExportCourseButton({ courseSlug }: ExportCourseButtonProps) {
       const filenameMatch = disposition?.match(/filename="(.+)"/);
       const filename =
         filenameMatch?.[1] ??
-        `${courseSlug}-export-${new Date().toISOString().slice(0, 10)}.json`;
+        `${courseSlug}-export-${todayFilenameDate()}.json`;
 
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");

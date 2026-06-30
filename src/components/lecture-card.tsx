@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { formatDateDisplay } from "@/lib/date";
 
 interface LectureCardProps {
   courseSlug: string;
@@ -33,7 +34,9 @@ export function LectureCard({
 
           <div className="mt-2 flex flex-wrap items-center gap-2">
             {date && (
-              <span className="text-xs text-muted-foreground">{date}</span>
+              <span className="text-xs text-muted-foreground">
+                {formatDateDisplay(date)}
+              </span>
             )}
             {tags.map((tag) => (
               <span

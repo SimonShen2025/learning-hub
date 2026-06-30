@@ -3,6 +3,11 @@
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import type { CourseStatus } from "@/lib/content";
+import {
+  formatIsoDateDisplay,
+  isValidIsoDate,
+  todayIsoDate,
+} from "@/lib/date";
 import { CompleteCourseDialog } from "@/components/complete-course-dialog";
 
 interface CourseProgressProps {
@@ -15,26 +20,6 @@ interface CourseProgressProps {
   lectureCount: number;
 }
 
-function formatDisplay(dateStr: string): string {
-  if (!dateStr) return "--";
-  const d = new Date(dateStr + "T00:00:00");
-  if (isNaN(d.getTime())) return "--";
-  return d.toLocaleDateString("en-GB", {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-  });
-}
-
-function isValidDate(dateStr: string): boolean {
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) return false;
-  const d = new Date(dateStr + "T00:00:00");
-  return !isNaN(d.getTime());
-}
-
-function todayIsoDate(): string {
-  return new Date().toISOString().slice(0, 10);
-}
 
 export function CourseProgress({
   courseSlug,
@@ -58,7 +43,7 @@ export function CourseProgress({
   const notesRef = useRef<HTMLTextAreaElement>(null);
   const finishDateInputRef = useRef<HTMLInputElement>(null);
 
-  const computedStatus: CourseStatus = isValidDate(endDate) ? "complete" : status;
+  const computedStatus: CourseStatus = isValidIsoDate(endDate) ? "complete" : status;
 
   async function save(updates: Record<string, string>) {
     await fetch(`/api/courses/${courseSlug}/meta`, {
@@ -81,7 +66,7 @@ export function CourseProgress({
       return;
     }
 
-    if (value && !isValidDate(endDate) && isValidDate(value)) {
+    if (value && !isValidIsoDate(endDate) && isValidIsoDate(value)) {
       openCompleteDialog(value);
       finishDateInputRef.current?.blur();
       return;
@@ -98,7 +83,7 @@ export function CourseProgress({
     }
 
     setStatus(value);
-    if (isValidDate(endDate)) {
+    if (isValidIsoDate(endDate)) {
       setEndDate("");
       save({ status: value, endDate: "" });
     } else {
@@ -122,7 +107,7 @@ export function CourseProgress({
   }
 
   async function handleCompleteConfirm() {
-    if (!isValidDate(pendingCompleteDate)) {
+    if (!isValidIsoDate(pendingCompleteDate)) {
       setCompleteError("Please choose a valid finish date.");
       return;
     }
@@ -207,7 +192,7 @@ export function CourseProgress({
         <div className="flex flex-col gap-0.5">
           <dt className="text-xs text-muted-foreground">Started</dt>
           <dd className="flex items-center gap-2">
-            <span className="text-sm">{formatDisplay(startDate)}</span>
+            <span className="text-sm">{formatIsoDateDisplay(startDate)}</span>
             <label className="relative cursor-pointer">
               <input
                 type="date"
@@ -235,7 +220,7 @@ export function CourseProgress({
         <div className="flex flex-col gap-0.5">
           <dt className="text-xs text-muted-foreground">Finished</dt>
           <dd className="flex items-center gap-2">
-            <span className="text-sm">{formatDisplay(endDate)}</span>
+            <span className="text-sm">{formatIsoDateDisplay(endDate)}</span>
             <label className="relative cursor-pointer">
               <input
                 ref={finishDateInputRef}

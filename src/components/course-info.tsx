@@ -1,4 +1,5 @@
 import type { CourseDetail } from "@/lib/content";
+import { formatDateDisplay } from "@/lib/date";
 import { CourseProgress } from "@/components/course-progress";
 import { ExportCourseButton } from "@/components/export-course-button";
 
@@ -104,7 +105,7 @@ export function CourseInfo({ course, sectionCount, lectureCount }: CourseInfoPro
               <InfoItem label="Instructor" value={course.instructor ?? ""} />
               <InfoItem
                 label="Last Updated"
-                value={course.lastUpdated ?? ""}
+                value={formatDateDisplay(course.lastUpdated)}
                 bold
               />
               <InfoItem label="Language" value={course.language ?? ""} />

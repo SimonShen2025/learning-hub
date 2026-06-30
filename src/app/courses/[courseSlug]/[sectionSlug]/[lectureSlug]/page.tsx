@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getCourse, getSections, getLecture, getLectures } from "@/lib/content";
+import { formatDateDisplay } from "@/lib/date";
 import { Breadcrumb } from "@/components/breadcrumb";
 import { MarkdownRenderer } from "@/components/markdown-renderer";
 import { LectureNote } from "@/components/lecture-note";
@@ -68,7 +69,7 @@ export default async function LecturePage({ params }: Props) {
           <div className="flex flex-wrap items-center gap-2 ml-11">
             {lecture.date && (
               <span className="text-sm text-muted-foreground">
-                {lecture.date}
+                {formatDateDisplay(lecture.date)}
               </span>
             )}
             {lecture.tags.map((tag) => (

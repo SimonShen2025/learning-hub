@@ -1,11 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { completeCourseContent } from "@/lib/content";
-
-function isValidDate(dateStr: string): boolean {
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) return false;
-  const d = new Date(`${dateStr}T00:00:00`);
-  return !isNaN(d.getTime());
-}
+import { isValidIsoDate, todayIsoDate } from "@/lib/date";
 
 export async function POST(
   request: NextRequest,
@@ -13,10 +8,9 @@ export async function POST(
 ) {
   const { courseSlug } = await params;
   const body = (await request.json()) as { endDate?: string };
-  const endDate =
-    body.endDate?.trim() || new Date().toISOString().slice(0, 10);
+  const endDate = body.endDate?.trim() || todayIsoDate();
 
-  if (!isValidDate(endDate)) {
+  if (!isValidIsoDate(endDate)) {
     return NextResponse.json({ error: "Invalid end date" }, { status: 400 });
   }
 
