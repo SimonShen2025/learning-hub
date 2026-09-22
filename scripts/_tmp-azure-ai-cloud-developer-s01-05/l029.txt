@@ -1,0 +1,109 @@
+SECTION: 4 Containers and Azure Web Apps
+LECTURE_ID: 29
+TITLE: Lab: Working with Azure Key Vault Secret Store (Hands-On Lab)
+TRANSCRIPT_LENGTH: 12201
+---
+Now with the help of this video we'll take a look at how can you integrate Azure Key Vault with your Azure Web App
+instance. So if you remember correctly in one of the previous videos we created a new image which is version 2 of our
+Python application whose main idea was to use environment variables configured dynamically during runtime in the Azure
+portal itself. And then we went to the environment variable section and configured three environment variables API key,
+the endpoint and then the model deployment name. But the problem over here is that API key is a sensitive value and
+storing API key just like a normal value in the environment variable section isn't a best practice. The best practice in
+an enterprise setup would be to store the API key in Azure Key Vault as a secret and then in the environment variable
+section over here make a reference to that Azure Key Vault so that the API key now could be referred from Azure Key
+Vault in a secure manner and not really just sit in the environment variable like a normal value. So first things first
+we're going to have to set up an Azure Key Vault resource. So I'll go to my Azure portal and search for Azure Key Vault
+in the search bar. So this is the resource that we're looking to deploy key vaults and then I'm going to click on the
+create button. We're going to create the key vault in the same resource group which is AI200RG and then we have to enter
+the name. So let's keep it AI200KV which stands for AI200 Key Vault. It's not available. Okay maybe if I try to type in
+my name as a suffix that should work. Yeah that works. So the name of a key vault is AI200KVKuljot and then region we're
+going to go ahead with Sweden Central and yep that works and for pricing tier I'm just going to go ahead with the
+standard one. Now there's soft delete which is enabled on my key vault resource and then the value of days to retain
+deleted vaults is set to 19. Now what does even soft delete means? Soft delete means that when you delete a secret
+that's showed in Azure Key Vault it doesn't get permanently deleted. It's retained for 90 days and after 90 days you
+have the option to permanently delete it. So this is also really good capability because in some cases you might delete
+the secret unknowingly and then you might require it the very next moment. So you can go ahead and retrieve it from its
+soft deleted state the secret in Azure Key Vault. Alright and then let's now go to the second tab which is access
+configuration. The permission model is going to be Azure Role-Based Access Control which will work in conjunction with
+Microsoft Anthra ID. Let's go to networking tab and the public access for now is allowed which is good but the other
+thing is you can also put this Azure Key Vault in a virtual network so that all the devices or all the resources that
+sit only within the virtual network are able to access Azure Key Vault. Thus you can also add another layer of network
+security in terms of key vault access but for now public access is good for the demo and then I'm going to go to the
+review plus create tab wait for the final validation to get over because we are done with nearly all the things and then
+I'm going to hit on the create button and then we'll have to wait for the resource to get deployed. So I'm going to skip
+this video to the part wherein I have the resource up and running. So looks like our resource is pretty much up and
+running. Let's go to our resource. So this is the resource panel and then under the objects area on the left hand side
+you can see that there is the secrets area from where we can create new secrets. So if you go to the secrets area you
+can create new secrets from here but for the first time it's going to prompt you by saying that the operation is not
+allowed by RBAC. If role assignments were recently changed please wait several minutes for role assignments to become
+effective. So that means our user identity is lacking some role assignments for it to create secrets in Azure Key Vault.
+So solution to this is to go to the access control tab on the left hand side section of the screen which is the identity
+and access management tab. Now from there we'll have to add a role assignment and the role assignment will be added on a
+user account and the role will be the Key Vault's administrator role. So let's click on add role assignment and from
+here we're going to search for the Key Vault administrator user role. So Key Vault. I'm going to search for Key Vault
+and hopefully that should pop up. So the problem with this is the search bar over here is a bit buggy so you have to
+manually look for the role but it's a variable on the ending pages and this is the role that I'm looking for which is
+Key Vault administrator. Yeah this one Key Vault administrator. So assigning this Key Vault administrator to a user
+account will let a user account perform all data plane operations on a Key Vault with one of them being creating a
+secret. So I'm going to select this role click on next and then click on assign access to a user group or service
+principle and then click on select members and from here select your user account that you're currently using to create
+a secret. So that's going to be my user account click on select next and then review plus assign and that should fix
+that error or that message that prompted that there was a lack of permissions on the user account. Now let's go back to
+the secrets area and probably the message won't appear now. Yeah the message doesn't appear. So now I click on generate
+slash import to create manually a new secret and the name of the secret would be openai hyphen api hyphen key. So that's
+going to be the name of my secret and then I'll put the secret value over here which is my azure openai api key. All
+right and we'll paste that over here and click on create. So that should create the secret in my azure Key Vault. Yep
+you can see the secret has been successfully created. Now in order for me to use this reference in azure web app
+instance in the environment variable section that ultimately points to azure Key Vault the managed identity that's
+associated with this azure web app instance needs to have a Key Vault secret user role so that this azure web app
+instance can go to the azure Key Vault and fetch the api key value from there and provide it to my application during
+runtime. So for that we'll have to again go back to our Key Vault resource go to the access control tab and this time
+the role that we'll be assigning is a Key Vault secrets user role to the managed identity and not the Key Vault's
+administrator role. So now I'll click on add, add role assignment and the role that we're looking for is a Key Vault
+secrets user role. So I'm just going to go back again to probably you know just going to search for Key Vault secret and
+yeah that's the role that I'm talking about the Key Vault secrets user role this one and click on next and now this time
+we not assign it to a user account but rather to a managed identity that's associated with our azure web app instance.
+So I'll click on managed identity select members and just to keep in mind we'll take a look at the managed identity
+that's associated with this web app instance. So you can go to the identity area in the settings panel and then from
+here take a look at the user assigned managed identity which is this one UAID A52E that's the managed identity but this
+over here is a user assigned managed identity. By default the behavior in azure web app instance is to somehow use the
+system assigned managed identity and resolve the reference that's made to azure Key Vault. So we'll have to go to the
+system assigned tab and then right now this azure web app instance doesn't have a system assigned managed identity
+because the status is set to off. We'll set that to on and then click on the save button and click yes. So it's going to
+create a system assigned managed identity behind the scenes for this azure web app instance. So that's the object id for
+that system assigned managed identity that's attached to this azure web app instance. Now we'll select that system
+assigned managed identity for our azure web app instance in the role assignment area in azure Key Vault and assign it
+the Key Vault secrets user role. So I'll click on select members in the managed identity area and then select the system
+assigned managed identity for my azure app service. So I'll click on select members for my azure app service instance.
+So I'll click on all system assigned managed identities and then select this identity that has the same name as my web
+app instance which is aoaipythonappkuljot. Let's go ahead and select that and then preview plus assign and wait for the
+role assignments to be set into place. So we're pretty much done with most of the lab and the next thing is to somehow
+find a way to make a reference to the azure Key Vault in the environment variable. So I'm going to go to the environment
+variable and we'll have to find a way to make a reference to the azure Key Vault. So for this we're going to take help
+of a code snippet from a markdown file. So this is the markdown file that contains the code snippet that will help us
+resolve a reference to azure Key Vault. So this is the markdown file which is keyvault.md under the containers and web
+apps folder in the GitHub repository and the code snippet is this one. The Key Vault reference needs to be of this
+format. So I'm going to go ahead copy this Key Vault reference and then in the azure API key environment variable I'm
+going to paste this reference. All right but the reference is still not completed. We need to provide it with a Key
+Vault name and then the secret name. So I'm going to go ahead copy my Key Vault name which is ai200kvkuljot. So that's
+going to be my Key Vault name and then we need the secret name. The secret name if I'm not mistaken was OpenAI API key.
+But I'm still going to check it. Yeah that's OpenAI API key. And then just going to paste that over here. And once
+that's done we are pretty much good to go. Let's click on apply. Apply and confirm to save the made changes. And now the
+environment variable will have a reference to Azure Key Vault. And as you can see in this environment variable which is
+Azure API key the source is set to Key Vault and that's with a green symbol. That means our application instance is
+using Azure Key Vault to resolve the API key secret. Now we'll try to test if it's working fine or not. If our
+application is working fine or not. For that I'm going to go to the overview section. Restart my application and then
+we'll hit the application with the post request and see if we get back a response from the large language model or not.
+If we get back a response from the LLM that means our Key Vault reference is working absolutely fine. So we'll have to
+wait for like a minute or so before the application could be restarted with the new environment variable settings and
+then we'll test our application out. So my application has successfully restarted which you can see on the screen. I'm
+on the slash health endpoint and it's returning me status which is set to healthy. Now let's try hitting it with a post
+request. So I'm going to copy this post command over here which is within the same markdown file keyvault.md and then
+I'm going to open my terminal. Yep there you go. Just going to clear everything else. And then hit it with this command
+which is can you suggest some places to travel in India or maybe let's try typing in you know a different query which
+could be tell me something about yourself. Yep so indeed I do get back a response you know that's from gpd4.1. Hello you
+know that's from gpd4.1. Hello I'm an AI language model created by OpenAI designed to assist you with answering
+questions providing information. I'm always here to help you as best as I can just let me know. Awesome. So that means
+our application is working absolutely fine and the reference to Azure Key Vault is also getting resolved just the way we
+want. Alright so I guess that's it that's all about the integration between Azure Key Vault and Azure App Service and
+I'll see you in the next lecture.

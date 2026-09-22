@@ -1,0 +1,33 @@
+SECTION: 4 Containers and Azure Web Apps
+LECTURE_ID: 28
+TITLE: Intro to Azure Key Vault for Secret Storage
+TRANSCRIPT_LENGTH: 3201
+---
+So let's quickly take a look at yet another Azure resource that's called as Azure Key Vault for storing your secrets and
+your credentials like connection strings, API keys, so on and so forth. So Azure Key Vault is a cloud service used to
+securely store and manage sensitive information and it's not only limited to storing secrets like connection strings and
+API keys, although that's one of the main concerns, but it can also help you store encryption and decryption keys and
+also certificates, SSL, TLS certificates and help you with certificate lifecycle management. And this is an Azure
+resource, you can deploy it just like any other resource and you just simply have to store your API key within your
+Azure Key Vault as a secret and then if you're running an application on an Azure Web App instance or anything like
+Azure Kubernetes Service or Azure Container App, you can make a reference via your environment variable to the Azure Key
+Vault secret that contains your API key and your Azure Web App via the virtue of a managed identity, if it has the right
+set of permissions, it can fetch that API key from Azure Key Vault. And this is also better from a security hygiene
+perspective because you're not at all hard coding the API key value within your application or within your code base
+anywhere. And this is how the overall flow for an example case scenario would look like. So imagine you have your Azure
+Web App instance up and running and this Azure Web App instance has a large language model that it makes use of that's
+deployed in Microsoft Foundry resource and this Azure Web App contains Python code that basically makes that large
+language model behave as a chatbot. Now in order to run that large language model, the Azure Web App code has to throw
+API calls to the Microsoft Foundry resource to the large language model, right? So for that it requires model endpoint,
+the deployment name and the API key. Now because model endpoint and the deployment name are not considered as secrets,
+you can directly inject the values of the model endpoint and the deployment name as environment variables to the Azure
+Web App so that it can make use of these environment variables directly at runtime. But because API key is a secret that
+you would not like to hard code anywhere, be it in the environment variable configuration or in the code for the
+application itself, you first of all store this API key in a secret store within the Azure Key Vault. And now you have
+to find a way that this Azure Web App instance can access the API key from this Azure Key Vault. Now because Azure Key
+Vault is a protected web resource, Azure Web App needs to have an authentication mechanism that can help it grab that
+API key. And that authentication mechanism will be provided by a managed identity. So we'll provide the system assigned
+managed identity of this Azure Web App instance, the role of being an Azure Key Vault secrets user, and then the Azure
+Web App can use this managed identity to grab the API key that's stored in this Azure Key Vault secret store over here.
+Alright, so I guess that's pretty much it. That was all about Azure Key Vault. And yeah, I'll see you in the next
+lecture.

@@ -1,0 +1,61 @@
+SECTION: 3 AI-200 Primers and Foundations
+LECTURE_ID: 15
+TITLE: Lab: Using a Vector Embedding Engine (Hands-On Lab)
+TRANSCRIPT_LENGTH: 6525
+---
+Now with the help of this video we'll be taking a look at how you can call a vector embedding engine from Microsoft
+Foundry and then generate some vector embeddings which is eventually going to help you in your rack pipeline setup. So
+we'll take a look at how you can deploy a vector embedding engine and then eventually call it from a code first
+approach. So the first thing is to deploy a vector embedding engine in Microsoft Foundry. So I'm going to go to my
+Microsoft Foundry resource and then I'm going to go to the discover area which will eventually take me to the model
+catalog. From model catalog I'm going to go to the models section and search for this vector embedding engine which is
+called as text embedding ADA002. So that's the specific kind of vector embedding that we'll be using. So text embedding
+ADA002. Yeah so that's the embedding model that I'm talking about which is text embedding ADA002. Now this embedding
+engine is from OpenAI and it returns vectors which are 1536 in dimensions. So what that means is doesn't really matter
+what the length of your input text is irrespective of the length it's going to return you vectors and that array of
+vector will be 1536 in length and these vectors will be floating point numbers like 0, 0.1, 0.23 something like that. So
+I'm going to go ahead click on this model and then we'll go ahead and deploy this model with some custom settings. I'm
+going to go ahead and select the second option which is to deploy this model with custom settings. So the deployment
+type will be set to global standard deployment name is text embedding ADA002 which is same as the model name and that's
+completely okay with me and tokens per minute rate limit is set to 150,000 tokens which is absolutely more than enough.
+I'm going to click on the deploy button and that should deploy this model for me and we'll be able to see this model in
+the model deployment section. So as you can see I can see this model in the build section and then to the deployments
+area. Yep the model is absolutely there. Now let's jump back to our VS Code environment. To perform this lab I'm on this
+folder which is AI Foundations and this notebook vector embeddings.ipynb Now before we can move on with the notebook
+execution we need to set in some environment variables. So we need to set in these three environment variables and as a
+matter of fact for this lab we won't be using the Microsoft Foundry SDK but rather the OpenAI SDK to throw an API call
+to our vector embedding engine. The reason we are doing this is because you get a feel of both worlds using the
+Microsoft Foundry SDK which we did in one of the previous videos and now using the OpenAI SDK. So for this we need the
+OpenAI API endpoint, the OpenAI API key and the embeddings model deployment name. I'm just going to simply type in the
+embedding model deployment name which was text embedding ADA002. So we have one environment variable that's filled in.
+Now we need the OpenAI API endpoint and the OpenAI API key. For this we need to go back to our Azure portal and now in
+this Azure portal in the Microsoft Foundry resource we shall now go to keys and endpoint which is right under the
+resource management tree. Let's go to the keys and endpoint section and from there we'll grab the endpoint and the API
+key value. All right so now you can see I have a couple of API key values and endpoint values. To grab the OpenAI
+endpoint value click on OpenAI over here and that's the OpenAI endpoint value. So I'm going to grab this OpenAI endpoint
+value and paste it in the environment variable and the next thing is we need the API key. So you can either copy the
+key1 or key2. I'm just going to go ahead and copy key1 and paste it again in my environment variable. All right and ctrl
+plus s to save the changes. Now let's go ahead and execute this notebook. So I'm just going to go ahead and select my
+Python kernel and that's done. So for this demo we'll be using the OpenAI SDK and not the Microsoft Foundry SDK. That's
+where we are installing OpenAI. This is the library that we are going to go ahead and install. So just make sure that
+you run this code block so that this library or SDK gets installed. I'm not going to do that because I already have it
+in my Python kernel. Now with the next code block we'll be importing the environment variables namely the OpenAI API
+endpoint, API key and the model deployment name. So I'm going to go ahead and execute this code block too. And the next
+thing is to set up an Azure OpenAI client. So the way you set up an Azure OpenAI client is you create an object of type
+Azure OpenAI which is from that OpenAI SDK and then you need to pass in the API key, the API version which is set to
+2024.6.1 and then the OpenAI API endpoint. Both the API keys and the API endpoint are defined in the .env file. And
+we'll be using this Azure OpenAI endpoint to create vector embeddings via our vector embedding engine and that's what we
+are doing with the help of this code block. So you use the OpenAI client and then this method which is
+.embeddings.create. This is the input text for which those vector embeddings will be generated with the input text being
+the quick brown fox jumps over the lazy dog. And then we're going to go ahead and use our vector embedding engine whose
+name is stored in the model deployment name variable in the .env file. So we're absolutely going to reference that
+variable. And then you just go ahead and simply print the response and we'll be able to see those vector embeddings
+which will be 1536 in dimensions. And then hopefully the vector embeddings should get generated. Yep there you go. These
+are the vector embeddings. So you can see these vector embeddings are floating point numbers between minus 1 and 1. So
+you have values like minus 0.005, 0.004, minus 0.016 and then you'll observe that the length of this entire array of
+vector embeddings is going to be 1536. And this length just depends on the kind of model that you're using. There's
+other model like embedding large which is also from OpenAI and that returns 3072 dimensions of these vectors. But the
+text embedding eta002 returns 1536 dimensions of these vectors. So that's the main difference. Alright so I guess that's
+pretty much it. That was all about taking a look at how you can deploy in the first place a vector embedding generation
+model in Microsoft Foundry and then go ahead and use that as an API call to generate these vector embeddings. That's it
+and I'll see you in the next lecture.

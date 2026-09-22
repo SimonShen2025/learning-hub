@@ -1,0 +1,54 @@
+SECTION: 5 Deploy and Manage AI Apps on Azure Kubernetes Service (AKS)
+LECTURE_ID: 37
+TITLE: Lab: Getting Comfortable with Kubectl Commands (Hands-On Lab)
+TRANSCRIPT_LENGTH: 5729
+---
+Now, with the help of this video, we'll quickly take a look at how can you connect your AKS cluster that's deployed on
+Azure portal and use the kube control commands to take a look at, you know, what pods are running, what nodes are
+running, what namespaces are configured in your Azure Kubernetes service cluster via some terminal commands. So we'll
+take a look at how can you connect using your Azure CLI credentials and use the kube control CLI commands to inspect
+your AKS cluster. So in order to perform this lab, I'm on this markdown file, which is getting started with aks.md,
+which is included in this folder, which is Azure Kubernetes service. So now we need to install the kube control CLI to
+move forward with the lab. I already have the kube control CLI installed on my device, but this is how I did it. So open
+up your PowerShell terminal and run this command, which is winget install, and then it installs the kube control CLI.
+That's going to help you in, help you interact with the AKS cluster. Now winget over here is the windows installation
+package manager, and that's going to install the kube control CLI for you. You can even take help of various other
+resources on the internet to make sure that you install the kube control CLI on your device, depending upon the kind of
+operating system that you're using. There are plenty of resources out there. And once you have installed your kube
+control CLI on your device, and if you open up a bash terminal, for instance, in this VS code environment, and then type
+in this command, which is kube control version, hyphen, hyphen client. That's going to display to you the kube control
+CLI version that's installed on your device. So just make sure that you do that. Now the next thing is that we need to
+connect to our AKS cluster, and we'll do that by fetching some credentials that are associated with that AKS clusters
+admin account. So I'll go ahead and run this command. And if you take a look at this command over here, the command
+makes use of the Azure CLI and then AKS, meaning I want to connect to the AKS cluster and get the credentials for the
+admin account. And then the AKS cluster is situated in the resource group with this name and the name of the AKS cluster
+needs to be typed in over here. So I'm just going to type in the name of my AKS cluster and the resource group name
+also. So the name of my AKS cluster is AI200 AKS cluster. I'll paste that over here. And the name of my resource group
+is going to be, let me just go ahead and delete that. So the name of my resource group will be AI200 AKS RG, all right.
+And then I'll hit the enter button. Now it's going to grab the credentials for the admin account. And then we'll make
+sure that it uses those admin credentials to connect to the AKS cluster as and when required. When I'm going to be
+running those kubectl commands, you'll notice that we are using the same credentials that we fetched just now. So it
+says that it's merged the AI200 AKS cluster in my device. Okay. Now let's go ahead and explore our Kubernetes
+deployment. So for instance, I just want to get an idea about the virtual machine nodes that are up and running in my
+Kubernetes cluster. So for that, I'm going to go ahead and enter this command, which is kubectl get nodes, right? So if
+I enter this command kubectl get nodes, you'll see that I have these two nodes up and working in my Kubernetes cluster.
+So I have this node number one, which is a part of the virtual machine scale set and node number two, which is also a
+part of the virtual machine scale set that's powering my AKS cluster. The age of these nodes is about 22 minutes. So
+these nodes were provisioned about 22 minutes ago. Now what if I want to take a look at all the pods that are currently
+up and working in my Kubernetes cluster? I can simply type in this command, which is kubectl get pods. So now it says
+that no resources found in default namespace. Now that's a bit concerning, right? We absolutely saw that we had some
+pods up and running. So if you go to your AKS cluster and go to the workloads area. So in the workloads area, you'll
+indeed see that there are some system defined pods that are up and running, but they belong to a different namespace. So
+in the kubectl command that I ran, because I didn't really specify a namespace, it defaulted to the default namespace,
+but there aren't any pods that are running in the default namespace. There are pods, but they are running in the kube
+system namespace. So we need to define the namespace in the kubectl command. I'll go back to my VS Code environment and
+enter this command, which is kubectl get pods and hyphen n, that is to justify the namespace that I want to get back
+these pods from. And the namespace would be kube system. All right, so there you go. I get back these pods from the kube
+system namespace, and you can see these pods exactly match the ones that we saw in Azure portal, right? And then in
+order to get what namespaces are assigned to my AKS cluster, I can even type in this AKS command, which is, or kubectl
+command, which is kubectl get namespace. So you see that currently in the AKS cluster, I have one, two, three, four,
+four namespaces up and working, a default namespace, a kube node lease namespace, kube public, and a kube system
+namespace. Majority of the pods currently, the system defined pods are running in the kube system namespace. All right,
+so I guess that's pretty much it. That was all about taking a look at how can you connect to your AKS cluster via some
+admin credentials by running the az cli command, and also use the kubectl command to administer your AKS cluster via the
+terminal sessions. That's it, and I'll see you in the next lesson.

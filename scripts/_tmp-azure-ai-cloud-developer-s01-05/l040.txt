@@ -1,0 +1,95 @@
+SECTION: 5 Deploy and Manage AI Apps on Azure Kubernetes Service (AKS)
+LECTURE_ID: 40
+TITLE: Lab: Running AI App on AKS from ACR (Hands-On Lab)
+TRANSCRIPT_LENGTH: 10572
+---
+All right so with the help of this video we now take the react.js application container image that's sitting there in
+azure container registry that we built in the previous lecture and then create a deployment yaml manifest file to deploy
+that to azure kubernetes service cluster. So we have to do a lot of things with this lab you learn about how do you
+write a deployment manifest file how do you use that deployment manifest file configure some rules configure some
+configurations and deploy that container application with those rules on an aks cluster. So it's going to be really fun
+and exciting. So in order to perform this lab I'm on this markdown file which is acr2aks.md that's just under the azure
+kubernetes service folder. Right so we'll primarily be interacting with our bash terminal so I'm going to open up my
+bash terminal over here just going to clear some things so that it appears neat. All right so first things first just
+make sure that you set up your azure container registry name as an export variable. I've already done that and my bash
+terminal store has that value of the variable stored. Now we like to create a yaml manifest file and the yaml manifest
+file will describe just how your container application will function as in what port is going to be exposed for that
+container application which node will that container application run on as a pod within your aks cluster and some rules
+that we like to configure maybe some scaling rules that we like to configure. So all of those guidelines and rules will
+be written in form of yaml definitions in what's called as a manifest file. So we'll have to create a folder to store
+that manifest file so that folder will get created somewhere over here in the same working directory. So I'm gonna make
+sure that I am in the correct directory correct root folder and the root folder for my bash terminal needs to be this
+one the azure kubernetes service root folder. So I'm just gonna make sure that I am in the correct root folder yep
+that's it and then I'm gonna run this command which is mkdir which is which stands for make directory and then the name
+of the directory is going to be the manifest directory. So now you see that a new directory got created over here the
+manifest directory and up until now it's empty but we'll store the deployment manifest files in this manifest directory
+over here. So now we're going to make use of this command over here to get back a templated manifest file for publishing
+our reactjs application to aks cluster. So we'll get back that template and then we can configure that template
+according to our needs. So the way this works is we'll use the kubectl cli to create a deployment. So whenever you want
+to publish an application to an aks cluster you call that as a deployment and the deployment will be named as AOAI chart
+app which is nothing but short form for azure openai chart app and it's going to run a container image which is stored
+in our azure container registry and that's the location that's the full naming convention of a container image. It's
+exposed on port number 80 and then you see this parameter which is dry run set to client. This really just means that I
+won't don't want to create a deployment right now I just want to have the template manifest file that I can configure
+according to my needs. So when you set dry run to client that means it's not going to create that deployment in real
+time but we'll just throw the templated yaml manifest file as an output and once it throws that templated yaml manifest
+file I will download the yaml manifest file to this manifest folder that I created earlier with this name. All right so
+let's just go ahead and quickly copy this command and run that in the bash terminal itself. All right so you see that if
+you open up the manifest folder over here you have a yaml file and let's quickly take a look at the yaml file now. So if
+you take a look at the yaml file that's a pretty large description of how our deployment running that container image
+should be deployed on our AKS cluster. So we'll go through this yaml manifest file in a step-by-step fashion. So if you
+zoom on this a bit you can see that I'm contacting the kube api server so you know the api version is set to apps slash
+v1 and the kind is set to deployment that means I want to use this yaml manifest file to deploy my container image as a
+pod or within a pod on my AKS cluster. The name of this container workload will be named as AOAI chart app right so
+that's going to be the name and then replicas is set to one which means at any given point in time the desired state of
+the AKS cluster will have one replica that is one instance of my application up and running. I can set it to 2, 3, 4, 5
+depending upon the kind of workload that I'm expecting and then now comes the specification over here. As far as the
+specification is concerned you define the container that you want to run the container image. So the container image is
+this one that's stored in my azure container registry and you can see the reference being made to that container image
+over here and this container image is exposed on port number 80 so that listens for incoming traffic on port number 80
+that's also very important to define in the yaml manifest file and that's according to the docker file that we created
+for running this reactjs application. So I don't think we'll be making any changes to this yaml manifest file we won't
+be adding any scaling rules or stuff like that I just wanted you to download the yaml manifest file so that I can show
+you how exactly it is written and what are the important key points to keep in mind while writing this yaml manifest
+file. Let's move forward with the rest of the lab so I'm going to go back to my markdown file and because we won't be
+making changes and we are happy with the way the yaml manifest template is written we'll just go ahead and use that
+manifest file to create a deployment finally. So I'm going to copy this command over here and this command will use the
+kube control cli to apply that yaml manifest file as a deployment and run that container image finally on my aks
+cluster. So whenever you want to apply a yaml manifest file to the kube api server and then run your container image you
+use the kube control apply command and then hyphen f to define that it's a file that I want to send and the file
+location also defined. Alright so I'm going to copy this command and paste that over here and hit enter. So in about a
+couple of seconds we'll have this working as a container containerized workload on our aks cluster. So looks like it's
+been created now the thing is I want to see whether it's up and running. So I can use the kube control get deployment
+command to see whether this deployment is healthy whether it's up and running and see other details for this deployment
+like what node is it running on and what is the age of this deployment. So I'm going to run this kube control command
+which is the get deployment command to get all the replicas that have the name or the label AOAI chat app. I only have
+currently one replica so we'll only see one container instance running for this for this application. So you can see
+that I have one replica of the application up and working. It's currently working in the desired state so one of one
+instances are up and because it's in the desired state the up to date value is set to one and then age is 45 seconds
+right. So my aks cluster is currently operating in the desired state. Now let's go to azure portal to check things out.
+Now if you go to workloads and because I didn't really define any namespace for creating this deployment this deployment
+or this pod gets created in the default namespace in my aks cluster. So now you'll see that in the workload section you
+have your container image up and working as a pod in the default namespace and you have one replica of it up and working
+which was deployed about two minutes ago. Now if you would like to know more things about it like what's the ip address
+what node is it running on you can see all of that too. So this is the pod name and then the status is set to running
+and it's currently running on this node over here this virtual machine over here and then this has this internal ip
+address which is the pod ip over here which is 10.244.1.14. Now this is a private ip address and not a public ip address
+that's cool that's really cool. Now let's go back to our aks cluster and then to our vs code environment. Now the thing
+is we would like to see this application working we would like to test this application out so there are two ways to
+test this application out to access the user interface. One of the ways is to expose this behind a public ip address via
+the means of a load balancer an azure load balancer. We would like to keep that for another video and we like to access
+this application via the second way which is a much easier way for testing purposes and that's why something that's
+called as port forwarding. So what happens is you can port forward the container application to your device so even
+though your application won't be exposed behind a public ip address you can still access the application via the local
+host port on your device. That's really awesome for testing purposes. So I'm going to go ahead and use the kube control
+port forward command over here to quickly port forward the deployment with this name and then the port forwarding will
+look something like this. So the local host 8080 port on my device will be mapped to port number 80 on the container
+application and that's exactly the port that the container application listens for all traffic. So I'm going to go ahead
+and execute this command and now that the port forwarding has taken place I can quickly go to my web browser again and
+go to localhost 8080. All right so that's the application right and then if I type in a query how are you it shall
+internally throw a call to a large language model and give me back the output. Yep thank you for asking I'm just a
+virtual assistant how can I assist you today. Awesome so the application is working absolutely fine. I think we are
+pretty much done for the lab. Yep that's it. All right so that's pretty much it for the video that was all about taking
+a look at how can you create a deployment for a container image that's stored in your acr instance and deploy it to your
+your acr instance and deploy that to your aks cluster with the help of some yaml manifest files. That's it and I'll see
+in the next lecture.

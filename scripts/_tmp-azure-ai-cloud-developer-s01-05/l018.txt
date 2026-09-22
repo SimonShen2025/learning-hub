@@ -1,0 +1,15 @@
+SECTION: 4 Containers and Azure Web Apps
+LECTURE_ID: 18
+TITLE: Lab: Installing Docker on your System (Hands-On Lab)
+TRANSCRIPT_LENGTH: 1152
+---
+So, this is just a short video to let you know that you will have to install and get Docker Desktop up and running on
+your device. Because in the labs wherein we aim to containerize our AI application, get that up and running on a cloud
+native resource, we will have to take help of the Docker Desktop runtime to containerize our application and create a
+container image and push that to our Azure resources. So, you can simply go to the web browser, type in Docker Desktop
+download, and then for instance, in my case, my device is a Windows device, so I can click on the first link and it's
+going to take me to the installation guide. And then I can simply follow this installation guide, which is pretty
+simple, and get Docker Desktop up and running and get that installed on my device. Now once that's done, you can go to
+your search bar on your device and search for Docker Desktop. And that should appear over here. Just open it up, log in
+with your personal account and you'll be good to go. All right, so I guess that's it. That's all that I wanted to share
+in this video as a quick note of some sort. And yeah, I'll see you in the next lecture.

@@ -1,0 +1,86 @@
+SECTION: 5 Deploy and Manage AI Apps on Azure Kubernetes Service (AKS)
+LECTURE_ID: 39
+TITLE: Lab: Building and Pushing our AI App to ACR (Hands-On Lab)
+TRANSCRIPT_LENGTH: 9550
+---
+Alright, so with the help of this video, we'll be building the AI application locally, that we will, in the next couple
+of videos, publish as a containerized workload to our Azure Kubernetes service cluster. So in this video, we'll just be
+building that image locally, and also pushing that to Azure Container Registry. So I have Docker Desktop running in the
+background, that's going to help me build this image locally. And in order to perform this lab, I'm going to take help
+of some code snippets. And these code snippets are within the GitHub repository that's grown on my VS Code environment.
+And that's the markdown file, which is docker2acr.nd. That's under the Azure Kubernetes service folder over here. So the
+kind of application that we'll be building is a React JS application, which means it's going to have a really nice
+looking UI. And then it will behave like a chatbot. You know, when you go to chat GPT, you interact with a chatbot on a
+user interface, you throw some queries, and in the backend, a call is being made to a large language model. We'll
+absolutely do that with the help of this application. So the application code is within this folder over here, which is
+AOAI chat app. So if you open up this application folder over here, you can see I have a .env file that will be used for
+sitting in the environment variables that are necessary for making the LLM API call. So I need the Microsoft Foundry API
+key, the endpoint, the Azure OpenAI endpoint, and the model deployment name that I wish to use. So I'm first of all
+going to fill these values. So we need the API key and the OpenAI endpoint. So I'm going to go to my Microsoft Foundry
+resource, to the keys and endpoint area, and then grab key number one, which happens to be the primary key. And then I'm
+going to paste that over here. And then next we need the Azure OpenAI endpoint and the model deployment name. Now in
+this case, we need a special type of endpoint because that's a REST API call that we are making. So instead of making a
+Python call, it's a REST API call. And the way I've written this JavaScript application, we cannot simply go to the keys
+and endpoint area in our Microsoft Foundry resource, go to OpenAI and grab this endpoint. No, this endpoint won't work
+because that's not the way I've written my JavaScript application. What instead we'll do is, we'll go to our Microsoft
+Foundry portal, to the build section and then to the deployments area. And then let's say I'm going to use the GPD 4.1
+model. So I'll click on this model and that's going to take me to the model playground area. Now just make sure that is
+shift from chat to call model. And when you open call model, just make sure that for the code snippet, you select
+instead of Python, a curl call, because that's a REST API call that we are even making in our JavaScript application.
+And then I've basically replicated this call in my JavaScript application. So this is the endpoint that we'll copy, this
+endpoint. So I'm going to quickly copy this endpoint and yep, paste that in the second environment variable. That's it.
+And then we need the model deployment name. So I'm going to type in GPD 4.1 as my model and control process to save the
+main changes. Now that we have the environment variables filled in, let's quickly take a look at the main code
+implementation. So I'll open the SRC folder, the source code folder over here, and then navigate to the app.jsx file.
+This is the React JavaScript file that basically runs that main logic and also renders everything in a really cool user
+interface. So you can see I have this function app declaration over here, which is the main entry point for this
+application. And what this basically does is it takes in the messages, which is nothing but the user query as an input.
+And then in the main try catch mechanism over here in the try block, it tries to make a POST request to my Azure OpenAI
+endpoint. That's going to be fetched from the environment variable file with the API key over here as part of an HTTP
+request. And then the user query with maximum token set to 4096, temperature value set to one. And then I have the model
+deployment name also defined over here, which is also taken from the .env file, the environment variable file. And then
+it renders everything in a UI kind of system. We'll not go into the details of the code over here, but that was just to
+tell you what's really happening behind the scenes. Next, let's take a look at the Docker file. So if we take a look at
+the Docker file, we are building this image on a Node.js parent image. So that's Node 18 Alpine. So that's the parent
+image that I'm going to be using. Then you create the working directory, which is slash app. And then in order to
+install all the libraries, dependencies and utilities, you basically take the package.json file and run the npm install
+command to install all the packages in the package.json file. The package.json file is just over here in the source code
+itself. And then you copy the environment variables, copy the rest of the application files, all of the files needed to
+run the application. And then you build the application by running this command, which is npm run build. And then you
+finally expose this application and make it listen on port number 80. So we'll have to do a mapping on port number 80
+for this application to listen whenever we deploy this as a containerized workload on our Azure Kubernetes service
+cluster. That's it. So now let's go ahead and build this application. So I'm going to go back to my markdown file. And
+then we like to build this application. So I'm going to open up my terminal over here. All right. And then just make
+sure that you are in your terminal at this root folder location, this one. So we'll have to enter a bit of CD commands.
+So CD Azure Kubernetes service, such that I navigate to that folder, and then I need to be in the AOAI chat app folder
+because the AOAI chat app folder contains the Docker file. So this folder acts as the root folder for the Docker file.
+And that's where you need to be to build your Docker image. Awesome. Now let's use this Docker command to build a Docker
+image. So we're going to be building a Docker image and we'll tag that as AOAI chat app, and then the latest version
+AOAI over here stands for Azure OpenAI. So that's just a short form. That's the kind of naming convention that I
+followed. So it looks like our Docker image is now built. Let's test it out locally before we can push it to Azure
+Container Registry. So I'm going to copy this command over here. And this command is a Docker run command that maps
+localhost port 5000 to port 80 on which the container application listens on, and then it runs the latest version of the
+application that we just built. So I'm going to hit enter and then open up a browser window. Let's go to localhost 5000
+on a device. And yeah, that's the UI that I was talking about. A really sleek and minimal UI. And then if I enter a
+query as in, hi, how are you? I should probably get back a response from the large language model. Yep, I do get back a
+response. It says, hi, I'm just a virtual assistant. So I don't have feelings, but I'm here and ready to help you. How
+can I assist you today? And then if I ask it something else, which is tell me something about Azure OpenAI. Let's take a
+look at the kind of response that we get back. It's going to take some time because that would quite be, would be quite
+a longer response. And yep, there you go. Absolutely. Here's a quick summary about Azure OpenAI. It's a cloud based
+offering from Microsoft that allows businesses and developers to access powerful OpenAI language models like GPT-4,
+Codex, DALI and more. And then talks about a couple of features of Azure OpenAI resource. Awesome. So that means that
+application is working just fine. Now that we know our application is working fine, we'll push this application to our
+Azure Container Registry. So we'll first of all set the variable name for our ACR instance, which is, you know, Kuljot
+ACR in my case. So just type in the name of your Azure Container Registry. And that's only for setting in the bash
+variable such that we can use this variable repeatedly in the scripts that will be running through our bash terminal. So
+we just set up a bash variable with the export command, and then I'm going to quickly log into my Azure Container
+Registry using the Azure CLI. So just going to copy this and paste that in the bash terminal also. Just going to scroll
+this up a bit. So it looks like the login has succeeded. Now let's re-tag our Docker image with the naming convention
+that we need to follow for Azure Container Registry. And then once that's done, we'll push our re-tagged image to Azure
+Container Registry. And then we'll just check whether it's pushed to the ACR instance on Azure Portal. So yep, looks
+like it's been pushed. Let's go back to our Azure Portal, search for container registries, go to Kuljot ACR instance in
+this case. And then I'm going to head to the repositories section. And from the repository section, there should be a
+new repository created. Yep. AOAI chat app. And then it should include the latest version of this application. Yep. I
+have an image that's tagged as being latest. All right. So I guess that's pretty much it. That was all about pushing our
+JavaScript application, our React JS application to Azure Container Registry. And in the next video, we'll deploy that
+to our AKS cluster. That's it. And I'll see you in the next lecture.

@@ -1,0 +1,44 @@
+SECTION: 4 Containers and Azure Web Apps
+LECTURE_ID: 32
+TITLE: Introduction to Deployment Slots
+TRANSCRIPT_LENGTH: 4573
+---
+Now, with the help of this video, let's quickly take a look at what are deployment slots in Azure Web App instances. So,
+deployment slots are live environments associated with an Azure Web App. Now, what does this even mean? So, if we deploy
+an Azure Web App instance in an Azure App Service plan, you can have two kinds of environments working within that
+instance. You can have a production environment and a staging environment. So, for instance, if you're developing an AI
+application, the production environment would have model A and the staging environment would have a model B. Your QA,
+your quality assurance and testing team, would interact with that staging environment so that they can make sure there
+are no bugs, no feature updates to be made, and the model B is working absolutely fine in that AI application. And once
+you get a green flag from that quality assurance team that's interacting with the application that runs in this staging
+environment behind that Azure Web App instance, you can swap things. That is, you can make this staging environment, the
+application that runs in the staging environment, now run in the production environment. And the application that's
+running in the production environment would eventually be replaced for all live users. Now, this is important because
+you would like to have zero downtime, right? This is very important because if you have a lot of downtime, your users
+might get disgruntled and that doesn't mean a lot of good things for your business organization. So, slots allow teams
+to validate changes before exposing them to end users. And a point to keep in mind is deployment slots are only
+supported in the Azure App Service premium plans. And this is how you can make use of deployment slots with your CI-CD
+strategy, with your repository branching strategy. So, for instance, for your application, you might host a repository
+that contains the code base for running that application in GitHub. And similarly, that application has three branches,
+main branch, the staging branch, and the development branch. Now, this development branch is where a lot of these
+feature updates happen. This is the branch where your developers are working. The staging branch is the branch that
+hosts the code base that the quality assurance team or the testing team is trying to run some test cases on. And now
+this main branch contains the code that runs the application that the end users are seeing. So, this code base in the
+main branch will be with the production slot. This code with the staging branch will be in the staging slot. And this
+code with the dev branch will be in the dev slot. And now you will swap these slots. The dev slot will be swapped with
+the staging slot and the staging slot would be swapped with the main slot or the production slot. And this would happen
+with a near zero downtime scenario. And similarly, for running these applications, you would be storing your application
+images in the Azure Container Registry. And then the Azure Web App instance can use this Azure Container Registry to run
+the different kinds of images on these different slots, like the dev slot, the staging slot, or the main or the
+production slot. Now, the kind of swapping mechanism that happens between the applications that run in these individual
+slots in your Azure App Service plan are based on the concept of something that's called as rolling updates. So, a
+rolling update is a deployment strategy that gradually replaces old application instances with new ones. And it doesn't
+happen immediately. Now, what this means is, if this was the scenario before you initiated that swapping mechanism, then
+the production slot was running the version one of your application, three instances of version one of your application.
+And the moment you initiated the swap between the staging slot and the production slot, all these three version one
+application instances aren't immediately replaced by application version two instances. It happens in a gradual process.
+And this is because you want to achieve near zero downtime scenario. So now, in the transition phase, you have one
+instance replaced by version two, and two instances still running version one. And then after some time, couple of
+seconds, in the final state, you have three instances running the version two of the application. But this kind of
+transition doesn't happen immediately. Alright, so I guess that's pretty much it for the video. That was all about the
+concept of deployment slots. And yeah, that's it. I'll see you in the next lecture.

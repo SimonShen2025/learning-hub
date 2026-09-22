@@ -1,0 +1,74 @@
+SECTION: 3 AI-200 Primers and Foundations
+LECTURE_ID: 6
+TITLE: Intro to the Microsoft Foundry Ecosystem
+TRANSCRIPT_LENGTH: 8069
+---
+Now with the help of this video, let's have a quick introduction to the Microsoft Foundry ecosystem. We'll take a look
+at what it is as a platform as a service and what capabilities does it have to offer to us in terms of building these
+JNI applications, these large language models and everything that you can think of in the AI space. So I think in order
+to understand what Microsoft Foundry is as an ecosystem, it's really important that we understand what it's trying to
+solve in the first place. So I think we as developers have always struggled with these three problem statements at
+large. You know, whenever we are trying to build these AI applications, the first step is to rapidly prototype and to
+build these minimum viable products and these POCs that we can use to share concepts with customers. But then the thing
+is, in order to build these MVPs and POCs, you have to set up your AI models, you have to set up the endpoints that you
+will use to throw API calls to in your applications and the models need to be deployed somewhere. And that's a
+bottleneck. You don't have a single platform that can help you deploy these models, manage these models and use these
+models in your applications. So developers have always struggled with rapid prototyping, building and deploying these
+MVPs and POCs to share concepts with customers, because that's the first stage in productionizing these AI applications.
+The second step is we have always struggled with experimentation and evaluation to quickly test out what sort of
+prompts, what sort of instructions, what sort of datasets will work for our solution and what sort of datasets won't
+work for our solution. So that's also something that developers struggle a lot with. The third problem statement is once
+you get past that MVP or POC stage, you are now tasked with a bigger problem at hand, a bigger opportunity at hand and
+that bigger opportunity is building production-ready AI workloads. You have to manage evaluation of your workloads, you
+have to manage security for your workloads and you also have to make sure that your workloads are scalable in nature.
+And the thing is there's not a single ecosystem that can help you with observability, that can help you with making sure
+that the workloads you're building are secure in nature and they are scalable in nature. So I think Microsoft Foundry
+for all of these problem statements at large is your one-stop solution to all your developer needs on a
+platform-as-a-service basis. So it's a platform that can help you with finding a solution to all these problem
+statements in your development lifecycle. And I think that's a really good visual, although quite a bit intimidating at
+first, but I think that's a really good visual that just highlights the different capabilities of the Microsoft Foundry
+platform. So Microsoft Foundry platform offers you with, first of all, a model catalog wherein you can deploy models on
+a serverless API inferencing basis from different vendors like Meta, Cloud, OpenAI, Grok, etc. So you have these large
+language models that you can deploy without worrying about the underlying infrastructure with the help of a single click
+of a button. And to this date, there are more than 11,000 plus models that you can deploy from the model catalog area.
+And the really good thing about the model catalog is that you just have to simply deploy those models. You don't have to
+worry about the underlying infrastructure and you can deploy these models on a pay-per-token or on a pay-per-use basis
+in which you only pay for the amount of API calls that you throw to your models rather than for the infrastructure these
+models use, even though they might sit idle for quite some time. So that's a really good starting point to build these
+JNI and LLM-oriented applications. The second capability is that of the agent service. You can take on these LLMs and
+then using the agent service, create your agents with different kinds of API plugins, different kinds of tools and
+knowledge bases. You can even create agents that work on your enterprise data. Now, your enterprise data could be stored
+in SharePoint, OneDrive, Microsoft 365, and even in some SQL databases and whatnot. So you can create agents that work
+as chatbot on top of all of this vast corpus of data. Then you have Foundry IQ. Now, Foundry IQ is the place wherein you
+bring all of this vast corpus of data to power your agents. So Foundry IQ is that single plane in the Foundry ecosystem
+that can help you consolidate your entire knowledge bases that could eventually power your agents that you build in the
+agent service. Then you have tools. Your agents need these tools. Your agents need these APIs and these functionalities
+that they can use to carry out their business logic. So you can choose from a variety of tools like MCP servers, logic
+apps, vector indexes for creating chatbots on top of your enterprise data, and some API definitions as well. And then
+Foundry ecosystem is also really well integrated with the machine learning ecosystem. So if you want to build custom
+models using those machine learning techniques, then you can absolutely take advantage of that. And then there's this
+Foundry control plane that can help you track how well your agents are behaving, what number of agents are currently
+working in the ecosystem, how good are they functioning. If there's any error with your agent, then what's that error?
+So that comes under the observability segment for your agents and their associated works. And then there's also
+something that's called as Foundry local in which you can completely develop LLM centric applications that stay private
+to your machine itself. So that's also something that you can take advantage of, although that's not going to be the
+main core basis of discussion for the further labs in this course. But yeah, that's a good point to know about the
+Foundry ecosystem. And then obviously Foundry has built-in security, compliance, and governance that can help make sure
+that you build your AI applications that have a security first or a compliance first or a governance first approach. So
+that's the model catalog that I was talking about. You have more than 11,000 plus models to select from the Microsoft
+Foundry ecosystem. And a point to keep in mind is that even though you see large language models in this screenshot, the
+Foundry ecosystem is not only limited to the gen AI world. You can even deploy models that can help you make use of
+those predictive AI workloads, those pre-built predictive AI workloads like image recognition, object detection, optical
+character recognition, and all of that cool stuff. And then you also have things like language analysis, speech to text,
+text to speech processing. So Foundry ecosystem is like that single ecosystem that you can use for all of your gen AI as
+well as predictive AI needs. And then the Foundry ecosystem is also really well integrated with all these third-party
+integrations. So whenever you build these multi-agentic architectures, you have to work with different third-party
+integrations, different third-party SDKs, and softwares. To name a few, these are Microsoft Agent Framework, Lanchain,
+LanGraph, Crew AI, Lama Index. So the Microsoft Foundry ecosystem also has support for all of these third-party
+integrations, SDKs, and software. So you don't really need to worry about how you're going to manage these third-party
+integrations. There's a built-in support for each of these third-party integrations. And I think that's it. You realize
+that Foundry isn't just a tool, it's the entire AI development ecosystem and that solves a lot of problems for you. That
+really just gives a head start on your AI development journey. And I think that's what is primarily needed in today's
+rapidly changing tech world. All right. So I guess that's pretty much it for the video. That was all about an
+introduction to the Microsoft Foundry ecosystem and some of its capabilities. And yep, without further ado, let's
+quickly move on to the next set of videos.

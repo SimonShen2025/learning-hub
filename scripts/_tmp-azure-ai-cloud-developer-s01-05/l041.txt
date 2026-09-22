@@ -1,0 +1,80 @@
+SECTION: 5 Deploy and Manage AI Apps on Azure Kubernetes Service (AKS)
+LECTURE_ID: 41
+TITLE: Understand Networking in AKS
+TRANSCRIPT_LENGTH: 8821
+---
+Alright, so with the help of this video, let's try to understand how networking happens in Azure Kubernetes Service, how
+Azure manages networking for us in the Kubernetes cluster, so that we don't really have to worry about setting up some
+virtual networks, some communication between these clusters, these nodes within the Kubernetes cluster. So, there are
+four main areas of communication that you really should be concerned with in a Kubernetes cluster. The first one is a
+container-to-container communication, which could be like a front-end containerized app talking to a back-end
+containerized app. Next, we have pod-to-pod communication, then there's something that's called a pod-to-service
+communication, and then external-to-service communication. We'll take a look at what does a service even mean, but this
+is the four main areas of communication that you really just need to be concerned with as a Kubernetes developer. So,
+this is a typical AKS networking setup. Now, in this typical AKS networking setup, you have node one and node two, which
+are nothing but the virtual machine scale sets deployed in Azure, which form for the compute engine, the compute power
+for your Kubernetes cluster. So, there are two nodes, and within these nodes, you have multiple pods up and working, and
+within these pods, you will have these containerized apps that are running and are exposed to the outside world. Now,
+the way this functions is the node one and node two, which happen to be virtual machine scale set, they sit within a
+virtual network, and this virtual network is managed by Azure. So, you can see that this IP address of node one, which
+is 192.168.1.4, sits within this virtual network over here that has this range, which is 192.168.0.0 till
+192.168.256.256. Now, you don't need to worry about setting up the CIDR range for this virtual network that's taken care
+of by Azure. Azure creates this CIDR range and assigns virtual IP addresses to the nodes within the AKS cluster. Now,
+similarly, within these nodes, you will have pods, and these pods internally have their own virtual IP addresses. Now,
+for each node, you can see that there's a pod virtual IP range that gets created, and from this virtual IP range, the
+pods are assigned their own individual virtual IP addresses, which means that the communication between this pod and
+this pod is protected and cannot really be seen by the outside world. And even the communication between node one and
+node two is protected and cannot be seen by the outside world because both of these nodes, these virtual machine scale
+sets, are a part of the virtual network, and an outside actor cannot really know what's happening to your virtual
+network. Now, you might wonder how will an external request route to your containerized workloads. Now, the way this
+works is to expose your applications to the outside world, you create a layer of Azure Load Balancer at the front, and
+the Azure Load Balancer has a public-facing IP address. It has a publicly accessible IP address. So, now if a user wants
+to access your containerized workload, the user just only has to make sure that he or she routes the request to the
+publicly accessible IP address of the Azure Load Balancer, and the Azure Load Balancer will take care of internal load
+balancing of the incoming request. Now, we talked a bit about, if you remember correctly, in the first slide, something
+about services, right? So, we'll take a look at, in the next slide, the four kinds of services, and what are these four
+kinds of services really used for, and in what kind of case scenarios. So, to begin with, services in Kubernetes and AKS
+are important to expose multiple pods under a single IP address or a DNS name, which means, let's assume you have a
+front-end application and a back-end application, and if you take the example of this setup over here, let's assume that
+your back-end application works on pod 2 and pod 3, and your front-end application works on pod 1 over here. Now, the
+thing over here is, rather than configuring that your front-end application that's working on pod 1 to make sure that it
+only communicates to the back-end application that's working in pod 3 by typing in the virtual IP address, a better way
+is to expose both of these pods, that is, pod 2 and pod 3, because they are running the same back-end application under
+a single service, and now the front-end application just has to make sure that the front-end application routes the
+request to that service, and that service will internally take care of load balancing whether the request goes to pod 2
+or pod 3 that's running the back-end container app. So, that's the idea behind a service. So, the reason why services
+exist is because pods are ephemeral, their IP addresses can change. So, if a back-end pod goes down because of some
+failover and it gets back up and running, it's not going to have the same IP address, and if you configured your
+front-end application to communicate with the back-end application by the virtue of an IP address, now the IP address
+has changed and it's going to cause errors, but a service has a stable IP address. So, even if the pod goes down, your
+front-end application is communicating with the service and the IP address of the service will not change in any case
+scenario. Now, there are five main types of services. We have clustered IP, node port, load balancer, and external LIM
+and headless service. We are only considering the four main types of services and the fifth one is not really important
+and goes off the scope for this course. So, this is, I think, a really good visual that highlights the usage of
+clustered IP, node port, load balancer, and external LIM as these four kinds of services. So, if you consider a
+clustered IP, a clustered IP is used for inter-pod communication, which means internally within a single node, within a
+single virtual machine, if you have a front-end port working over here and that front-end port wants to communicate with
+these back-end ports and your back-end application is running on port one, port two, and port three, you will create a
+clustered IP service over here such that the front-end port will communicate to these back-end ports via the virtue of
+this IP via the virtue of this clustered IP service over here because the IP address of the clustered IP service won't
+change and it's going to internally load balance the request coming from the front-end port. Next, we have the load
+balancer. Now, the load balancer is simply used to route the request from the outside world. Now, in case of clustered
+IP, the requests were only coming from a front-end port that sits within the Kubernetes cluster. Now, in case of an
+Azure load balancer, for instance, the request will come from the outside world. So, the whole flow goes something like
+this. For the Azure load balancer, you get a publicly accessible IP address. The user throws a request to this public IP
+address. Then, the request internally gets routed to a clustered IP service and then it can go to either port one, port
+two, or port three. So, that's the idea of a load balancer. Next, we have node port. So, instead of the user now
+throwing a request to this public IP address, the user can now throw a request to a specific port on the node. It could
+be either port 3,000. It could be either port 5,000. Now, the user throws a request to this exposed port. The request
+gets routed to the clustered IP service and now it can go to port one, port two, or port three. So, that's a node port
+service. Next, we have external name. Now, what if you don't really want your user to throw a request to a public IP
+address because that doesn't really sound nice. You don't go in your web browser and type in a public IP address. You
+could do that, but you don't usually do it. You go to your web browser and type in the DNS name like google.com,
+microsoft.com. What if you want that? Now, that's the idea behind an external service. So, an external service maps to
+an external DNS name, which could be like google.com, microsoft.com, and then the request routes to the clustered IP
+service internally, and then it can go to port one, port two, and port three. So, you see in all of these case
+scenarios, the clustered IP service is pretty important because this is what handles the internal communication within a
+node, within a virtual machine scale set that sits in your Kubernetes cluster. You could go ahead and simply make your
+choice based on your case scenarios with regards to external traffic in terms of you choosing load balancer, external
+service, or a node port service. All right. So, I guess that's pretty much it. That was all about understanding
+networking in great detail in Azure Kubernetes Service. That's it, and I'll see you in the next lecture.

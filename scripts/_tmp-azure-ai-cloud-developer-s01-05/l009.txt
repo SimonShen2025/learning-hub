@@ -1,0 +1,96 @@
+SECTION: 3 AI-200 Primers and Foundations
+LECTURE_ID: 9
+TITLE: Lab: Deploying OpenAI Model and Chat Playground Demo (Hands-On Lab)
+TRANSCRIPT_LENGTH: 10713
+---
+With the help of this video, we'll be quickly deploying our first instance of a large language model, probably from the
+OpenAI world. We'll also take a look at how you can interact with that deployed large language model in the chat
+playground in your Microsoft Foundry resource. To perform this lab, I'm on my Microsoft Foundry portal, that's on
+ai.azure.com, that's connected to my Microsoft Foundry resource. We need to go to the model catalog area. For the model
+catalog area, I click on the ''Discover'' tab, that's just beside the ''Home'' tab in the Foundry portal. Then I'm going
+to go to the ''Models'' section, that's just under the ''Overview'' tab, right over there. Now, I'm going to search for
+an OpenAI model, and that model would be GPT 4.1. Now, the thing is, these model deployments are only available in a set
+specific region. For instance, GPT 4.1 is available to be deployed in Sweden central region. Now, for some of the other
+reason, if you deployed your resource in a region that doesn't support the deployment of GPT 4.1, just make sure that
+you deploy any model that is a chat completion model. You can search for GPT 5, GPT 4.1, GPT 4.0, and then just make
+sure that the model that you're deploying is a chat completion model. That's just written below the model description
+panel then and there itself. That should be a chat completion model. I'm going to go ahead, click on the GPT 4.1 model
+button over there. Then you can see it contains things like, what's the model details, the deployments, the benchmarks,
+a responsible AI segment, and then a license segment also. Then I'm going to click on the ''Deploy'' option in the
+top-most right section of the screen, and just make sure that you click on the ''Custom Settings'' section. When you
+click on the ''Custom Settings'' section, you can name your deployment. I'm going to name my deployment as GPT 4.1
+Guljot. I'll attach my name at the end, and the deployment type will be set to global standard. Now, here are a couple
+of different deployment types that you can go ahead with. The global standard is the most cost-effective route in a way
+that in a global standard deployment, it will only be built for the number of API calls, and the number of tokens that
+you send to your engine, and the number of tokens that you get back as output from the large language model itself. You
+won't be built for the underlying infrastructure, but for other kinds of model deployment types like global provision
+throughput, data zone provision throughput, you will have to pay an upfront cost, and what that means is you will be
+also built for the underlying infrastructure, and not necessarily for only the time that you use the model. I'm just
+going to go ahead with the global standard in which I will be built on a per API call basis, on a paper API call basis
+with the highest rate limits. Then you can even set the tokens per minute rate limit from over here, which is now
+currently set to do 150,000 tokens per minute rate limit. That's more than enough. We'll go ahead with the default
+setting for this. Then you can even apply the default content guardrails over here. The content guardrails are applied
+at the large language model layer and they sit as a layer between the incoming user query and the model API. If the
+incoming user query contains things like instances of harm, hate speech, violence, and adult content, or if the model
+output also contains any of these things, the content safety filter will filter out those instances of hate, violence,
+self-harm, and adult content also. By default, a default content guardrail is applied to your model. In this case, it's
+a default V2 content guardrail. I think that's pretty much good to go. Let's click on the deploy button and that should
+hopefully deploy our GPT 4.1 large language model instance. As soon as your model gets deployed, you're going to be
+redirected to what I call as the chat playground area. That's where we exactly are. Now, before we can move forward with
+the chat playground area, I will also want to show you from where you can see the model deployments. You have to go to
+the Build section, that's just beside the Discover tab, and you go to the Models area. Then from the Models area, in the
+deployment section, you'll be able to see the model that you'd deployed just now, and then in the future, all the models
+that you'll deploy within that foundry resource. I could see I have this model deployment, which is GPT 4.1 Kuljot, and
+that's a GPT 4.1 LLM instance. Now, clicking on this model itself will take me to the chat playground section and that's
+where we currently are. Now, in the chat playground section, you can tweak with model configurations a bit, set in the
+different kinds of system prompts that will internally determine the behavior of the large language model, and also
+throw some user queries to the model itself. I'm going to tweak with the system prompt a bit. Currently, it's set to you
+are an AI assistant that helps people find information. I'm going to change it and make it behave as Batman. That's
+going to be you are Batman, and the protector and Dark Knight of Gotham City. Our LLM is now going to behave as Batman,
+and that's probably a dream come true situation. Imagine talking to Batman in real life. That could only happen in
+dreams. But anyways, jokes aside, the instruction being you are Batman, the protector and Dark Knight of Gotham City.
+Let's see how the responses come about when I type in some user queries. I'm going to type in the first user query as,
+hello, my name is Kuljoth. How are you doing? All right. The response looks something like this. Hello, Kuljoth, this is
+Batman. I don't usually indulge in small talk, but I'm always vigilant. Gotham's never quiet and neither am I. How are
+you doing? Anything suspicious in your area? Awesome. And now if I ask it something on the lines of, let's say, how is
+Gotham City doing today? Anything from Joker's side? Let's take a look at how the response looks like. All right, so
+it's a bit longer response. Gotham never truly rests. The city pulses with danger, corruption, and shadows lurking
+around every corner, blah, blah, blah. Stay alert with Joker. Chaos is only ever a heartbeat away. That's great. And
+then for each of these responses, you'll also observe that I do get back some traces. You know, the first response took
+in around like 2.2 seconds and then a total token transaction of 84 tokens. Now, if you click on this token icon over
+here, you'll see that the input tokens come to about 36 and output tokens come to about 48. And for the second query,
+the input tokens come to about 36. The input was more or less on the same lines and the output comes to about 134 tokens
+because the output is a bit longer than the previous one. And that's exactly what's reflected in the token consumption
+box over here also. All right. And then you can even change the instruction set a bit. Let's type in you are a travel
+assistant that helps users plan their journeys. So I'm going to make it behave as a travel assistant. And before I do
+that, I'm also going to clear the chat section over here. And that's just by clicking on this button. And then I'm also
+going to tweak some parameters. So you see that just beside the model selection area, the model dropdown area, where you
+can select all of your deployed models, there's also this parameter section over here. So if you click on this parameter
+section, you can include things like what should be the max completion token count. Currently it's set to 13,107. So if
+you drop it down a bit, maybe to 1,000 tokens or 2,000 tokens, you won't see much larger of responses that you get back
+from your large language model instance. And then you can even tweak that temperature parameter a bit. Make it go all
+the way down to zero or make it go all the way up to two. So the larger the value of the temperature parameter is to the
+upper bound, that means more creative are the responses from your LLM instance will be. And the closer the value of the
+temperature parameter is to the lower bound, with the lower bound in this case being zero, that means the more accurate
+and the less creative your responses from the large language model would be. So if you're using your LLM for a legal
+writing assistant, then probably you would have to dial down the value of the temperature to a value that's closer to
+zero. But then currently I'm making it behave as a travel assistant and I need some creative responses. I will dial it
+all the way up to a value that's closer to the upper bound and then I'm gonna keep it two, that's the highest possible
+value. Let's do that. And now I'm gonna ask it some questions. So help me plan a trip to India in summers. And let's see
+the kind of response we get back. So you see the response is completely erratic. It kind of mixes some different
+languages in the response and it's not at all something that we were expecting. This is not a good response and the
+reason being that we messed up setting the temperature value. We set it all the way up to two and that completely
+randomizes the response that's generated back from the engine. I'm gonna dial it down to a value which could look
+something like 0.7. I'm okay with 0.7. I'm gonna clear this chat window and then let's try out the query again. And now
+the response should be pretty good. So you see, tweaking these values a bit can make or break your large language model
+and your AI applications. So it's pretty important that you understand what you're doing and you do these changes within
+limits. So now it's good. It talks about, I'd love to help you plan a trip to India in the summers to give you the best
+recommendations. Could you please share a bit more about your preferences? Talks about these preferences, some questions
+for me and then some general tips for summer travel in India, like talks about weather, some popular summer destinations
+like South India, Northeast India, Himalayan hill stations, some cultural sites and a bit about the monsoon weather as
+well. And then plans a sample summer itinerary for me, like day one to three should be in Delhi, day four to six should
+be in Shimla and then day 13 to 14 should be in Agra. And then some trips like book trains and domestic flights in
+advance, consider local festivals and holidays and yep, that's just about it. All right, so I guess that's pretty much
+it for the video that was all about taking a look at how you can deploy your large language model instances in Microsoft
+Foundry. And then we also interacted with the model in the chat playground itself. That's it, without further ado, let's
+quickly move on to the next set of videos.

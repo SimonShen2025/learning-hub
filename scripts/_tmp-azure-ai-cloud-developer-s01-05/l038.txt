@@ -1,0 +1,26 @@
+SECTION: 5 Deploy and Manage AI Apps on Azure Kubernetes Service (AKS)
+LECTURE_ID: 38
+TITLE: Lab: ACR Integration with AKS (Hands-On Lab)
+TRANSCRIPT_LENGTH: 2391
+---
+Now, with the help of this video, I just want you to focus on the integration between Azure Container Registry and our
+AKS cluster because that's going to play a very crucial role when we want to deploy container images onto our AKS
+cluster with those container images stored in our Azure Container Registry. So, if you go to the resource visualizer tab
+over here, that's on the left-hand side section of the screen, that's going to help you visualize the entire AKS cluster
+and the underlying resources. You'll see that you have a system assigned managed identity that gets created over here,
+and this managed identity is associated with the AKS cluster, and that's the name of the managed identity. Now, you'll
+observe that this managed identity has the ACR pull role on the Azure Container Registry. So, we already had an Azure
+Container Registry created as a resource in Azure portal, and while we were creating our AKS cluster in Azure portal, we
+had a creation wizard, and in that creation wizard, we prompted that or we selected that we would like to integrate that
+ACR resource to our AKS cluster. Now, behind the scenes, what really happened was a managed identity got created and
+roles were automatically assigned to this managed identity, which is going to help the AKS cluster get those container
+images from the ACR resource and deploy them as containerized applications on the AKS cluster. So, on the other tab, I
+have this ACR resource open up, and if you go to the identity and access management, access control tab in this ACR
+resource, which is Kuljoth ACR in my case, you'll see that if you go to the role assignments area, you have that managed
+identity, the AI200 AKS cluster agent pool managed identity, having the ACR pool role on this Azure Container Registry
+resource, and that really happened all behind the scenes. There was no manual intervention, and we didn't really have to
+worry about setting it up in the first place, but that's definitely good to know that it's there, and it's definitely
+better to understand what's happening behind the scenes, what's happening, and what's helping the AKS cluster retrieve
+those container images and deploy them as container applications on the AKS cluster. All right, so I guess that's it.
+That's all I wanted to share with the help of this video. Just a quick video on a quick note, and I'll see you in the
+next lecture.

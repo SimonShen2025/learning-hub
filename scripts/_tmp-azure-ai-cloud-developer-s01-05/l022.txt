@@ -1,0 +1,37 @@
+SECTION: 4 Containers and Azure Web Apps
+LECTURE_ID: 22
+TITLE: Lab: Lock and Unlock an Image (Hands-On Lab)
+TRANSCRIPT_LENGTH: 3782
+---
+All right, so with the help of this video, we'll take a look at how you can lock and unlock a container image that's
+stored in your ACI resource with the help of some CLI commands. So, in order to perform this lab, I'm on this markdown
+file which is lockimages.md that's within the containers and webapps folder. So, let's first of all take a look at how
+we can lock an image. So, the overall idea behind this lab is that we have an AOAI Python app container image that has
+this version 1 up and working and at the present moment this version 1 of the container image by default is in unlock
+mode. Now, consider the scenario that this container image is powering your production application and what if this
+image because it's by default in unlock mode, somebody can mistakenly go to your ACI resource and then delete this
+image. If this image gets deleted and if your application wants to restart, well, it's going to cause some problems
+because the image then wouldn't just exist in your ACI resource. So, what do you do? In this case, you lock an image
+that's currently running in production mode so that no one mistakenly can edit or delete your locked image and then once
+you want to make changes to your image, you unlock it, make changes and then lock it accordingly because it's an image
+that's powering your production application. So, let's take a look at how we can unlock, sorry, lock an image. Right
+now, it's in unlock mode. We would like to lock that. So, I'm going to copy this azcli command over here and if you take
+a look at this command, what this does is it makes use of the Azure CLI and then ACI meaning I want to interact with my
+Azure Container Registry resource and then it makes an update to the repository. Now, the repository in our case is the
+AOAI Python app repository that houses version 1 of our application. That's our ACI resource name, the image that we
+want to lock. So, that's AOAI Python app version 1 and then to lock this image, you need to configure the right enabled
+parameter and set it to false and that's going to lock your image. So, I'm going to go ahead and execute this. So, looks
+like our image was locked and then if I go back to my Azure portal and give this a refresh and then if I try to delete
+version 1 of this image, you'll see that it doesn't allow me to delete the image. So, I'm going to go ahead, click on,
+well, the three dot symbols over here for the version 1 of the container image and click on the delete button and you'll
+see that we encounter an error. Okay, I'm going to click on okay and now it's not going to allow me to delete the image.
+Well, the error says could not delete the manifest and the code, the error code is registry disallowed operation because
+the image is currently in lock mode. Now, let's take a look at how you can unlock an image. So, I'm going to copy this
+code block over here, paste it in the terminal and if you see this code block, well, we are again making use of the
+Azure CLI, interacting with our Azure container registry, performing a repository update operation, that's our ACR name,
+that's the image which is AOAI Python app version 1 and now we'll configure the right enabled parameter and make it
+change all the way from false to true. So, making it go all the way to true unlocks this image. So, now that this image
+will get unlocked, you can edit this image, push updates to this image or even delete it but I'm not going to delete
+this image because I'll require this image in the further labs that we do as part of this course. But this is how you
+can unlock a locked image. Alright, so I guess that's pretty much it. That was all about taking a look at locking and
+unlocking a container image in Azure Container Registry. That's it and I'll see you in the next lecture.

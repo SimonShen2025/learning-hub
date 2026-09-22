@@ -1,0 +1,89 @@
+SECTION: 4 Containers and Azure Web Apps
+LECTURE_ID: 27
+TITLE: Lab: Working with Environment Variables (Hands-On Lab)
+TRANSCRIPT_LENGTH: 9918
+---
+So now with the help of this video we'll take a look at how can you configure environment variables in an Azure web app
+instance. So what we have done until now is that while we were building our AI applications, we were filling the
+environment variables before building the container image in the .env file. Now this is not a best practice. The best
+practice is that you don't really fill in the environment variables when you're building the container image. You build
+the container image without the values of these environment variables but then when you're running container image on
+your Azure web application instance, you fill the environment variables dynamically during runtime when running the
+image. That's the best practice and we'll take a look at how can you implement that best practice. So first things
+first, we'll have to make some changes to our AI application in the code in the app.py file and then we have to rebuild
+the container image and then we can launch that container image with environment variables filled in dynamically in our
+Azure web app instance resource on Azure portal. So first I'm going to make some code changes over here. So there's a
+code snippet that you can take help of and to grab the code snippet, I'll go to this markdown file which is
+environmentvariables.md. Alright now this is the markdown file and from this markdown file, we'll take this code snippet
+over here. So ctrl c and then let's go to the app.py file and replace the Azure OpenAI endpoint, the API key and the
+modern name loading values with the code snippet that we copied. Alright so now with the help of this code snippet by
+using this function to load the environment variables but earlier we were using a different function. So earlier we were
+using this os.getenv function which loads the environment variables that are defined in the .env file but now that we
+have pasted another code snippet which uses a different function, this function will load the environment variables that
+are defined in the environment variable setting in your Azure web app instance and this loading of environment variables
+will take place dynamically on the Azure web app instance and not in a pre-configured manner. So I'm going to hit the
+ctrl plus s key combination to save the mate changes and in the meantime I'll also go to the environment variable file
+and just going to copy these values and paste them in notepad so that I can reference them later. Alright so these are
+the values in the notepad and then I'm just going to delete these values just to show you that the variables are not
+getting loaded from over here. Alright and ctrl plus s to save the mate changes. Now I'll go to the environment
+variables.md markdown file from where I grabbed the code snippets and we'll rebuild a new version of this python
+application. Alright let's do this. So just make sure that you are in the ai app root directory in the terminal and then
+you know run these commands. So we're using the docker commands to build this python application which is we're going to
+build version 2 of the python application so just make sure that you have docker desktop running in the background. So
+I'm going to copy this and paste it over here and this is exactly oops looks like I had some problems copying the
+statement and yeah so it's going to be a docker build command that builds our application as aoaipythonapp and then a
+semicolon v2 which is version 2 of the application and we'll have to wait for the application to be built and then we're
+going to re-tag it with our azure container registry name. So I'm going to copy the second statement over here docker
+tag. It's going to re-tag the image with our azure container registry name and then we'll push it to our azure container
+registry awesome all right so it says error from registry authentication required no problem I'll first of all have to
+log into my registry so it's going to be ac acr login and then the name of my registry which is going to be kuljoth acr
+and once I get logged into my registry I can finally push this container image to my acr instance right now we are
+pushing version 2 of that container image the login succeeded and now I can rerun the command which is docker push
+command all right so it looks like the image has been pushed now let's try to confirm this so I'm going to duplicate my
+azure portal over here and I'll just open up my azure container registry so just going to search for container registry
+yep and then let's go over here to the repository section and from the repository section aoai python app is what we'll
+select and yep you can see I have version 2 of that python application container image over here that's good now let's
+try to run this version 2 of the python application so I'm going to go back to my azure web application instance and at
+this moment I'm going to run this version 2 version 2 of the python application so I'm going to go back to my azure web
+application instance and at this moment at the present moment it's running version 1 so it's simple to change it to
+version 2 I'm going to go to the deployment center under the deployment area and then click on the main container that's
+running so I'm going to click on the main hyperlink over here that's going to open up the wizard on the right hand side
+section of the screen from where I can make the changes and switch my container application from version 1 to version 2
+so now that this creation wizard opens up I simply have to go ahead scroll down to the image tag area and change it from
+version 1 to version 2 rest everything remains the same so I'm going to type in v2 over here which stands for version 2
+and click on apply so it's successfully saved the container settings and the next thing is that in order to run this
+version 2 application I have to go to the overview tab again and then hit on the restart option but before I can hit on
+the restart option we forgot one thing we have to fill in some environment variables so now let's go to the environment
+variables area which is right under the settings area and then I'm going to reference the environment variables that I
+made a note of in my notepad namely the azure api url azure api key and azure modern name so these are the three
+environment variables and I need to feel fill them accordingly with these key value pairs all right so I'm going to just
+go ahead and refresh my browser things are taking a bit of a time to load but that's okay right so now I'm going to
+click on add and the first environment variable that I'll add is this azure api url so that's going to be the name of
+the environment variable now the name of the environment variable needs to match exactly what's written in your python
+code over here right the names need to match exactly these values azure api url azure api key and azure modern name or
+else it's going to cause a problem so the first value is azure api url and I already have the value over here and there
+you go let's click on apply and the next value is going to be the api key I guess yeah azure api key so I'm going to
+copy the name of this environment variable over here and then the value also so that's going to be the value okay so I'm
+going to copy the value okay and then the next one is the azure modern name the model name of the large language model
+that we intend to use in our application so that's simply got to be gpt 4.1 this one in my case okay and then I click on
+apply now I'll click on apply to save all of these environment variables and their values configured accordingly so now
+once that's done the only thing left is to go to the overview section and then restart my azure web app instance I'm
+going to restart the azure web app instance version 2 of the application will be up and running because that's what's
+defined now in the deployment center along with the environment variables so I click on yes and then we'll have to wait
+for like a minute or so before we can have the version 2 of the application up and running so I'll skip this video to
+the part wherein I have version 2 of the application up and running so now that I can see that the application is up and
+running which I just confirmed by throwing a get request to the slash health endpoint and if you refresh your browser on
+your screen you can see that it's returning status code of healthy so that means it's up and running now let's test our
+application by throwing a post request so that we can see it's using those environment variables in real time so I'm
+going to go back to this markdown file which is docker2acr.md which contains a code snippet that I can use to throw a
+curl request so I'm going to copy this and then in my terminal window just going to paste this over here I'll just
+probably clear everything else and then I just need to grab the url endpoint so I'm just going to do that from my web
+browser itself so that's got to be this endpoint and then the slash chat endpoint to this url oops yep and then I'll
+type in chat as the post endpoint that this request will go to and then I'm going to hit enter and let's see if we get
+back a response or not and if we do get back a response yep we do get back a response and it's definitely making use of
+the environment variables or else we wouldn't have been able to see a response because we deleted everything from the
+.env file and the only way it's not working is that it's using those environment variables from the azure portal itself
+so you can see you know I asked it about can you please suggest me some places to travel in India and I do get back a
+response from the model which is gpd 4.1 the reply is absolutely India is a vast and diverse country with a rich
+typistry of culture history natural beauty and then yep that's the response all right so our application is pretty much
+up and working and yep that's just about it that's it and I'll see you in the next lecture

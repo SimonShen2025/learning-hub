@@ -1,0 +1,23 @@
+SECTION: 3 AI-200 Primers and Foundations
+LECTURE_ID: 4
+TITLE: Why this Section of the Course?
+TRANSCRIPT_LENGTH: 2056
+---
+So as you can see from the course structure, I have created specifically a module for the course in the very beginning
+that focuses on developing some solid foundations with regards to the Microsoft AI ecosystem and this video is just to
+tell you why do we need to get ourselves comfortable with the entire AI ecosystem and what you can expect from this
+module for the course and why you should move forward with this module for the course. So the thing over here is the AI
+200 certification is literally called as Azure AI Cloud Developer Associate and in all of the use cases that you'll
+encounter in the various hands-on activities that we'll do, all of the use cases revolve around AI applications and to
+build these AI applications you need to get very comfortable with the Microsoft AI ecosystem wherein all the things
+revolve around a platform as a service that's called as Microsoft Foundry. So the learning outcomes for this module of
+the course will look something like this. Our aim is to get comfortable with GNI concepts like what are large language
+models, what are agents, what are agentic applications and what are vector embeddings, why are they useful in a
+retrieval augmented generation setup, all of that. The next outcome is to or the next aim is to deploy or get
+comfortable with deploying gen AI models and build hands-on experience working with the Microsoft Foundry ecosystem
+wherein this Microsoft Foundry ecosystem is Microsoft's state-of-the-art platform as a service for all things AI
+development and last but not the least our aim is also to build strong foundational AI knowledge that's required for
+exploring various AI oriented use cases with other Azure development services for the AI 200 certification. So those are
+the learning outcomes for this module of the course and I'm pretty sure by the end of this module you'll have a really
+good and strong foundation in terms of AI knowledge required for the AI 200 certification and then we can take things
+forward from there. That's it and I'll see you in the next lecture.

@@ -1,0 +1,33 @@
+SECTION: 3 AI-200 Primers and Foundations
+LECTURE_ID: 10
+TITLE: Introduction to the Microsoft Foundry SDK
+TRANSCRIPT_LENGTH: 3228
+---
+With the help of this video, let's have a quick introduction to the Microsoft Foundry SDK, and that's the most important
+SDK from a hands-on or the demo perspective for all the labs in this course, because this is the primary SDK that we'll
+be using to have a code-first approach to establish our connections to the Microsoft Foundry resource to build some
+lightweight AI applications. In the hands-on activities in the labs that we do for this course, we will be mainly
+interacting or running those code scripts in Python as a language, and that's how you simply just define that Foundry
+project client using the Foundry SDK. This is an object of class AI project client. The AI project client definition
+over here will include two parameters, the Foundry project endpoint. Now, that's the API endpoint that you'll get back
+from the Foundry portal, and then the credential. The credential could be in the form of an API key or Microsoft Anthra
+ID. In this code snippet, we're just using Microsoft Anthra ID to authenticate a connection to the Microsoft Foundry
+resource. All in all, whenever you want to use the Foundry SDK to establish a connection to your Microsoft Foundry
+resource, you have to create this object, which is the AI project client. Now, this AI project client has internally
+some sub-clients that you can use and instantiate depending on your use case. This AI project client has an OpenAI
+client that you can use to throw some API requests to the OpenAI models, to the OpenAI LLMs that are deployed within the
+Foundry resource. Whenever we want to make use of these API calls that will be sent to these OpenAI models in a Foundry
+resource, we will internally instantiate from the AI project client and OpenAI client. But then you can also create some
+vendor-specific clients like an Anthropic client or a Google Gemini client, depending on the case scenario. If you have
+a Cloud model that you would like to use instead of an OpenAI model that you have to create an Anthropic client. The key
+takeaway here is that the AI project client sits at the topmost level, and then depending on your use case, whether you
+want to use an OpenAI model or a model from Anthropic, and provided you have that model deployed in your Foundry project
+itself, you can internally create some sub-clients and then throw these API calls to these respective models. Then for
+all the agents that we'll be creating in the Foundry agent service, this AI project client and the Foundry SDK will
+primarily be used to connect to those agents also. This AI project client has an agent client that can help you with the
+creation and management and the invocation of these agents that will be created in the Foundry agent service. The key
+takeaway from over here is, create a Foundry AI project client first. Each and every time you want to establish a
+connection to your Foundry resource, and then these sub-clients like the OpenAI client, the Anthropic client, or the
+agent service client, depending on what your usage and your use case really is. All right. I guess that's pretty much it
+for the video. That was all about an introduction to the Microsoft Foundry SDK. Without further ado, let's quickly move
+on to the next set of videos.

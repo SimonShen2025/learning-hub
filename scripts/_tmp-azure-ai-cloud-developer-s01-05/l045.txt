@@ -1,0 +1,51 @@
+SECTION: 5 Deploy and Manage AI Apps on Azure Kubernetes Service (AKS)
+LECTURE_ID: 45
+TITLE: Introduction to the Sidecar and Init Container Patterns in K8s
+TRANSCRIPT_LENGTH: 5376
+---
+Now with the help of this video, let's quickly take a look at some multi-container design patterns in a Kubernetes
+cluster. So the whole idea behind this video is the fact that in a Kubernetes cluster, within nodes which are nothing
+but your virtual machine scale sets, your compute engines, you can have multiple different pods. And within these
+individual pods, you can have multiple containers, n number of containers running depending upon the resource
+utilization of that pod. Now the idea is that if you can run multiple containers within that same pod, there could be
+some design patterns that you can take advantage of. And that's exactly what we'll discover. So there are many two types
+of multi-container design patterns. The first one is what you call as the init container design pattern. And the second
+one is the sidecar container design pattern. Now let's first of all focus on what is the sidecar container design
+pattern. So in a sidecar container design pattern, you have a main container and that main container carries out your
+core business workflow. And then within that pod that runs that main container, you can have a sidecar container and
+multiple different sidecar containers. So for instance, if you take this example, the idea behind a sidecar container is
+to improve the functionality of the main container. For instance, you have this main container that runs a Python
+application that makes a call to a large language model that's deployed in your Microsoft Foundry project or Microsoft
+Foundry resource. So that's your core or main container. Now besides this main container, you have in this case two
+sidecar containers. The first sidecar container is this one, the proxy container. Now the work of this proxy container
+is to monitor the communication that this main container could be having with any other pod or any other container. So
+if any other pod or any other container in the Kubernetes cluster wants to communicate with this main container, the
+request will be routed to the sidecar proxy container. And the sidecar proxy container could do a lot of things like
+rate limiting or enforce mutual TLS communication, authentication before the requests are routed to the main container,
+so on and so forth. So the sidecar proxy container will act as an API gateway of some sort that's going to monitor the
+incoming ingress and the outgoing egress traffic. Then the second sidecar container is this log scrapper container. So
+for instance, your main container writes all the logs, all the errors that could be useful for debugging and for audit
+purposes to this shared file system. And this shared file system could be a persistent volume. Now the idea behind this
+sidecar log scraper container is that it's also going to have an access to this shared file system and then at every
+midnight or after every two days or three days, it's going to perform a database migration of some sort, which means
+it's going to take all the data that's stored in this shared file system and write all the data to a cloud service like
+your log analytics system or your monitoring solution. So that you now have that data from the kubernetes cluster that's
+stored onto a cloud system and then you can use this cloud system to well monitor how your application is working,
+identify some bottlenecks and take a look at the logs of this application in general. And the name the sidecar container
+design pattern also arises from the fact that you have well a motorcycle over here and then a sidecar is attached to
+this motorcycle and the sidecar could be used to store additional items and the idea is that the sidecar improves the
+functionality of the motorcycle. In this case, the functionality being in terms of storage of additional items. The next
+kind of design pattern is what you call as the init container design pattern and the word in it is short form for the
+word initialization. Now in this case, if you consider this scenario in which you have a main container and this main
+container is that same container that talks with your large language model, makes some API call to that LLM that's
+deployed in a microsoft foundry resource or project right and besides this container you can have two different
+initialization containers. Now the way these initialization containers work is before your main container even starts
+these initialization containers start do their work and get terminated. So for instance you can have this initialization
+container one that writes some system configurations to this shared file system which will eventually be used by your
+main container that talks with your large language model. Similarly on the other hand you can have an initialization
+container too that performs some database migrations from a cloud resource and stores data in this shared file system
+that this main container could take advantage of. Now after initialization container one does its work it gets
+terminated it's no longer running and after initialization container two does it work it gets terminated and it's no
+longer running. Now the only container that's running finally and eventually is your main container that talks with your
+microsoft foundry large language model. Alright so i guess that's pretty much it that was all about multi-container
+design patterns in kubernetes cluster that's it and i'll see you in the next lecture.

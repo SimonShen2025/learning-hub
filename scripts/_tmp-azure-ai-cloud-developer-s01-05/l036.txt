@@ -1,0 +1,123 @@
+SECTION: 5 Deploy and Manage AI Apps on Azure Kubernetes Service (AKS)
+LECTURE_ID: 36
+TITLE: Lab: Creating an AKS Cluster in Azure (Hands-On Lab)
+TRANSCRIPT_LENGTH: 13884
+---
+Now, with the help of this video, we'll take a look at how we can deploy an Azure Kubernetes service cluster, an AKS
+cluster on Azure portal. So I'm on portal.azure.com and I'm going to go to the search bar and search for Azure
+Kubernetes service. So Azure Kubernetes service, that's a pretty big name and maybe AKS, if I type in, that's going to
+appear. Yeah. If I type in AKS or even type in Kubernetes services, this is the resource that we are looking to deploy.
+So let's go ahead and deploy this resource. So that's going to take me to the Kubernetes center from where I can deploy
+a Kubernetes cluster. I'm going to click on the create option and then just select the first option, which is deploy a
+Kubernetes cluster. All right. So we have a lot of things to do over here and we'll approach this in a step-by-step
+fashion. I'll place this cluster in the same resource group as my other resources, and that's going to be the AI200-RG
+resource group. And then if you talk about the cluster preset configuration, you have different modes to operate the
+cluster in, which is production standard, that's best for most applications serving production traffic. Then there's dev
+or test environment, and then there's also production enterprise. But for now, for the sake of performing the demo,
+we'll go ahead with the development slash testing environment. That's best for developing new workloads or testing
+existing workloads. And then we'll have to name our Kubernetes cluster. So I named this Kubernetes cluster as AI200-AKS
+cluster, if that's available and that should be available. Yep. And then for region, I'm going to go ahead with Sweden
+Central. And then for the AKS pricing tier, you have three modes, the premium one, standard one, and the free one. We'll
+operate for the free one, but the free pricing tier, the name itself is a bit misleading. What the free pricing tier
+means is the fact that you won't be built for the control plane. You won't be built for the orchestration plane, which
+is provided by Azure to maintain and control and apply all of the rules, all of the guidelines to your compute engines.
+But you'll still be built for the compute engines and the virtual machines that you'll be using for the Azure Kubernetes
+service cluster, for the AKS cluster to serve these applications. And then for Kubernetes version, we'll just go ahead
+with the default version, which also has automatic security patching enabled. So you can also enable automatic security
+upgrades over here, which will be enabled by default. And then for authentication authorization, we'll just go ahead
+with local accounts with Kubernetes RBAC. And then let's quickly go to the next area, which is the node pools area, the
+node pools tab. So now you can see that you have a node pools tab over here, and you can see that you have one system
+assigned node pool added over here. Now this node pool is that virtual machine scale set that will be running our pods,
+and these pods will be running our containers. So these node pools provide the compute engine to run these applications
+as containerized workloads in our pods. And you can see that for this system assigned node pool, the node pool is
+nothing but a virtual machine over here, and then it runs on the Ubuntu OS. And then this node pool has, well, a scaling
+rule set in, which means at any given point in time, we will have at least two nodes up and working, and then it can
+scale to a maximum of five nodes. And then the maximum number of pods that can run on a single node, depending upon its
+CPU utilization is set to 110. And then within these pods, we will have a container applications working. So I'll just
+go ahead with the default values in the node pools configuration panel. And now let's jump to networking. Now for this
+networking, you can see that we have this container networking that's set to Azure CNI overlay. Now this Azure CNI
+overlay is also system managed. And what this does is it basically creates an Azure virtual network. And then from that
+Azure virtual network, it assigns IP addresses to these pods that are running our container applications. So we'll just
+go ahead with the default values for all the networking configurations over here. And then you can also see that as far
+as the network policy engine is concerned, it's set to none, which means it's going to allow all ingress and egress
+traffic to the pods, which means it's going to allow all the incoming and outgoing traffic from the pods, which is what
+we exactly want in our case. And then a load balancer is also enabled on a Kubernetes cluster, which will do the work of
+assigning traffic to these pods and container applications based on the usage demand. Now let's go to the integrations
+area. From the integrations area, we would like to integrate an Azure container registry that's going to host our
+container images. So we already have an Azure container registry up and working, which we created in one of the earlier
+labs. And we'll use that same Azure container registry and assign and integrate it with the AKS cluster. You can even
+create a new one, but I'm going to go ahead with the already created one. So I'm going to select my container registry
+from over here. And then let's go to the monitoring section. From the monitoring section, you can enable container logs
+for which it will require Azure monitor. So I'm going to go ahead and enable container logs. And it's also going to
+create a log analytics workspace, which will store all the container logs. And then you can query these container logs
+in the log analytics workspace by using a Kusto query language query, a KQL query. And then we'll move on to the
+security tab over here. For the security tab, you can see that you can even enable Microsoft Defender for Cloud that's
+going to monitor all of your container applications for security vulnerabilities. And then there's also the capability
+to enable Azure Key Vault integration with your AKS cluster so that you can reference all the secrets from Azure Key
+Vault as environment variables in your container applications also. Then you can move on to the advanced tab. And from
+here, you can manage some Kubernetes namespaces. Now namespaces are nothing but logical separations in Azure Kubernetes
+service. And you can think of namespaces as logically separating your container applications in the form of some
+applications will be for production workloads. Some will be in the staging environment and some will be in the testing
+environment. So Kubernetes namespaces let you do exactly that. Now I'm going to go back to my basics tab over here and
+just make sure that I changed the resource group and create a new resource group for the AKS cluster. The reason that
+I'm doing this is because I don't want the AKS cluster to be up and running even after I get finished with the demos and
+the labs because AKS clusters usually cost a lot. So I need to be a bit careful. So I can put all the AKS cluster
+resources under a single resource group, which is going to be a new resource group. And then after I'm done with the
+labs and demos, I'm just going to go ahead and delete the resource group entirely so that I don't have to incur a lot of
+cost just for the fact that I forgot to turn off my resources. So I'm going to create a new resource group and let's
+call this resource group as AKS-AI-200-RG if that's available. And yep, that should be it. Okay. And I think we are
+pretty much good to go. Let's click on review plus create. So after hitting on the review plus create tab, it looks like
+the final validation is over and then I can simply go ahead and click on the create button and that's going to create
+all the resources required to run the AKS cluster on my Azure portal. And then it's going to take quite some time to get
+done with things. So we'll have to wait for some moments. So grab a cup of coffee and then you'll be good to go with the
+AKS cluster up and running. I'm going to skip this video to the part within I have the AKS cluster deployed and then we
+can move forward from there. So it looks like our deployment is complete and we'll just take a quick look at the
+resource group itself and take a look at what kind of resources got deployed. So I'm going to go ahead to the
+AKS-AI-200-RG. So that's the resource group that was configured for the AKS cluster creation. And as you can see,
+there's this AKS cluster that got created and then there are a couple of Metric Alert rules, Azure Monitor Workspace,
+and then a data collection endpoint that collects these container logs and yeah, a couple of things over here. And then
+let's take a look at if there are indeed some other resource groups that also got created with the creation of this
+resource group. So I'm going to go ahead to the search bar and search for resource groups in this case. So I get a view
+of all the resource groups in my subscription. Okay, so you're looking for other resource groups that are connected with
+the AKS cluster. I'm just going to refresh things a bit over here. And that should probably pop up. Yep. So you can see
+that I do have a couple of other resource groups up and working. So this is one of the resource groups. This one, this
+one. So these two resource groups are somehow attached to this AKS cluster resource group, the AKS AI200-RG resource
+group. Let's take a look at the first resource group. I'm going to open this up in a new tab. And similarly, we'll also
+take a look at this one. It's just going to sign into my account. There you go. And we'll take a look at the kinds of
+resources that got deployed. So that's the first resource group. So I can see I have a managed identity, a public IP
+address, a load balancer over here, and then a virtual network. And this virtual network is used to assign virtual IP
+addresses to the Kubernetes cluster nodes, the pods, and the container applications alike. And then I also have this
+virtual machine scale set, which is over here. And this virtual machine scale set provides the nodes that provide
+internally the compute power, the compute engine to run my AKS cluster. And then I also have a network security group.
+That's good. Let's take a look at the second resource group. So the second resource group only has some data collection
+rules that collect data from my AKS cluster and feed to the log analytics workspace. That's okay. Now, let's get going
+with our AKS cluster. So I'm going to go to the AKS AI 200 RG, the main resource group that houses my AKS cluster. And
+let's quickly open up the AI 200 AKS cluster in this case. Now I have a bunch of things working in this AKS cluster. So
+if you open up the Kubernetes resources section over here, you'll see that you have namespaces, a section for
+namespaces. Again, namespaces are nothing but logical separations to logically separate your containerized workloads
+with things like you will have a bunch of containerized workloads working in the production environment, a bunch of them
+working in the staging environment, a bunch of them working in the testing environment, something like that. So
+namespaces only provide some logical separation for these container workloads. And you can see that there are some
+system built and some default namespaces. So I have the default namespace, the kube system namespace. Now this is a
+system built namespace where in some system defined pods are running. So when you create an AKS cluster, some system
+defined pods and container workloads will be up and running that just manage the internal working of the AKS cluster. So
+if you go to the workloads area over here, you'll see the kinds of pods and the kinds of container workloads that are up
+and running currently. So even though we haven't run any application on this AKS cluster, it's surprising to see some
+pods up and running. You know, I have pods like the core DNS pod, the connectivity agent pod, the matrix server pod, all
+of that. So these are system defined pods that are set with the creation of the AKS cluster. So for instance, this core
+DNS pod is a pod that takes the virtual IP addresses and assigns them to the AKS cluster. Now this matrix server pod
+collects matrix from the entire AKS cluster. And then this core DNS autoscaler pod also applies autoscaling rules on our
+AKS cluster. So these are some system defined pods. And as you can see, these system defined pods indeed consume some
+CPU and also some memory from our nodes. So if you click on one of these pods, let's click on the core DNS pod over
+here. And you can see that these pods are logically defined in a namespace. In this case, it's the kube system
+namespace. So if I click on the core DNS pod over here, this will have a private IP address and it will be up and
+working in my node, in my virtual machine that I created or that got created while I was creating the AKS cluster. You
+can see that there are two replicas of the pod up and working. That's why you see two of two. And then you can see that
+there's replica number one and replica number two of the pod. Replica are nothing but instances. And then they are
+consuming a minimal amount of CPU, but a significant amount of memory from these nodes. And because I only have a single
+node up and working currently in the AKS cluster, you can see that both of these pods are running in that node, in that
+configured node for the AKS cluster. So that's the node. And this node is the same virtual machine that was created with
+the creation of this AKS cluster in the creation wizard. And then I also have a private IP address for this pod. So you
+can see these are private IP addresses that are assigned to these two replicas of the same pod. All right. So I guess
+that's pretty much it. That was all about setting up an AKS cluster in Azure portal and taking a quick walkthrough of
+the entire setup. That's it. And I'll see you in the next lecture.

@@ -1,0 +1,50 @@
+SECTION: 4 Containers and Azure Web Apps
+LECTURE_ID: 21
+TITLE: Lab: Build and Run Images with ACR Tasks (Hands-On Lab)
+TRANSCRIPT_LENGTH: 5245
+---
+Now, with the help of this video, we'll be discovering something and trying out a hands-on activity on a concept that's
+called as ACR tasks. So, in order to perform this lab, I'm on this markdown file which is acrtasks.md that's included
+within the containers and web apps folder in the GitHub repository. Now, before we can move forward, I'd like to give
+you a brief idea about the kind of problem statement that this concept of ACR tasks is trying to solve. So, up until
+now, we have built up our AI application which was a Python application locally using the Docker runtime. So, what we
+did is we opened up Docker as a background process and then with the help of a couple of, you know, Docker commands with
+the docker build command, the docker tag command, and the docker push command, we successfully built, first of all, our
+application locally and then pushed it to Azure Container Registry. Now, the problem over here is what if on the device
+that you're working on, you don't really have the Docker application running as a background process for some or the
+other reason or maybe just for the sake of simplicity, you don't want that added layer of having to run those Docker
+commands to build your application and push that to Azure Container Registry. What if there is a way that we can use the
+container runtime that's provided by Azure Container Registry resource and then without having to run the Docker runtime
+as a background process, we could just take the help of Azure Container Registry to, number one, build our image, test
+our image, and then store that image to our ACR resource repository. And that's what ACR tasks really are. So, with the
+help of ACR task, without using the Docker runtime at all, we'll be able to build that image and push it and save it on
+our ACR resource. Let's get started. So, I'm going to open up the terminal and it's just going to be a single command
+that will help us build that image and push that image to our Azure Container Registry resource. Now, just make sure
+that within this terminal, you are in this root directory that just houses all of the application files. You know, just
+make sure that within this terminal, you are in the AI app folder. So, I already am on the AI app folder and then I'm
+just going to go ahead and run this command. All right. So, yep, there you go. Now, if you take a look at this command
+over here, that's basically making use of the Azure CLI and then it's an ACR command. So, az acr build. So, we're going
+to, first of all, build this image with our Azure Container Registry reference over here. Now, this is the variable that
+references your Azure Container Registry name because we saved the ACR name in this variable in a couple of videos
+earlier to this one. So, if you don't really have the ACR names saved to this variable, just make sure that you can type
+in the name manually over here. And then the name of the image is going to be AOAI Python app and then the version of
+this image will be tagged as acr-tasks and then a dot at the end, which is to signify that the folder or the directory
+that we are currently in with the help of this terminal contains a Dockerfile. So, this dot over here is a way for me as
+a developer to tell the container runtime that ACR provides that, hey listen, I am currently in this root folder and
+this root folder contains a Dockerfile that you can take help of to build that container image and store that eventually
+to your ACR repository. So, I'm going to go ahead and execute this code block and within like 15-20 seconds, we will
+have our image built and also stored in our ACR resource. So, I'll just skip it to the part wherein we have our image
+built and stored in our ACR resource. All right. So, there you go. You get back an output that looks like this and it
+looks like it performed a bunch of tasks and then at the end, it says that this run was successful after 26 seconds.
+Now, let's go to our ACR resource and I'll give this browser a refresh and then hopefully we'll be able to see within
+the AOAI Python app repository a new version of that application. So, I'm just going to sign into my account again and
+that should hopefully be it. So, if you see in the command, we have created the image with the same repository name but
+a different version. So, from one of the earlier videos, we will have version 1 of the application stored but then
+through this video, we'll have this version which is named as ACR tasks of that same application stored. So, I'm going
+to open up the AOAI Python app repository in my ACR resource and you see that, well, I have this new version which is
+ACR tasks and this is the new version that we created just now and because these are different versions, you'll see that
+the digest values, the SHA-256 digest values for this version and this version are indeed different because they were
+carried out through different processes. So, they also have a different digest value. Alright, so I guess that's pretty
+much it. That was all about taking a look at a concept of ACR tasks and how that could eventually help you even remove
+an extra dependency of having Docker Desktop or Docker Runtime installed on your device. That's it and I'll see you in
+the next lecture.

@@ -1,0 +1,79 @@
+SECTION: 5 Deploy and Manage AI Apps on Azure Kubernetes Service (AKS)
+LECTURE_ID: 34
+TITLE: Introduction to K8s and Azure Kubernetes Service (AKS)
+TRANSCRIPT_LENGTH: 8681
+---
+Now, with the help of this video, let's have a quick introduction to the world of Kubernetes. We'll try to understand
+what sort of business problem is the world of Kubernetes trying to solve, how does it function, discuss some use cases,
+and then we'll move on to understanding the world of Azure Kubernetes Service, which is Azure's managed version of
+Kubernetes. So, in the modern world, in the modern application development world, we follow the microservices
+application approach. Now, earlier back in those days, we used to follow the traditional application approach, and the
+traditional application approach had a lot of bottlenecks, with these bottlenecks being because we just simply used to
+build these applications on these virtual machines and servers directly, we did not really have any concept of
+application containerization. It was very difficult to replicate the same environment across different virtual machines,
+across different servers, and because you were limited to only the kind of hardware that you had an access to in, let's
+say, the on-prem environment, you had a lot of difficulty scaling out and scaling in these applications. You had a lot
+of difficulty exposing these applications to the outside world and managing the influx of users and the spikes that you
+would experience in the usage and the user demand. But now we have moved towards the microservices application approach
+in which we take advantage of concepts like containerization, so that solves the problem of replicating the environment
+across different servers and machines where in your application is meant to function absolutely fine. And then because
+we have things like cloud service providers like Azure, AWS, and GCP, we aren't limited by the hardware that we have an
+access to. And because we aren't limited by these hardware configurations, scaling these applications is a lot easier.
+And now you can handle the spike in user demand a lot more better. So if you talk about some developer pain points, here
+are the three pain points and solution to these pain points. So the pain point of delivering same functionality and
+replicating the same environment across multiple different scenarios and ensuring consistency and avoiding dependency
+hell is solved by the idea of containerizing your application. Now, where does Kubernetes come into the picture? Now,
+when you have these containers in a microservices application approach, you need to orchestrate the functioning of these
+containers. You need to monitor which container will be able to talk with which microservice and how will the scaling of
+these applications look like. If there's a certain spike in user demand, what number of instances should this
+application scale to? So it's more about orchestration. It's more about monitoring. It's more about setting rules in
+place. And that's what Kubernetes helps you with. Kubernetes helps you with setting these rules, setting these
+guidelines in place, and eventually helping you monitor the working of these containers, monitor the orchestration that
+sits within these containers. So Kubernetes, to put it very simply, is a container orchestration platform. It's an open
+source project that was spearheaded by the Cloud Native Computing Foundation, CNCF for short. And here are some elements
+of Kubernetes orchestration. So with Kubernetes, you can put in some rules and guidelines that can help you with
+monitoring your applications. If there's failover, some application or some region fails, how do you have a fallback to
+another instance of the same application? You can even set in rules for ensuring reliability and consistency within your
+application environments. And then with Kubernetes, you can even set in some scaling rules. If this is the kind of user
+demand that leads to a spike in CPU usage for a virtual machine, then what number of instances should that application
+scale to? And another important capability of Kubernetes orchestration is networking. You have these various containers,
+these containerized applications in a microservice environment running on these machines. How do you control the
+networking between these applications? How do you determine that the front-end application is able to talk with the
+back-end application in a secure environment? That is what Kubernetes is all about. Managing container orchestration.
+It's a platform that helps you manage container orchestration. So Kubernetes is portable, it's extensible, and has
+self-healing capabilities. When I talk about it being portable, it means you can take Kubernetes platform and make it
+run on public, private, hybrid, and multi-cloud scenarios. It's extensible, which means Kubernetes, even though that's
+an open-source platform, various cloud service providers have a managed instance of the Kubernetes platform. And for
+instance, your container that's running in the Kubernetes environment, it can even make use or talk with an Azure
+resource, like Azure Key Vault. So if your container requires an API key, it can talk with the Azure Key Vault, which is
+an Azure native resource, and fetch the API key secret from there. So this is how the Kubernetes architecture really
+looks like. The three main components of a Kubernetes, or the four main components of a Kubernetes architecture, is
+number one, what you call as manifest files. Now these manifest files are used for setting in those rules and
+guidelines, those scaling rules, those failover rules, in a YAML definition. You will write a lot of manifest files to
+set in these rules of container orchestration. Then you have the control plane node. Now this control plane node is the
+area or that hosts the API from where you can, with the help of manifest files, set in the rules that will apply to all
+the containers in your Kubernetes cluster. So the control plane node exposes an API for you to talk with the Kubernetes
+cluster by the virtue of these manifest files. And then in a Kubernetes cluster, you have different kind of nodes. Now
+these nodes are nothing but compute engines. And within these nodes, you have pods. And pods run containers. Pods run
+your application containers. So in a Kubernetes cluster, you have a single control plane node, multiple different nodes,
+multiple different virtual machines, compute engines. And within a single node, you can have multiple pods. And within a
+pod, you can even have multiple application containers up and running. Now we talked about Kubernetes being a platform
+for container orchestration. And it's an open source platform that was spearheaded by the Cloud Native Computing
+Foundation. But what does it mean to interact with the Azure Kubernetes service? What does it mean when you say you're
+interacting with an Azure managed version of Kubernetes? So when I talk about Azure Kubernetes service, the rules and
+definitions remain the same. But what really changes is that Azure, being a cloud service provider, it takes charge of
+providing you with the virtual machines. It takes charge of providing you with the compute engine. And it takes charge
+of managing the Kubernetes cluster for you. So you don't have to worry about the underlying infrastructure. And you just
+have to focus on writing those manifest files, writing the business logic, the rules and guidelines that will govern how
+your application containers behave in the Kubernetes cluster. So Azure takes care of critical operations like health
+monitoring, maintenance, and you only pay for the AKS nodes that run your applications. And you don't have to worry
+about the underlying infrastructure. You only have to worry about writing your YAML manifest files and writing the rules
+and business logic for running the container orchestration workloads. So I think this is a really good slide that
+highlights what is your work and what is Microsoft's work when you're working with Azure Kubernetes service. So when
+you're working with Azure Kubernetes service, you only have to worry about application development, application
+iteration and debugging, and containerization of those applications and writing those YAML manifest files that will hold
+the business logic rules and guidelines. Whereas Microsoft or Azure completely takes care of cluster hosting, providing
+you with the compute engines in the form of these virtual machine scale sets, cluster upgrade, making sure that the
+cluster has latest security patches, and it also takes care of monitoring and logging your Kubernetes cluster
+functioning. All right, so I guess that's pretty much it. That was all about an introduction to the world of Kubernetes
+and Azure Kubernetes service. That's it, and I'll see you in the next lecture.

@@ -1,0 +1,60 @@
+SECTION: 4 Containers and Azure Web Apps
+LECTURE_ID: 24
+TITLE: Understanding Managed Identity Auth for Pulling ACR Images
+TRANSCRIPT_LENGTH: 6500
+---
+Now, with the help of this video, let's try to understand the concept of managed identities and how can you make use of
+managed identities in your day-to-day workloads. So, the problem statement that we have at hand and something that the
+idea of managed identities is trying to solve is the fact that credentials management is a big, big problem. So, modern
+applications rely on numerous secrets and these secrets could be in the form of API keys, connection strings, passwords,
+certificates and access tokens and you use these secrets in your application. And the whole idea is or it's a saying
+that you shouldn't store your API keys as hard-coded values in your application because they become a threat vector for
+these attackers to compromise your application. If you store your secret in an application and for some of the other
+reason you push that secret to a GitHub repository that's made public by mistake, an attacker could gain access to that
+API key to that secret and could internally compromise your application or in other extreme events your organization as
+a whole. So, the whole idea is that credentials and secrets to be very precise shouldn't be hard-coded in the code that
+runs your application. And another big headache over here is something that's called as credential management. So, if
+you hard-coded your API key in the code base that runs your application and at the moment that hard-coded value is
+version 1 of the API key. What if you want to change the API key, make it go all the way from version 1 and version 2
+and this is not easy, you would have to go ahead scan the entire code base and at every single line at every single
+instance where that API key is being referenced, you would have to change and make it go all the way from version 1 and
+version 2. And as applications grow, this kind of credential management becomes next to impossible to keep a track of
+and that's in a nutshell what the concept of a managed identity is trying to solve. Number one, it's first of all to
+improve the security hygiene of your overall application workload and number two, it's also to help you with this kind
+of credential management problem that we talked about in the previous slide. So, if you take a look at this workflow
+over here, let's consider this example. You have an Azure Web Application instance that's up and running and to perform
+a business logic, it has to access an Azure Storage account. Now, there is one option of accessing this Azure Storage
+account and that's by the virtue of using this API key. Now, this is not the route that you would want to go in an
+enterprise setup for all the reasons that we discussed in the previous slide. The other option, the other way to go
+about achieving the same outcome is by using the concept of a managed identity. So, you replace the API key reference
+with a managed identity and now your Azure Web Application can, by the virtue of this managed identity, gain an access
+to data that's stored in this Azure Storage account and the way this works is a managed identity has the right set of
+permissions assigned to itself that lets it access the data that's stored in this Azure Storage account. Now, in this
+case, that right set of permission level could be a role and that role could be a storage account data contributor role
+and this role is directly tied with your identity provider like Microsoft Antara ID in this case. So, Microsoft Antara
+ID handles the authorization and authentication part of this managed identity when it tries to gain an access to this
+Azure Storage account. So, now your Azure Web Application, instead of using the API key, it now uses this managed
+identity to gain an access to this protected data that's stored within the Azure Storage account. So, you're solving two
+problems. You don't have to bear the burden of rotating your API keys going all the way from version one of the API key
+to version two of the API key. So, that's problem solved and the second problem is you don't hard code the value of
+these API keys anywhere in the code base that runs the application on this Azure Web App instance. You only have to make
+sure that your Azure Web App instance refers to this managed identity when it's trying to access the data that's stored
+in this Azure Storage account. So, there are two types of managed identities. One is a system assigned managed identity
+and the second one is a user assigned managed identity. They differ in a lot of scenarios and the first thing is they
+differ in their lifecycle management scenario. So, system assigned managed identity is tied to the Azure resource and
+gets deleted with it, whereas a user assigned managed identity is independent of the Azure resource and has its own
+lifecycle. So, there could only be one system assigned managed identity per Azure resource, whereas there could be
+multiple different user assigned managed identities attached to multiple Azure resources. If you talk about use cases,
+you would use a system assigned identity wherein only a single application requires an Azure resource access and on the
+other hand you would use a user assigned identity wherein multiple applications require the same level of permissions
+and you would want to have a centralized RBAC management because you could use that single identity and assign it to
+multiple Azure applications or Azure resources. And this is absolutely something that we'll also take advantage of when
+we want to deploy our container image on an Azure Web App instance. Now, because Azure Container Registry is a protected
+resource, you would have to use an authentication mechanism in place so that you can authenticate your Azure Web App
+instance and let it pull the container image and run that container image on itself so that it can make your application
+accessible via a public URL. And the way we'll do this is at the time of creation of this Azure Web App instance, we'll
+enable a system assigned managed identity and then we'll assign this system assigned managed identity the role of ACR
+pull in the identity and access management tab of our Azure Container Registry resource. So, now your Azure Web App can
+use this system assigned managed identity to authenticate itself to the Azure Container Registry, pull that application
+image and run that image as a container and make your application go live. Alright, so I guess that's pretty much it.
+That was all about the concept of managed identities and that's it. I'll see you in the next lecture.

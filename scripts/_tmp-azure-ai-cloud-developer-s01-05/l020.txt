@@ -1,0 +1,85 @@
+SECTION: 4 Containers and Azure Web Apps
+LECTURE_ID: 20
+TITLE: Lab: Pushing AI App Image to ACR (Hands-On Lab)
+TRANSCRIPT_LENGTH: 9412
+---
+Now with the help of this video we'll take that locally built container image and push that to our azure container
+registry in azure. Again I'm on the same markdown file because we went to the first half of the markdown file which was
+building a container image locally of our application and just for information the markdown file is this one which is
+docker to acr.md. So we date until this part and the last half of this markdown file is still left to do that is pushing
+the container image to azure container registry. So for that we'll have to first of all deploy an azure container
+registry resource in azure portal. So I'm going to go back to my azure portal and then from here search for container
+registry. So that's the resource that I'm looking for container registries and then I'm going to click on the create
+button and we'll just go ahead and create this container registry in the same resource group as our Microsoft founding
+resource. So I'm going to enter the name as kuljoth-acr if that works and that should work yep location is Sweden
+central I'm okay with it and that's going to be the registry domain name which is kuljoth-acr.azurecr.io so that's going
+to be the domain name of our container registry hub that's the place where all the container images will be stored so
+that's the domain name for that server. For pricing plan I'm going to go ahead and select the basic pricing plan the
+basic tier and for the role assignment permissions mode I'll go ahead with the second option which is RBAC registry
+permissions in which the permissions will be modeled on the role-based access control levels that are assigned via
+Microsoft anthra id. Let's go to the networking tab and in the networking tab for connectivity configuration public
+access that is access from on networks is enabled had the container registry pricing tier being premium which in our
+case is just basic for now you can also go ahead create a virtual network put this container registry inside that
+virtual network so that your registry gets a private IP endpoint and then private access could be enabled that is
+devices or resources that sit within that virtual network will only be able to connect with your azure container
+registry so that's even adding one more layer of network security but for now we'll go ahead with public access and yeah
+I think that's it let's go ahead with encryption you can even enable customer managed key to encrypt all of your
+container images but that's only enabled for the premium SKU and I'll go ahead to the review plus create tab wait for
+the final validation to get over because we are nearly done with all the things and then I'll go ahead and click on the
+create button to wait for the container registry resource to get created so I'll skip to the part wherein we have the
+container registry resource deployed it looks like a resource deployment is completed I'll click on go to resource and
+yep that's how the resource looks like so you have the overview tab that displays the domain name server of the login
+server and then if you go to access keys you can see that you have the registry name the login server and then if you
+click on admin user which you need to because it's going to display the username and password that you can use to
+authenticate to this azure container registry also so upon clicking admin user you can use this username and then a
+corresponding password and make this part's password act as like an API key to connect to your container registry the
+second option is to use the azure cli from our git bash terminal in vs code to contain to connect to this azure
+container registry so now that we have our azure container registry created as a resource in azure portal the next step
+is to go to our vs code environment and via the means of our terminal push that locally created container image to this
+container registry so I'm going to go to my vs code environment and then open up the bash terminal and from the bash
+terminal just make sure that you are signed in using the azure cli which is to run the command az login and then sign
+into your account to the user account that has that is associated with this you know azure subscription and then this
+container registry all right so first things first we'll set up the name of our azure container registry as an export
+variable so that we can use this container registry name in all the scripts that we'll be running and we don't really
+have to type the name again and again so this is the command that helps you set up that export variable I'm going to
+copy this command and this is simply an export command so this export command is used to set in a variable in our bash
+terminal and the variable would be the acr name and that needs to be your azure container registry name so I'm going to
+go ahead and simply type in the name as guljot acr and then a way to verify this is by running the echo command and then
+a dollar symbol at the beginning and then the name of the variable and then it's going to echo that is displayed to you
+the name or the value of that variable so now that we have the variable set in the first thing is to use the az cli the
+azure cli on the terminal to log in to our azure container registry so that's going to be the first command so with the
+help of this command we are logging into our azure container registry which is az which means we are using the azure cli
+acr login and then the name of our azure container registry that's stored in this bash variable we'll have to wait for
+some time for authentication to get completed probably like 10-15 seconds and we would have successfully signed into our
+azure container registry via the az cli the login procedure got succeeded and executed successfully and that's where you
+see login succeeded now the next thing is to take our container image and the container image right now has a really
+arbitrary name that doesn't really follow any naming convention and the name is just you know for a container image at
+the moment aoai python app which means azure openai python app now in order for you to push your container image to acr
+it needs to follow a certain naming convention and the naming convention needs to be like this which is the azure
+container registry name dot azure cr.io so that's the dns name of our container registry server this one in the red box
+right that's the full naming convention and then the name of your container image which is aoai python app and then the
+version of your image now in an enterprise setup for every application you would have different versions and then
+different versions of these container images so that's the naming convention right you have the name of the container
+image and then version 1 version 2 stuff like that so we'll go ahead and re-tag our image so we're going to be using the
+docker tag command so and then that's going to re-tag the name of the image make it go all the way from just aoai python
+app to this whole big name that follows a certain naming convention so we're just simply re-tagging our image and then
+once we have re-tagged our image we'll use the docker push command to push this re-tagged image to our azure container
+registry and it's simply docker push and then the name of your container image that you want to push to your azure
+container registry resource so i'm just going to go ahead copy this command and paste that over here so it's going to
+take couple of seconds to push that image and we'll be able to see that image in our azure container registry resource
+so as you can see the image has been pushed successfully now let's go back to our container registry i'm going to
+refresh my browser and then we'll hopefully be able to see that container image in our registry so now to view that
+image you can go to the services section over here and under services section just navigate to repositories and then
+going to repositories section we'll be able to see our container image live stored over there so the repository name for
+a container image is aoai python app and then you'll see that the version one of the image is stored right so that's tag
+number one which is version one and you also see something that's called as a digest now this digest is a alphanumeric
+alphanumeric character combination and this digest displays the layers or it's a way to symbolize those layers that were
+used to build your container image right so if you write a dockerfile you use a parent image and then you install some
+libraries utilities and if you change any of the components in that dockerfile maybe change the parent image or change
+the libraries even a single package that package change or that parent image change could change the layers of the
+container image and if you change that the digest over here would be a bit different than this one so that's the whole
+idea behind these digests these digests are used to uniquely identify the layering or the combination of these layers
+that make up a container image all right so i guess that's pretty much it that was all about this video wherein we had
+taken up a container image that we built locally using the docker runtime and then re-tagged it reconfigured it and
+pushed that to our azure container registry resource and now we have the version one of that image up and working stored
+in our container registry resource that's pretty much it and i'll see you in the next lecture

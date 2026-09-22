@@ -1,0 +1,108 @@
+SECTION: 5 Deploy and Manage AI Apps on Azure Kubernetes Service (AKS)
+LECTURE_ID: 44
+TITLE: Lab: Running AI App with ConfigMaps (Hands-On Lab)
+TRANSCRIPT_LENGTH: 12152
+---
+Alright, so with the help of this video, we'll take a look at the concept of config maps in AKS clusters to store
+environment variables and then dynamically inject those environment variables to your applications during runtime as a
+best practice. So in order to perform this lab, I'm on this markdown file, which is config maps.md. And that's within
+the same folder as your Kubernetes service. So let's talk a bit about the whole lab flow. So the lab flow would look
+something like this, we will have a Python application that is a very basic implementation of making API calls to large
+language models deployed in Microsoft Foundry. So you need three environment variables, the open AI endpoint, the API
+key and the modern name. We'll create a container image, store that to Azure Container Registry for that Python
+application. And then we'll also create a config map to store the environment variables like the endpoint, the API key
+and the modern name. We'll create a config map using a YAML deployment manifest file in AKS cluster and use this config
+map to power our container image of that Python application to inject those environment variables dynamically during
+runtime so that we can see this application live in action. So I'll just give you a quick walkthrough of what the
+application really is. So the application is within this folder AOAI Python app under the same Azure Kubernetes service
+folder. So this contains an app.py file, which is an implementation of making API calls to large language model in
+Microsoft Foundry. So it reads these environment variables, namely the endpoint, the API key and the modern name. And
+then it creates an Azure OpenAI client. It exposes one route that is the slash chat route, which is a post endpoint,
+wherein users can throw their request in a post HTTP request, and then it's going to extract the user query use the
+Azure OpenAI client to throw an API call to a large language model and then return this kind of JSON response. The JSON
+response would contain the model that was used for generating the response and then the assistant reply from the model.
+And then this application runs on port 5000 and we have the Docker file containing the instructions for how the
+container image should be built. So we have this application exposed on port 5000 and then there's also a
+requirements.txt file, which lays down all the libraries and utilities required to run the container image successfully.
+And this file will be used during the buildup of that container image by the Docker file. So I'm just going to jump back
+to my Markdown file over here. And then first things first, because we'll be interacting with the bash terminal a lot,
+we need to store the Azure OpenAI endpoint, the API key and the model name as variables for our bash terminal session.
+So first I'm going to store the Azure OpenAI endpoint variable that contains the value of my OpenAI endpoint. So I'm
+just going to grab the value of OpenAI endpoint. So on the Microsoft Foundry resource, go to keys and endpoint section,
+click on OpenAI and grab the OpenAI endpoint from over here. So that finally sets up the Azure OpenAI endpoint variable.
+Now we need to set up the API key variable. Similarly, in the same fashion, I'll fetch the primary key and store that as
+a bash variable. There you go. And then we need the model deployment name. So the model deployment that I'm going to be
+using is simply my GPD 4.1 model. So I'm just going to type in the name of my model deployment. Awesome. So now that we
+have these environment variables set in as bash variables currently in our terminal session, we'll use the kubectl
+command to create a config map on our AKS cluster. So we'll use the kubectl create command to create a config map
+resource. And the name of this config map will be AOAI Python app hyphen configs. And this will include three variables
+and their corresponding values, namely the Azure OpenAI endpoint, the Azure OpenAI API key, and the model deployment
+name. And then these variables will be named as Azure API URL, API key, and model name. And these variables need to
+match exactly what's defined in your app.py file. So if you go to your app.py file, these variables are defined like
+Azure API URL, API key, and model name. So just make sure, or it's a point to keep in mind, that whenever you're trying
+to create a config map, those variable naming conventions should absolutely follow what's defined in your application.
+So I'm going to go ahead, copy this, and with the help of this kubectl create config map command, create the config map
+in our AKS cluster. Now let's go to our AKS cluster. And from there, we can see the config map created. So to see the
+config map, I'm going to go to Kubernetes resources and click on configuration. And then on the config maps area, I
+shall see my config map created. So the config map gets created in the default namespace over here, because we didn't
+really define any namespace during the creation of config map. So it defaults to the default namespace, and that's my
+config map. I can even click on this config map and take a look at the environment variables defined in this config map,
+right? So these are the environment variables, the Azure API key, API URL, and the Azure model name. Now let's take this
+config map and deploy and use it to deploy our Python application. So I'm going to go back to my markdown file and we'll
+have to create a container image of that Python application firstly. So just make sure that you are in the correct
+directory, which is this AOAI Python app directory in the bash terminal. So I'm going to run a cd command that takes me
+to this directory, which is AOAI Python app. And then I'm going to run this docker build command to create my container
+image. So the container image will be named as this, and we'll have the latest version of that container image. So now
+that our container image is created locally, we like to push it to Azure container registry. So I'm going to first of
+all, log into my Azure container registry, just going to scroll this up a bit and then wait for the login session to get
+succeeded. And once it get done, I can re-tag my container image with my Azure container registry naming convention and
+push that finally to my Azure container registry. So login was successful, now let's re-tag our image with the correct
+naming convention. Now once that's done, we'll push finally the image to Azure container registry. Alright, so now that
+we have this image in Azure container registry, the next step is to create a YAML deployment manifest file and then with
+the help of that manifest file, create finally our Python application workload and run that as a containerized
+application in a pod in our AKS cluster. So we already have this manifest folder over here, that's going to house our
+YAML manifest file. So if you don't really have this manifest folder created, first of all, create this manifest folder
+with the help of this make directory command. And next, we download a template for that manifest file with the help of a
+kubectl command. So we'll use the kubectl command to download or create that templated YAML manifest file that's going
+to be named as AOAIPythonApp. That is for this image, that image is exposed on port 5000 and because we only want a
+template of that manifest file, we don't want to create that deployment in AKS cluster. As of now, we'll set the
+parameter dry run to client and then that YAML file will be downloaded to the manifest folder at this path. So I'm going
+to go ahead and execute this code block also. So it threw an error and looks like I'm not in the correct directory. So
+I'll just make sure that I'm in the correct directory and run the command again. So this time we have the YAML manifest
+file downloaded, which is this one, AOAIPythonAppDeployment.yaml. Now if we take a look at this YAML manifest file, this
+YAML manifest file is of type deployment because we want to create a container REST workload in a pod in our AKS
+cluster. That's the name, that's the label, the replicas is set to one, which means we'd only have one instance of this
+image up and working. And then this container application will run on this container image that's sourced from our Azure
+container registry and it will be exposed on port 5000. The problem with that templated YAML manifest file is that it's
+a template. It's only a template, we haven't made any changes and it doesn't include the integration of config map to
+power our application. So now I'm going to jump back to the markdown file and copy this new YAML manifest definition and
+paste that in the YAML manifest file. So if you take a look at this YAML manifest definition, the only thing that's
+changed is that we have added an integration for the config map to be made usable by the Python application. So in the
+specification where we define the container image that should be run as part of this deployment, we also define that,
+hey listen, the environment variables should be sourced from this config map resource with this name that's deployed in
+our AKS cluster. That's the only thing that we changed in this YAML manifest definition, rest everything else remains
+the same. Now before we can apply this YAML manifest file, we need to change one thing. So we need to type in our Azure
+container registry name over here or else it's going to throw me an error. So I'm just going to type in the name of my
+ACR instance, which is Kuljot ACR and control persist to save the main changes. Now the only thing that's left is to
+apply this YAML manifest file to our AKS cluster. So I'm going to use the kubectl apply command to apply the YAML
+manifest file that's going to create my container applications. All right, so it looks like the deployment is created.
+Now let's view the status of the deployment. So I'm going to use the kubectl get deployments command to get the
+deployment status of the replicas for this container application. All right, so you can see that we ordered one replica
+to be up and running and that replica is up and running and the AKS cluster currently is in the desired state. So if you
+run the kubectl get pods command also, you'll be able to see that a new pod got created that's currently running one
+replica of this application. Right, we can see that we have a newer pod that's created about 33 seconds ago and this pod
+is running the instance of a container application, one replica of a container application. Now let's try and test this
+application out in real time to see if the application is indeed using the environment variables defined in the config
+map or not. So for that, I'm going to port 5000 from my container application to port 8000 on my local host machine so
+that I can test this out in real time in a testing environment. So I'm going to use the kubectl port forward command to
+do that. All right, so it looks like the port forwarding has successfully taken place. Now I'm going to open up a new
+bash terminal. I won't close this because that's going to close the port forwarding scenario. I'll open up a new bash
+terminal and then I'm going to copy this curl command. So if you take a look at this curl command, this throws a
+request, a post request to the slash shared endpoint on local host 8000 with the user query being, hello, can you help
+me with Azure OpenAI? That's the user query. All right, so I do indeed get back a message and that means the application
+is working just fine and it's making use of the environment variables defined in the config map correctly. You can see
+that we got back a response from the GPT 4.1 model. The reply is absolutely, I'd be happy to help you with Azure OpenAI.
+What specific questions do you have, blah, blah, blah. Let me know what you need help with and I'll guide you step by
+step. Awesome. All right, so I guess that's pretty much it. That was all about taking a look at how you can use config
+maps to create environment variables in an AKS cluster that could be injected dynamically during runtime to power your
+applications, your container applications. That's it, and I'll see you in the next lecture.

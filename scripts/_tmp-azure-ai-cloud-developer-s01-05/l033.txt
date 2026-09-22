@@ -1,0 +1,61 @@
+SECTION: 4 Containers and Azure Web Apps
+LECTURE_ID: 33
+TITLE: Lab: Rolling Updates with Deployment Slots (Hands-On Lab)
+TRANSCRIPT_LENGTH: 6512
+---
+Now with the help of this video, I want to shift your focus towards the concept of deployment types in Azure web
+application instances. So imagine you know you have this Python application up and working which is at the moment
+currently using a GPD 4.1 model as we can see by the value that's filled into the environment variable which is the
+Azure model name. So this GPD 4.1 model is currently working in the production environment. Now you would like to switch
+in a gradual manner in a rolling update kind of system and make the application go all the way from using a GPD 4.1
+model to a GPD 5.2 chat model right. How do you do that? Well one answer could be that you simply you know fill in the
+value of the environment variable over here with GPD 5.2 and then you instantaneously shift the model usage to GPD 5.2
+instead of GPD 4.1 but that's not something that we want. We want to have this built up as a gradual process that is in
+addition to this production environment maybe we would like to set up a staging environment wherein we currently have
+that application up and working that's using GPD 5.2 and then we would like our QA team or testing team to test that
+staging environment first and then once we get green flag from the QA team that everything's good to go we can then swap
+the staging environment with the production environment so now that the production environment would be running a GPD
+5.2 model. We want this kind of gradual shift and not really an instantaneous shift and that's where the concept of
+deployment slots will kick in. So I'm going to go ahead to the deployment slots section that's under the deployment
+area. So now we are currently using I think the basic or the standard pricing tier of our Azure App Service plan but the
+thing is deployment slots are only supported in premium plans so we'll have to first of all upgrade to a premium plan to
+add some slots. So I click on upgrade and then I'm going to upgrade to a premium plan. Now just keep in mind that
+premium plans are costly and after you perform this lab just make sure that you downgrade on your app service plan
+downgrade back to a standard or a basic plan. So now that you can see we are currently on the basic plan we'll have to
+switch towards the premium plan so I'm just going to go ahead and select the cheapest premium plan option which is this
+one which is premium v3 t0v3 this one that costs around 64.97 US dollars for the entire month. So that's a bit costly
+but just make sure that you downgrade or even can just go ahead and delete the Azure App Service plan right. So I'm
+going to go ahead and click on the select option and yeah we like to upgrade our pricing plan. So now it's going to take
+quite some time maybe you know a minute or so for changes to set in. So I'm going to skip this video to the part wherein
+I have all the changes set in. Alright so about 30 seconds to one minute the shift of the pricing plans got executed
+successfully and now we are on to the premium version the premium pricing tier and now you can see that in the
+deployment slots section it allows me to create some slots but as of now no slots have been added. So I can click on add
+slot and then we like to add a staging slot that runs in addition to the production slot that's currently running our
+gpd 4.1 model. So that opens up the slot creation visit for me and I have to type in the name. So we name this slot as
+staging and the staging slot will create a new web application instance that will have this url which is
+aoaipythonapp.guljot hyphen staging.azurewebsites.net. So we'll have a new instance of the Azure web application created
+and that would be up and running and then we can clone all of these settings like the health checks that we configured
+and even the environment variables that we created from the production version of the application that's up and running.
+So I'm going to go ahead and select that I want to clone settings from the production version of the application that's
+up and running and let's click on the add button over here. So now you can see that in the deployment slots section I
+have two deployment slots one is the production version and the second one is the staging version and both of them are
+currently running on the app service plan and now you can see that you can also set in the traffic allocation. Currently
+100% of the traffic is going to the production version whereas 0% of the traffic is going to the staging version. Now
+the traffic in this case is the traffic that's routed to this url which is just simply this one the main url over here.
+So this is the url that does that traffic splitting but then you might wonder what if I want to send the traffic or test
+at least how the staging application is up and working. Now we'll do exactly that so if you click on the staging
+application instance over here you get a separate url for the staging application and throwing all the requests to this
+url will route 100% of the traffic to the staging application. So the whole idea is that you can go in the staging
+application to the environment variables and then really just change the azure model name over here make it go from gpd
+4.1 to gpd 5.2 so that your application now uses a gpd 5.2 model and then you give this application url to your quality
+assurance or your testing team and then they can test their application out and then once you get a green flag from that
+team you go back to your deployment slots in the main application instance. The url where the production application is
+running and then you quickly just increase the traffic in a gradual manner maybe like first of all forward 20% of the
+traffic to the staging environment and then 80% to the production version and then 50 is to 50 and then 80% to the gpd
+5.2 version of the application and then 20% to the gpd 4.1 version of the application, the one that's running the gpd
+4.1 model and then finally you completely swap them together that is shift 100% of the traffic to the application that's
+running a gpd 5.2 model and then 0% of the traffic to the application that's running gpd 4.1 model and then you
+eventually remove the application instance that was running the gpd 4.1 completely from the app service plan. So that's
+the whole idea in a nutshell with regards to deployment slots. Alright so I guess that's pretty much it that was all
+about taking a look at deployment slots and some rolling update strategy with deployment slots. That's it and I'll see
+in the next lecture.

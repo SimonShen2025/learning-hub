@@ -1,0 +1,40 @@
+SECTION: 4 Containers and Azure Web Apps
+LECTURE_ID: 17
+TITLE: Intro to Azure Container Registry (ACR)
+TRANSCRIPT_LENGTH: 4058
+---
+Now with the help of this video, let's have a quick introduction to Azure Container Registry as yet another Azure
+resource. So what is Azure Container Registry? Now when you develop a Docker image, you need a resource or you need a
+platform wherein you can store that Docker image in a secure manner. And then you can use this platform or a resource to
+distribute that Docker image to trusted individuals so that these trusted individuals can take these Docker images and
+run these Docker images as containers on these servers, on these virtual machines, on these application platforms, and
+also maybe use these Docker images for testing applications on their personal device. And that's the idea of having an
+Azure Container Registry. Now as this name suggests, Azure Container Registry is an Azure resource that lets you store
+these Docker images in a safe and secure environment. So it's a private managed Docker compatible registry service in
+Azure. And then the way it works is you can first of all restrict the people that are accessing Docker images within
+your Azure Container Registry by role-based access control. So people who only have the right sort of permissions can
+take these images of these applications and run these applications or experiment with these applications on their
+machines or servers. And the second advantage of having Azure Container Registry is that you can also restrict network
+access to the images stored in Azure Container Registry because that's an Azure resource. You can put this Azure
+resource into a virtual network. You can assign it with a private endpoint in that virtual network. And then the way
+this works is only machines that sit within that virtual network, only resources that sit within this virtual network,
+can establish a connection to this Azure Container Registry. So you make things even more secure. You make communication
+with the images of these applications that sit in Azure Container Registry more secure. And ACR integrates directly with
+Azure services such as Azure Kubernetes Service, Azure Container Apps, Azure Web App, and Azure Machine Learning. So now
+you can take the Docker images from the Azure Container Registry and deploy them as application containers on these
+Azure services like AKS, Azure Container Apps, Web App, and even the Machine Learning Workspace. Now this is how the
+setup of an Azure Container Registry resource looks like in terms of these hierarchical namespaces. So at the topmost
+level definition, you have the registry resource itself. And it has an associated endpoint that looks something like
+this. So the endpoint has the registry name, then Azure CR, which stands for Azure Container Registry dot IO. So that's
+the endpoint of your ACR resource. Now within this resource, you have a repository and likewise, you can have multiple
+repositories. And the way that these repositories work is they provide you logical separation to store these container
+images. Now you might use the same ACR resource to store images for different kinds of applications. For instance, you
+might use this ACR resource to store different images and different versions of these images for two kinds of
+applications, a front-end application and a back-end application. And then you might go ahead and also include different
+versions of both of these back-end applications and front-end applications. So now you're left with version 1 and
+version 2 of both of these back-end and front-end applications. Now the repository A would store the version 1 and
+version 2 of the back-end application, and repository B would store version 1 and version 2 of the front-end
+application. So these repositories provide a logical separation to help you store different versions of different
+container images meant for different kinds of applications, like the back-end and the front-end applications in this
+case. Alright, so I guess that's pretty much it for the video. That was all about a quick introduction to Azure
+Container Registry. And yeah, that's it. I'll see you in the next lecture.

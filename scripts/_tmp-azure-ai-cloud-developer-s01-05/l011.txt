@@ -1,0 +1,89 @@
+SECTION: 3 AI-200 Primers and Foundations
+LECTURE_ID: 11
+TITLE: Lab: Calling OpenAI Model with Foundry SDK (Hands-On Lab)
+TRANSCRIPT_LENGTH: 9875
+---
+Alright, so with the help of this video, we'll take a look at how you can use the Microsoft Foundry SDK to call a large
+language model that's deployed in your Microsoft Foundry resource. Now this is important because in the next labs that
+we'll follow throughout this course will include a lot of these API calls and a lot of deployments in Microsoft Foundry
+because Microsoft Foundry will form as the Gen AI powerhouse of all the labs that we'll do throughout this course. So
+it's pretty important that we have a good foundational knowledge of how we can use Microsoft Foundry and throw these API
+calls to these large language models and integrate these API calls in our AI applications. So in order to perform this
+lab, I'm on this GitHub repository, the AI 200 GitHub repository, and then I have cloned this repository in my VS Code
+environment. And now this is the Jupyter Notebook file that we'll be following for this lab, which is under this folder,
+AI Foundations, and then this notebook, chartcompletions.ipynb. Now in order to run this Jupyter Notebook, we need to
+fill in the .env file, which contains the environment variables. Let's quickly have a look at the environment variables.
+So we need the Foundry project endpoint and the chart model deployment name as far as this lab is concerned. We won't be
+filling these three environment variables for this lab. So we only need to fill these two environment variables, namely
+the Foundry project endpoint and the model deployment name, which is simply the large language model that we want to
+throw API call to. So I'm going to go back to my Microsoft Foundry resource in Azure portal, and we need to fetch the
+Microsoft Foundry project endpoint. So for that, you need to go to the Foundry studio, which you can simply navigate to
+by going to the overview section and then clicking on the go to Foundry portal button. And once you do that, it takes
+you to the Foundry studio over here. Now to fetch the Foundry project endpoint, I'm going to go to the home section and
+from the home section, this is the project endpoint that I'm talking about, this one. So I'm going to go ahead, copy
+this value and paste it in the environment variable over here. And then we need the model deployment name. So I have a
+GPD 4.1 model up and working, so I can go to the build section, go to deployments, and then this is the model that I'm
+talking about, a GPD 4.1 model. You can use any chart completions model, even a GPD 4 or GPD 5.2 model, anything, as
+long as it's a chart completions model. So I'll just type in the name quickly in the second environment variable, which
+is GPD 4.1. All right, and control plus says to save the main changes. Now let's quickly jump to the notebook
+implementation. Now before we can implement this notebook, we need to log into our Azure account via the Azure CLI, via
+the terminal in VS Code. So I'm going to click on, you know, right click on the notebook in the navigation section and
+then click on open an integrated terminal. And that opens up a PowerShell terminal for me. And with this PowerShell
+terminal, I can use the Azure CLI to log into my Azure account. Now logging into your Azure account is important because
+that's the way the code is implemented. The code uses your user account's identity to authenticate itself to the
+Microsoft Foundry resource and internally to the large language model. So I'm going to type in az login and that's the
+command to log into your Azure account. So as soon as you type in az login, a sign in window should open up and then you
+should navigate to your account. So I'm going to click on the account that I'm going to be using and let's click on the
+continue button. Now once the login is done, we are good to go and we are good to move forward with the rest of the lab.
+So I close this window below and again, I'll just show you how you can even check whether you're logged into the current
+account or not. So you can just type in this command, which is, you know, let me just clear it out. Yeah, you can type
+in this command, which is az account show. And then it's going to show you the account that you're currently logged in.
+So you can verify the email address and subscription along with the tenant ID from over here. So it looks like I'm
+logged into my current account and now I'm going to move forward with the lab. All right. So I'm just going to go ahead
+and select my Python environment from the device and we can go ahead and run this notebook. So we'll be making use of
+the Microsoft Foundry SDK and the Microsoft Foundry SDK is this one, which is Azure AI Projects 2.0.0b2. So that's the
+current version of the Microsoft Foundry SDK that we'll be using to make an API call to a large language model. In the
+next code block, we'll be importing the environment variables from the .env file, namely the Foundry project endpoint
+and the model deployment name. I'm going to go ahead and execute this code block. And the next thing is to set up a
+Microsoft Foundry project client. So this is how we set up a Microsoft Foundry project client by creating an AI project
+client object that takes in two values, the endpoint. So the endpoint will be the Foundry project endpoint that we set
+in the .env file and then the credentials. And the credential over here is the default Azure credential, which means
+it's going to use the credential of the user account that you signed in with the Azure CLI that we did just now. So
+that's how that Microsoft Foundry project client is created. We'll be using this client to throw an API call to our
+deployed large language model. So I'm going to go ahead and execute this code block also. And then because our large
+language model is a GPD 4.1 model, which is in fact a model from OpenAI, we need to create an OpenAI client. And the way
+you create an OpenAI client is to take the Foundry project client and then use this function, which is getOpenAIClient,
+and that creates an OpenAI client for you. And we can use this OpenAI client to send a request to our GPD 4.1 model. And
+then last but not the least, we'll be sending a request to our OpenAI model. And the way we do this is by using our
+OpenAI client and the method .responses.create. Now in this, you need to provide the model deployment name and the
+instruction. The instruction will be the system prompt. And that's going to set in the behavior of the large language
+model. So in this case, it's a simple system prompt, which is, you are a helpful AI assistant. And then the input over
+here needs to be the user query. The user query being, can you please tell me something about Microsoft Foundry? The
+temperature is set to a value of 0.7. Now the temperature could be a value between zero and one, zero meaning that you
+get back accurate responses, whereas one meaning that you get the most amount of creative responses. So we are leaning
+towards the more creative side of things over here with the value set to 0.7, which is much closer to one than zero. And
+then the max output tokens value is set to 1000, which means we won't get back a response which exceeds 1000 tokens in
+output. And then you simply print the response output, which is at this path, output text path in the response variable.
+All right, so I'm going to go ahead and take a look at the kind of response that we get back from our deployed large
+language model. All right, so it indeed looks like we have a response and the response is pretty good. So the assistant
+says, certainly Microsoft Foundry was an initiative by Microsoft aimed at fostering innovation. So provides me with an
+overview, location and focus, goals, legacy, current status. But a point to keep in mind is, it's talking about
+Microsoft Foundry as a program and not really as a Microsoft platform as a service, not really as a Microsoft product.
+And that should also tell you something related to large language models. Maybe the version of the large language model
+that I'm using is an older version and it wasn't trained on the dataset, which included things related to Microsoft
+Foundry as a product. Maybe the dataset that the large language model was trained on was before Microsoft Foundry came
+out as a platform as a service. And that's the reason why you see that it's referring to Microsoft Foundry as a
+Microsoft program rather than a cloud product. So that should also tell you that in order to make these large language
+models more useful, we need to provide them with external tools. And one of the solution to this could be providing the
+large language model with a web search external tool so that the large language model could retrieve real-time
+information. But we won't really dive into that segment because that would go out of the scope for this course. But
+that's a really cool thing to know about these large language models. If I ask it something on the lines of, maybe that
+could be better as in, what are some beautiful places to visit in India? And then I'm going to give it a shot. And
+hopefully this time we should get back a better response because the information would be there in the large language
+models training dataset and we shouldn't really have any problem. Yep. So it says India is a country of stunning
+diversity with natural beauty, talks about some natural wonders like Kashmir Valley, Jammu and Kashmir, Leradak, Kerala
+backwaters, Meghalaya, Valley of Flowers in Uttarakhand, which is also UNESCO World Heritage Site and some beaches and
+coastlines like Goa, Andaman in Nicobar Islands, Udaipur in Rajasthan. That's it. All right. So I guess that's pretty
+much it for the video. That was all about taking a look at how you can make use of a large language model deployment in
+Microsoft Foundry and using the Microsoft Foundry SDK through an API call to that large language model to get back an
+output. That's it. And I'll see you in the next lecture.

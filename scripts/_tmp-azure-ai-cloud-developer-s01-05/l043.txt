@@ -1,0 +1,32 @@
+SECTION: 5 Deploy and Manage AI Apps on Azure Kubernetes Service (AKS)
+LECTURE_ID: 43
+TITLE: Understanding ConfigMaps and Secrets
+TRANSCRIPT_LENGTH: 3196
+---
+So, now with the help of this video, let's quickly take a look at config maps and secrets in Azure Kubernetes Service.
+So, let's consider a scenario in order to understand the kind of problem statement that config maps and secrets are
+trying to solve. So, imagine you're developing a chat GPT-like application with the front-end and a back-end. And the
+back-end is a simple Python Flask or a fast JPI application that connects to the Azure OpenAI service to throw requests
+to the GPT engine. And you have that large language model deployed in Microsoft Foundry project, right? Let's consider
+that. So, when you deploy a large language model in a Microsoft Foundry project, you notice, you must observe that in
+order to throw API calls to that LLM, you need to have three variables, three values. One is your Azure OpenAI endpoint,
+one is your API key, and the third one is modern name. But the problem over here is, you are concerned how you're going
+to make use of these three values. The first option is you can either hard code these three values within that Python
+code. So, whenever your back-end application runs as a containerized workload, it eventually makes an API call to the
+endpoint using the API key with a concerned modern name. But there's a bottleneck, there's an issue with that. What if
+you wanted to change dynamically at runtime the model deployment name? What if your endpoint value changes? That's not
+modular, right? This approach is not modular. For you to change the endpoint value or even the modern name, you again
+have to create that container image because you are hard coding the endpoint API key and the modern name values. That's
+not modular at all. So, this kind of solution that you're looking for is to somehow dynamically at runtime find a
+solution to inject these values as environment variables and as secrets. So, if you wanted to change the endpoint, the
+API key, or the modern name, you don't have to go all the way to your VS Code environment, open your Docker runtime in
+your personal machine and rebuild the image for that back-end application. And this is exactly the kind of problem that
+the concept of environment variables via the means of config maps and secrets is trying to solve. So, there are two
+objects. One is a config map and the second one is a secret. And you can create both of these objects, define them while
+you are creating your YAML manifest files. So, config map is an API object that's used to store non-confidential data in
+key value pairs. So, this means that your endpoint value and the modern name value would go into a config map because
+these are non-confidential values. Whereas, to store that API key, you would use a secret object. So, a secret is an
+object that contains a small amount of sensitive data, such as a password, a token, or an API key, in the case scenario
+that we have taken into consideration. Using a secret means that you don't need to include confidential data in your
+application code. Alright, so I guess that's pretty much it. That was all about config maps and secrets in Azure
+Kubernetes Service to bring about modularity and extensibility. And yeah, that's it. I'll see you in the next lecture.

@@ -1,0 +1,147 @@
+SECTION: 3 AI-200 Primers and Foundations
+LECTURE_ID: 13
+TITLE: Lab: Creating a Foundry Agent in Portal (Hands-On Lab)
+TRANSCRIPT_LENGTH: 16769
+---
+So with this video, we'll be creating our first agent in Microsoft Foundry. So I'm on my Foundry project resource and
+then in the build area. And then to create my agent, I'm going to be working in this agents section. So let's get
+started with our first agent. So let's name our agent as demo agent and hit the create button. So this is our agent
+looks like. So you can power your agent with first of all, a foundational large language model. So I'm going to go ahead
+and select the model that I deployed, which was GPT 5.2 in this case. And now this agent also follows something that's
+called as versioning. So every time you make a change to your agent, such as changing a foundational large language
+model or maybe adding more tools or deleting one that might exist, that's going to create a new version of the agent. So
+if you hit on the save button, that's going to create a new version. And then this will be updated from version one to
+version two. And then it also supports history tracking. So if you want to shift from version one, from version two to
+version one, go back in time or move forward in time, you can absolutely do that. And even compare versions in which
+you'll be able to see what changes were made to your agent. So in a way, they have sort of implemented a versioning
+control on these agents, just like you would do with container images if you're working in the web application world or
+maybe versioning your applications also along the software development lifecycle. So, you know, that that inspiration is
+still there. So you can write your instruction for the agent. So I'm just going to type in you are a helpful AI
+assistant. And yeah, and now from here, let's take a look at what tools can you add to your agent. So if you click on
+add tools, you have a couple of things to select from. So the first first tool is file search that's going to enable
+your agent to search content from files that you can upload from your local device. So that creates like a local vector
+store. And then the agent has an access to this local vector store to perform search operations on the uploaded files
+and give you back a response. The second one is Azure AI search. So if you have enterprise knowledge, which is pretty
+big, which is which includes a lot of unstructured data and you want to create a grounding knowledge source out of that,
+you go ahead with Azure AI search, which is Microsoft's state of the art AI enrichment pipeline and search solution that
+has vector integration deeply embedded into it. The third one is web search that allows the agent to search the
+internet. Then there's also grounding with Bing custom search in which you can provision a Bing resource back in
+portal.azure.com, apply filters like what websites will your agent have an access to and only search from those specific
+websites. So that's absolutely there. And then give your agent an access to this tool so that it's going to perform
+internet operations, internet search operations in real time. You can even bring in knowledge from SharePoint. There's
+this browser automation tool that allows your agent to replicate human behavior in a browser environment, just like you
+would go ahead in a browser, click on buttons and perform some operations. What if you want your agent to do? So browser
+automation works in that manner. And even the web search, you can do that. And now there's also this code interpreter
+tool that allows the agent to simulate a sandbox Python environment and execute Python code and give you back an output
+of that executed Python code. So if you want your agent to, let's say, generate some charts based on a data set using
+matplotlib in Python so that the agent could, first of all, generate the code. Provision a Python sandbox environment
+with system dependencies and then execute that Python code and give you an output, which is going to be a chart at the
+end of the day that was generated using some Python libraries. You can absolutely do that. Now, as far as
+knowledge-based code, you can quickly connect your system to FoundryIQ. Now, from FoundryIQ, you can bring in data from
+SharePoint. Now, from FoundryIQ, you can bring in data from Enterprise Knowledge Bases, from Azure Data Lake Storage,
+even from multi-cloud environments like AWS S3 with connectors, and then create a single source of truth for your agent
+from which it can perform search operations and then present you with the answers. So that capability is also there.
+Although we're not going into the details of FoundryIQ, as this would go out of the scope for this course right now, but
+yeah, for you to establish a single source of enterprise knowledge truth, you go ahead with FoundryIQ and attach that as
+knowledge to your agent. And as far as memory goes, you can also create a memory store, a Foundry memory store for
+individual users that will be interacting with your agent. So the part about what sort of information for the user will
+be stored in that memory store across user sessions, that logic is handled or is offloaded from you, and that's handled
+by Microsoft Foundry, so you don't really need to worry about that. And then for this agent, you can also apply some
+custom guardrails, although there's going to be a default guardrail that's applied to the agent, and that indeed is the
+one that's also applied to the foundational large language model that's powering the agent, which in this case is
+Microsoft Default Version 2, and then it protects the agent against sensitive data leakage, task drift, and indirect
+prompt injections with configuration set for jailbreak attempts, content safety filters applied, and also protected
+materials. Now let's attach the web search tool to our agent and see it in action in real time. So I'm going to click on
+Add, and let's quickly go to web search, and I'm going to click on Add Tool, and now let's hit on the Save button. All
+right, so let's click on Add. So likewise, our web search tool has been added to our agent, and let's click on the Save
+button. So that's going to save version 3 for our agent because we just entered a new system prompt as well as attached
+a new web search tool. So that's version 3 for my agent, and that's what you could see from the versioning section over
+there. Okay, so I'm going to ask my agent, can you please, in bullet points, summarize the top global news headlines for
+the day? And now the internal orchestration engine for the agent, the part that handles what tools the agent should call
+and in what execution manner, that internal orchestration engine should quickly utilize the web search tool because
+that's the intent of a user query, and we'll also be able to see that from the agent trace stack. I'll also show you how
+the agent trace stack looks like. So these are the couple of headlines in bullet points, and I also see some citations.
+So it took the information from Al Jazeera, 15k tokens in total were involved, used this foundational large language
+model, and it also indeed used this web search tool that we provided our agent with. Now, there's something that's
+called a trace section. So if you go to the traces area, before even going to the traces area, let's take a look at
+this, which is AI quality. So if you click on AI quality, it gives you the evaluation, right? Evaluation in two
+segments. One is intent resolution, whether the agent or assistant was able to identify the intent of the user query and
+call these tools or carry out the execution plan accordingly, which in this case has been assigned a score of five out
+of five. The second one is task adherence. If as part of the intent resolution, a tool call was made, how successfully
+did the agent carry out that tool call? In this case, it's the web search tool call. So it also receives a green signal
+in this case. Now, for you to be able to see what tool was called and in what manner and the number of total tokens
+included in the transaction, both as input and output tokens, there's this agent trace tag that you should definitely
+take advantage of. So if you go to the traces segment, you'll be able to see the conversations that users have had with
+your agent in the past. So whenever you type in a user query within that same chat conversation, you sort of have a chat
+with the agent in a conversation state that's assigned a conversation ID. So if you click on conversation ID, it's going
+to present you with a list of all that took within the conversation. So all the steps that took within the conversation.
+So that's the user query and that's the agent response. And if I go to the metadata, I'll also be able to take a look at
+the total number of tokens involved in the entire transaction. And that's 14,269 total tokens. And the steps are also
+listed down over here. So the first one was reasoning. The GPD 5.2 chat performed reasoning as to sort of generate an
+execution plan by performing intent resolution on the user query. And as part of its reasoning step, it made use of this
+web search call, the internal orchestration engine made use of this tool call and performed a web search operation.
+Right. And that is what's done. And as part of invoking that tool, a query was run, which was Reuters top global news
+headlines, December 25, 2025, which indeed is going to return me back as part of the web search operation top 10 or top
+global news headlines on this very day. And last but not the least, once the agent got back the response from the web
+search call, it finally did display this kind of response to me. So that's how you could also sort of take advantage of
+the agent trace tag to see how your agent is behaving. And if some of the other error is kind of keeping you back, you
+know, is dragging you back, you can also drill down to that error via the agent trace tag that's displayed over here.
+Now let's make our agent a bit more complex. Let's add one more tool to our agent, and that's going to be the code
+interpreter tool. So I'm going to quickly add the code interpreter tool and save a new version for the agent. Now what I
+would like to see is, first of all, we'll hit the agent with a simple query and see if the internal orchestration engine
+is able to correctly route queries to different tools. And second of all, we'll hit the agent with a combined query. And
+the combined query should, first of all, make the internal orchestration engine route the request to the web search tool
+and parse the output from the web search tool to the code interpreter tool. And the output of the code interpreter tool
+should be my final output. So that's how the overall flow will essentially look like. And let's try it out. So first of
+all, let's quickly invoke the agent to only call the code interpreter tool. So I'm going to type in, or maybe start a
+new chat session by clicking on this icon, and that's going to create a new conversation ID for me. Now within a
+conversation ID, all the parse messages are also going to be stored as long as they remain within the contextual window
+of your agent. So you could, in some or the other way, also use a conversation object along with the conversation ID as
+a chat history store of some sort, right, in addition to this foundry memory store that preserves chat conversations
+across user sessions. All right. So I'm going to quickly type in the query, please prepare a chart for me with values
+and the values are following. So oranges has a value of 40. Apples has a value 50. And grapes. Okay, so grapes has a
+value. Let's keep it 100. Right. And that's it. So I think, I mean, this user query has nothing to do with the price of
+oranges, apples, and grapes. That's just arbitrary values that I took. But somehow we should be able to see Code
+Interpreter in action. Okay. So indeed, first of all, if you take a look at the execution, it quickly created this
+Python code, right, using matplotlib. So it used the matplotlib to create that chart for me. Now once that Python code
+was created, it took help of the Code Interpreter tool. And that's what you could exactly see over here with the
+transaction having 5,000 tokens going both inwards and outwards, and gave me back this PNG formatted file. This is an
+image. So if I click on this image, and that gets downloaded for me. And if I try to open this, this is how everything
+appears. So oranges 40, apples is 50, and grapes, although the spelling is pretty, that's completely wrong, but it's
+good. The agent took it the same way as I typed in. It's set to a value of 100. Awesome. Now let's try to, or before we
+can even go ahead with another user query, I'll just quickly show you the agent trace stack. So we started a new chat
+session, and that's created a new conversation ID for me. And if I try to go inside of this, you'll see that indeed in
+one of those steps, Code Interpreter call is made. The call to the Code Interpreter tool is being made. So that's
+clearly highlighted over there. And going through the metadata, the total transaction comes out to be around 4K tokens
+in total. All right. Now I'll go back to the Playground section, start a new chat, and I'll quickly type in, please,
+after performing, please perform a web search, please perform a web search to get stock prices for the day for, let's
+say, I'm going to keep it apple. So I'm going to type in the ticker symbols, which is AAPL for Apple, MSFT for
+Microsoft. And I don't know what's for Google and for Google. So I'm just going to type in Google like this. And then
+please create a pie or maybe a chart for me, a chart for me for visualization. So first of all, it should perform a web
+search and making use of the web search tool and then parse the output from the web search tool to my Code Interpreter
+tool and create a chart for me, which I can quickly download as a PNG formatted file. OK, so it's making use of the Code
+Interpreter tool after it's made use of the web search tool. And that's exactly what I see. OK, so if you like, I can
+also show percentage change for the day, plot a historical trend or export this chart as an image or CSV for download.
+So I'll type in, I would like you to export this image. This image for download. Now, because I'm also typing this
+within the same conversation object, the agent retains a history of what I wanted to do and what sort of conversation we
+had in the past. And then that's the stock price chart that was generated for me. That's a PNG file. And let's hope it
+gets quickly downloaded. So this is how the chart essentially looks like with Apple stock being priced at $273,
+Microsoft taking the lead with close to $500 and Google priced at $308 for the day. And let's quickly go to the agent
+trace stack. So I'm going to go to the agent traces section and that's the conversation ID, the latest one. And indeed,
+if you take a look at things, first of all, let's take a look at the total transaction. So it comes out to be around
+10,000 tokens. And then as part of its step, first of all, made a web search call so as to get back the information for
+the latest stock prices of Apple, Google and Microsoft. And then once it got back information from the web search call,
+parsed that output as an input to the code interpreter call, created a Python script, executed that script in a sandbox
+environment and gave me that generated PNG file with the chart included in it. And that's how the execution flow
+essentially looked like. And I think we're pretty much done with the demo. And I just want to show you a couple of
+things before we can close this. So if you go to the YAML section, you can also see how the agent definition looks like.
+So your agent has these tools, web search, code interpreter tool. And if you even want to call the agent out from a
+Python SDK in a code first environment, you can absolutely do that. So if you go to the code section, that gives you a
+sample code that you can try out in your coding environment using the Python SDK. Support is also there for JavaScript
+and C Sharp. And if you want to go ahead, you can even publish this agent to Microsoft Teams and the Microsoft 365
+Copilot ecosystem. You can absolutely do that, although that goes out of the scope for this course until now. We're not
+going to do that. But yeah, I hope you get the idea. The functionality is absolutely there, although that would take a
+couple of steps more to publish it to M365 Copilot and Teams. Setting up your infrastructure is what I mean by that. OK,
+I guess that's pretty much it. That was all about creating a first agent, seeing tool calls in action, and even a multi
+tool call scenario. And we also took a look at how conversation objects behave along with their conversation IDs for
+that agent. That's pretty much it. Without further ado, let's quickly move on to the next set of videos.

@@ -1,0 +1,27 @@
+SECTION: 2 System Setup and GitHub Repo for the Labs
+LECTURE_ID: 2
+TITLE: System Setup and GitHub Repo for the Labs
+TRANSCRIPT_LENGTH: 2512
+---
+Now, that's going to be a really quick video in terms of showing you the GitHub repository where all of the code base
+required to perform the hands-on activities is situated. You know the URL and also a bit of system setup that's required
+for you to perform the hands-on activities without any problem. So first things first, the GitHub repository that we'll
+be using for majority of the course in order to perform these hands-on activities is at this URL, which is on my GitHub
+public profile, and that's with the name of Azure AI Cloud Developer. You can pause this video over here, copy the URL
+in your web browser, clone or fork the repository on your account, and then we can move forward. I'll also be attaching
+a link to this repository in the resources section of the video, so make sure you grab that from there. Now, this is the
+repository that we'll be using for the hands-on activities, and this in the readme file also includes links for various
+system softwares that will be required like VS Code, a Git Bash terminal, an Azure CLI, and Python installed on your
+environment. So we'll be using VS Code as the IDE, the integrated development environment for all the labs, and we'll
+also require a Bash terminal installed on our device. Now, if Bash is not available on your device, you can also simply
+move ahead with PowerShell. So wherever you encounter these command scripts that are written in the Bash command, just
+make sure you copy those command scripts, go to chat GPT or any other code generation tool, and simply prompt the AI
+application with the fact that you just want to convert the Bash script into a PowerShell script, and you'll be good to
+go. So that's one thing that you can also do. Then we also need the Azure CLI installed. Now the links are absolutely
+all over there, and Python installation is also required. The code snippets are in Python, so Python is absolutely
+required. So all of these links are in the GitHub repository. You can access the installation links from the GitHub
+repository's readme file so that you don't waste a lot of your time into searching for these links. And these
+installations are pretty much easy to do, easy to configure, and I'm pretty sure majority of them would already be up
+and working on your device. So just go ahead and get these installations up and working, and I'm pretty sure you'll be
+able to get all of them up in no time. All right, so I guess that's it. That's pretty much it for the video, and I'll
+see you in the next lecture.

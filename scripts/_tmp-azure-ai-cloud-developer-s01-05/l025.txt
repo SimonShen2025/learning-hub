@@ -1,0 +1,106 @@
+SECTION: 4 Containers and Azure Web Apps
+LECTURE_ID: 25
+TITLE: Lab: Deploying a Container to Azure Web App (Hands-On Lab)
+TRANSCRIPT_LENGTH: 11857
+---
+Alright, so with the help of this video, we'll take this version one of our AOAI Python app that we have got as a
+container image in our Azure Container Registry and deploy that to an Azure web app instance that runs on an Azure app
+service plan. So for that I'm in Azure portal and then I'm going to go to the search bar and search for Azure web app.
+Alright, so upon searching for Azure web app, you land on the app services option. This is the one that we're looking
+for, so I'll go ahead and click on app services. And then we'll click on create. And I'll choose the first option, which
+is to create a web app. So for now we because we don't have an app service plan up and working and we need an app
+service plan before we can deploy an Azure web app with a publicly accessible web URL, we'll also be creating an app
+service plan in the next forthcoming procedures. So I'll create this in the same resource group as my other resources,
+which is AI200RG, and then I'm going to name this web app as AOAI Python app. And then I'm going to toggle this off. So
+toggling this off gives me a neat URL, which is AOAIPythonapp.azurewebsites.net. Now it says the app name AOAI Python
+app is not available. That's OK. I'll kind of put my name as a suffix, so that becomes AOAI Python app Guljot. And now
+that's a clean URL. And for publishing purposes, we'd like to take a container image and publish that to an Azure web
+app instance. So for the publish option, I'm going to go ahead and select container radio button and then operating
+system. Now this operating system depends on your container image and our container image runs on a Python 3.11 slim
+base parent image, and that base parent image is a Linux-based base parent image. So now our whole application image
+becomes a Linux-based image. So I'll go ahead and select Linux as the option. For region, I'm going to go ahead and
+create the web app and the app service plan in Sweden Central. And then as far as pricing plans are concerned, we'll
+just go ahead with the basic pricing plan. So a basic or the standard one. We'll take a look at what's the cheapest
+option. So as far as a Linux plan is considered, we'll have to create a new one. So this is the plan that will get
+created. That's with a predefined name. You can even change this name, but I'm OK with this. And for pricing plan, we'll
+go ahead and select the basic pricing tier. You can go ahead and select the free one also, but the free one has quite a
+bit of latency associated with it. So for demo purposes and for keeping our demos fast track, I'll go ahead with the
+basic version that's going to cost me $13.14 per month. You can even perform the demos on your end and deed the
+resources straight away. So you're not going to be billed for anything. Alright, and then I'll go to the container
+section and from this container section, we need to define the container image that this application will run. So for
+that, our container image is stored in Azure Container Registry. I'll select the second option and then from here,
+select your ACR resource, which is Kuljot ACR in my case. And for authentication purposes, I'll go ahead and select
+managed identity. Now what this will do is as soon as my Azure web app instance gets created, a system assigned managed
+identity with that web app instance will also get created. And now this system assigned managed identity for that web
+app behind the scenes, which means I don't have to really worry about setting that up, will have the role of an image
+pull role that allows it to go to the ACR instance, authenticate itself, and pull the container image and run that
+container image onto itself. So the kind of role that this system assigned managed identity will have will be that of
+ACR image pull role. That's the role that it will have. I don't really have to worry about the role. This will get
+created behind the scenes. And then I'm going to go ahead and select a managed identity for my Azure web app instance.
+So this identity will also get auto created. I'll just have to select that from the drop down. And then as far as the
+image is concerned, our image was named as AOAI Python app. So that's the name of our image and the version of the image
+that we would like to run is version 1. So the tag value will be set in as v1 and port. So the application, if you take
+a look at the Docker file, is exposed on port 5000. So we'll have to configure port mapping over here and expose port
+5000 in this case. Alright, I guess that's it. Let's go to the networking tab. And then as soon as you go to the
+networking tab, you'll see that public access is enabled. If it's disabled, enable it by switching it to on. And then
+we'll just go ahead with the default values in the monitor and secure tab as well as in the tags tab. So I'll just
+switch over to the review plus create tab, wait for the final validation to get over, and I'll hit on the create button.
+It's going to take like three or four minutes to have our Azure app service plan created, our web app instance created,
+and to get our application up and running. So I'll skip the video to the part where I have all the resources created. So
+it looks like our deployment got created successfully, and if you jump to your resource group, you'll see a bunch of
+things got created behind the scenes. So you'll see that you have this Azure web app instance created, an Azure app
+service plan created on top of which that web app instance runs, and then this is a user assigned managed identity that
+gets created that has the image pull role on the ACR and that assists the Azure web app instance to pull the container
+image, authenticate to the ACR resource, and run that as a web application. So a bit of correction from my side, this
+was not a system assigned managed identity, but a user assigned managed identity that got created with the creation of
+our Azure web app instance. Now let's go to our Azure web app instance. So I'm going to click on AOAI Python Apkul Jyoth
+resource over here. That happens to be an Azure web app instance, and you'll see that this Azure web app instance has
+this default domain over here. Now if you paste this default domain in your web browser and try to navigate to the slash
+chat endpoint, you'll see that you get a method not allowed error because, well, the slash chat endpoint accepts a POST
+request and just simply pasting that into a web browser throws a GET request. So that's probably just not going to work.
+Alright, so we indeed get an error and the error is method not allowed. This method is not allowed for the requested
+URL. For the first time that you try to access the website, it's going to take quite some time, maybe 10-20 seconds for
+the website to get heated up because that's just the way Azure web app instance and Azure app service works. There's a
+bit of latency because it needs some time for your application to get heated up. Alright, now let's go back to our Azure
+web app instance, and before we can inspect some other things, let's just verify if it's working fine or not. So I'm
+going to throw a request to my Azure web app instance. For that, I'm going to go to my markdown file which is
+docker2acr.md and grab this request, the sample recall request from over here and then try that out from my bash
+terminal. So the only thing that I need to change over here is the URL. So instead of localhost 5000, it needs to go to
+my Azure web app instance. So if you take a look at the URL of my Azure web app instance, that's the URL where the
+request needs to go to. So I'm going to copy this URL over here and then make sure that I do the required changes in my
+bash terminal. Alright, so I'm going to replace that and I think that's it. Yeah, so that's the curl request, a post
+request that goes to our Azure web app instance. Now keep in mind that we don't really have to expose or define the port
+that we are trying to throw a request to because the port mapping internally gets taken care of. And at the time of
+creation of this web app instance, we exposed the port 5000. And then the query is, can you please suggest some places
+to travel in India? That's the query that we'll be throwing. So I'm just going to hit enter and take a look at if we get
+back an output from this application or not. So we indeed do get back an output from the application. That's the output.
+So you see that the response was from GPD 4.1 model. And that's the reply. Absolutely, India is a vast and diverse
+country with something for every kind of traveler. If I try to hit with a bit different query, I would probably like to
+have, you know, something else, which would be, can you please tell me something about Gen AI? And let's take a look at
+the kind of response that we get back. Yeah, there you go. So certainly Gen AI is short for generative AI. It refers to
+a field of artificial intelligence focused on algorithms and models that can generate new content, blah, blah, blah. So
+our application is working absolutely fine. Now let's take a look at some more key details in Azure portal that can help
+us with application administration. So now there's something that's called as the deployment center over here, which is
+just under the deployment section. If you go to the deployment center, you'll be able to see what container image is
+this application running. In this case, it's got to be AOAI Python app version one that's sourced from our Azure
+container registry resource. It's taking quite some time to load. I'm going to refresh my browser and hopefully things
+get in place. So we're currently on the deployment center and I'll just show you some key features of the deployment
+center. Yep, there you go. So in the container section, you can see that there's a main container that's running in this
+web application. And if you click on the hyperlink, that opens up even a more detailed wizard that tells you that the
+image is sourced from Azure container registry. That's the name of the ACR instance. Authentication is via managed
+identity. That's the identity used for authentication purposes. That's the image name, the image tag and the port that
+the image listens on, which is 5000 in this case. Now you can even change the image for this application instance.
+Simply what you have to do is you have to change the ACR instance if you're using a different one and then change the
+image name and the image tag. Maybe you want to replace it with version one to version two. So you just simply have to
+type in version two, click on the apply button and for the application instance to run this newer version, you have to
+go to the overview area, click on restart and once you click on restart, it's going to take like a minute or so to get
+the application restarted and the newer version, which is version two, will be running on your application instance.
+It's as simple as that. Then there's also logs section. So from the log section, you can see all the container logs and
+this is useful for debugging purposes. If there was a transient failure or error, you can debug those errors and
+failures from this container logs section over here. And then if you go to authentic identity area, right, let's go to
+the identity area, you'll be able to see that the application instance is using a user assigned identity and that's the
+user assigned identity that is helping this application instance to authenticate to Azure Container Registry, pick up
+that container image and run that container image as yet another application instance. Alright, so I guess that's pretty
+much it. That was all I wanted to show you in terms of a detailed walkthrough on how you can, via the Azure portal,
+deploy an Azure web application instance on an Azure App Service plan that sources a container image from Azure
+Container Registry. That's it and I'll see you in the next lecture.

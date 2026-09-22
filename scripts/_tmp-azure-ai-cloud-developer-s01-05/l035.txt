@@ -1,0 +1,65 @@
+SECTION: 5 Deploy and Manage AI Apps on Azure Kubernetes Service (AKS)
+LECTURE_ID: 35
+TITLE: Understanding the K8s Architecture: The Fun Way!
+TRANSCRIPT_LENGTH: 7026
+---
+Now, with the help of this video, we'll do a quick deep dive into understanding the Kubernetes architecture. So, this is
+the architecture that we'll try to understand. We'll try to understand what does an HCD do, scheduler, controller
+manager, cloud controller manager, kubelet, kubeproxy, and pods. And yeah, that's the architecture that we'll try to
+unravel. Now, this is quite intimidating at first. It's really horrific. To be honest, if I try to explain things
+without any analogy of some sort, without any relation to the real world, things will seem pretty dry and I'm pretty
+sure a lot of people will lose interest. So, I'm going to do my best and try to make this simple with the help of taking
+a real-life analogy and that's with taking the help of how does even a restaurant function. So, in a restaurant, you
+have the restaurant manager and admin staff. So, that's part number one of a restaurant. You have the chefs and the
+kitchen station. So, that's part two of a restaurant. And then you have the supplier warehouse. The restaurant needs all
+those vegetables, fruits, and stuff for it to function properly. So, the supplier warehouse provides all of that stuff.
+So, if you consider the restaurant management and admin staff, these are all the components that come under that analogy
+of the management area. So, if you talk about the Kube API server, now this Kube API server acts as the reception desk,
+meaning if you write your manifest files with those manifest files in form of a YAML definition containing the scaling
+rules, the health check rules, the monitoring rules, and you try to make an API call to register the information that's
+stored in those manifest files to this Kubernetes cluster, you are interacting with this Kube API server. So, this Kube
+API server acts as that communication medium between the developer and the Kubernetes cluster to register the
+information that's stored in the manifest files. Now, the next question is where is that information stored in the
+Kubernetes cluster? The information is stored in this HCD over here. So, the HCD, which is ETCD over here, that's read
+as HCD, that acts as the reservation logbook. All of the information stored in those manifest files that you register
+via making an API call to the Kube API server, all that information, all of the scaling rules, the monitoring rules, are
+stored in the form of key value pairs in the HCD. So, the HCD acts as a database to store all of those logics and rules.
+Next, you have the scheduler. Now, in the manifest files, you will obviously write rules regarding what application
+containers should run on your Kubernetes cluster. Now, the application containers run within a pod and that pod
+eventually runs on a node and that node is nothing but a virtual machine or a compute engine that's provided by a cloud
+service provider like Azure. So, the task of scheduler is to talk with the HCD, take a look at what application
+containers need to run, and then it's going to take information from the HCD, communicate with the nodes in the
+Kubernetes cluster that happen to be the virtual machine, and run those application containers on those nodes. And it's
+also going to monitor the running of those application containers and will monitor whether the nodes and the application
+containers that are running in the Kubernetes cluster happen to be in the desired state. So, if you want five
+application containers running and only three are running currently in the Kubernetes cluster, that's not a desired
+state. The scheduler will find this mismatch and will add two more application containers and now your Kubernetes
+cluster is in the desired state. Next, we have the controller manager. The controller manager acts as the restaurant
+manager. It ensures if everything is running correctly or not. It's going to ensure whether nodes are running properly,
+whether these virtual machines are providing proper power to these nodes within the Kubernetes cluster or not. And it's
+also going to monitor whether the Kubernetes cluster is in the desired state or not. And then you have the cloud
+controller manager. Now, this cloud controller manager talks with your cloud service provider so that it can provision
+things like virtual machines from the cloud service provider. In our case, the cloud service provider is Azure. But if
+it had been AWS, if it had been GCP, the cloud controller manager would talk with that very specific API of the cloud
+provider API. So, the HCD over here acts as the single source of truth and all of these components derive their
+information from the HCD itself. Next is the chef and the kitchen stations part of a restaurant. So, if you consider the
+kubelet over here, the kubelet acts as the station's chef. It gets orders from the scheduler and then it runs those
+application containers on the pods over here. Very similar to getting order from the head waiter and cooking those
+dishes. So, the kubelet continuously talks with the scheduler and makes sure that those desired number of application
+containers are running in these pods in the Kubernetes cluster. Now, pods in this case are the dishes being cooked,
+right? A pod is that environment where in your application containers run. Now, within a pod, you could have multiple
+application containers running depending upon the configuration that was provided via the developer in the manifest
+files. And then you have the kube proxy. The kube proxy acts as the kitchen coordinator. It handles communication inside
+and outside the Kubernetes cluster, which means if this pod wants to interact with this pod on the same virtual machine,
+kube proxy will handle that communication. And also, if this pod over here in virtual machine A in node A wants to talk
+with this pod in node B, that communication will be handled out by the kube proxy. And then you have the supplier
+warehouse. The supplier warehouse is the cloud provider API over here. Now, to run a Kubernetes cluster, you need these
+virtual machine scale sets. You need the compute power that's going to power your application containers and node. Now,
+that compute engine, that compute power of virtual machine scale sets are provided by the cloud provider API. Now, the
+cloud provider API could be Azure, AWS, or GCP, depending upon the kind of managed version of Kubernetes that you're
+running. So, even though the Kubernetes architecture from a very high level perspective looks pretty simple, if you
+consider this from a very high level perspective, you only have to worry about the manifest files, the control plane
+node, the kube API server, and then only the pods and the nodes or the virtual machine scale sets that are powering your
+Kubernetes cluster. But in terms of a deep dive, this is what really happens in a Kubernetes architecture. All right.
+So, I guess that's pretty much it for the video. That was all about a quick deep dive into understanding the
+nitty-gritty details of the Kubernetes architecture. That's it. And I'll see you in the next lesson.
