@@ -14,7 +14,7 @@
   "description": "Prepare for the Microsoft AI-200 Azure AI Cloud Developer Associate exam with hands-on labs covering Azure AI application architecture, container hosting, data platforms, event-driven systems, security, and monitoring.",
   "startDate": "",
   "endDate": "",
-  "notes": "Partial metadata assembled from the public Udemy landing page; the curriculum API was blocked by Udemy anti-bot protection, so the full section list is incomplete.",
+  "notes": "Course metadata and curriculum verified against the public Udemy landing page.",
   "sections": [
     {
       "number": 1,
@@ -75,6 +75,42 @@
       "title": "Process AI Operations with Azure Service Bus",
       "slug": "process-ai-operations-with-azure-service-bus",
       "lectures": 13
+    },
+    {
+      "number": 11,
+      "title": "Event-Driven AI Workflows with Azure Event Grid",
+      "slug": "event-driven-ai-workflows-with-azure-event-grid",
+      "lectures": 4
+    },
+    {
+      "number": 12,
+      "title": "Build Event Driven Backends with Function Apps",
+      "slug": "build-event-driven-backends-with-function-apps",
+      "lectures": 8
+    },
+    {
+      "number": 13,
+      "title": "Application Secrets and Configuration with Azure Key Vault",
+      "slug": "application-secrets-and-configuration-with-azure-key-vault",
+      "lectures": 2
+    },
+    {
+      "number": 14,
+      "title": "Application Settings and Configuration with Azure App Configuration",
+      "slug": "application-settings-and-configuration-with-azure-app-configuration",
+      "lectures": 9
+    },
+    {
+      "number": 15,
+      "title": "AI App Observability and Monitoring",
+      "slug": "ai-app-observability-and-monitoring",
+      "lectures": 5
+    },
+    {
+      "number": 16,
+      "title": "Practise Tests",
+      "slug": "practise-tests",
+      "lectures": 0
     }
   ]
 }
