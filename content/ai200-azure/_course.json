@@ -7,13 +7,13 @@
   "instructor": "Scott Duffy",
   "lastUpdated": "5/2026",
   "language": "English",
-  "rating": 3.0,
+  "rating": 3,
   "totalStudents": 192,
   "totalHours": 3.9,
   "level": "All Levels",
   "description": "The most complete course available on the Microsoft Azure AI developer exam AI-200. Covers container hosting, Cosmos DB, PostgreSQL, Redis, event-driven AI, Azure Functions, security, and monitoring for the Azure AI Cloud Developer Associate certification.",
   "startDate": "",
-  "endDate": "",
+  "endDate": "2026-09-22",
   "notes": "",
   "sections": [
     {
