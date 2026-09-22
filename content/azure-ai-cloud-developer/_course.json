@@ -1,0 +1,80 @@
+{
+  "slug": "azure-ai-cloud-developer",
+  "title": "AI-200: Azure AI Cloud Developer Associate Exam Prep",
+  "platform": "udemy",
+  "url": "https://www.udemy.com/course/azure-ai-cloud-developer/",
+  "status": "not-started",
+  "instructor": "Kuljot Singh Bakshi",
+  "lastUpdated": "6/2026",
+  "language": "English",
+  "rating": 4.7,
+  "totalStudents": 1510,
+  "totalHours": 18,
+  "level": "Intermediate Level",
+  "description": "Prepare for the Microsoft AI-200 Azure AI Cloud Developer Associate exam with hands-on labs covering Azure AI application architecture, container hosting, data platforms, event-driven systems, security, and monitoring.",
+  "startDate": "",
+  "endDate": "",
+  "notes": "Partial metadata assembled from the public Udemy landing page; the curriculum API was blocked by Udemy anti-bot protection, so the full section list is incomplete.",
+  "sections": [
+    {
+      "number": 1,
+      "title": "Introduction",
+      "slug": "introduction",
+      "lectures": 1
+    },
+    {
+      "number": 2,
+      "title": "System Setup and GitHub Repo for the Labs",
+      "slug": "system-setup-and-github-repo-for-the-labs",
+      "lectures": 2
+    },
+    {
+      "number": 3,
+      "title": "AI-200 Primers and Foundations",
+      "slug": "ai-200-primers-and-foundations",
+      "lectures": 12
+    },
+    {
+      "number": 4,
+      "title": "Containers and Azure Web Apps",
+      "slug": "containers-and-azure-web-apps",
+      "lectures": 18
+    },
+    {
+      "number": 5,
+      "title": "Deploy and Manage AI Apps on Azure Kubernetes Service (AKS)",
+      "slug": "deploy-and-manage-ai-apps-on-azure-kubernetes-service-aks",
+      "lectures": 13
+    },
+    {
+      "number": 6,
+      "title": "Deploy and Manage AI Apps on Azure Container Apps (ACA)",
+      "slug": "deploy-and-manage-ai-apps-on-azure-container-apps-aca",
+      "lectures": 7
+    },
+    {
+      "number": 7,
+      "title": "Develop AI Solutions with Azure CosmosDB for NoSQL",
+      "slug": "develop-ai-solutions-with-azure-cosmosdb-for-nosql",
+      "lectures": 14
+    },
+    {
+      "number": 8,
+      "title": "Develop AI Solutions with Azure Database for PostgreSQL",
+      "slug": "develop-ai-solutions-with-azure-database-for-postgresql",
+      "lectures": 18
+    },
+    {
+      "number": 9,
+      "title": "Enhance AI Solutions with Azure Managed Redis",
+      "slug": "enhance-ai-solutions-with-azure-managed-redis",
+      "lectures": 9
+    },
+    {
+      "number": 10,
+      "title": "Process AI Operations with Azure Service Bus",
+      "slug": "process-ai-operations-with-azure-service-bus",
+      "lectures": 13
+    }
+  ]
+}
