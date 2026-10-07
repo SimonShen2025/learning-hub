@@ -1,0 +1,56 @@
+{
+  "slug": "practical-ai-for-work",
+  "title": "Practical AI for Work (ChatGPT, Claude, Copilot)",
+  "platform": "udemy",
+  "url": "https://aderant.udemy.com/course/practical-ai-for-work/learn/lecture/53620003#overview",
+  "status": "not-started",
+  "instructor": "Gustavo Escobar Henríquez, Federico Garay, Valentin Despa",
+  "lastUpdated": "June 2026",
+  "language": "English",
+  "rating": 4.6,
+  "totalStudents": 11339,
+  "totalHours": 3.2,
+  "level": "Beginner",
+  "description": "Build practical AI skills for workplace productivity, including prompt engineering, communication, data analysis, no-code automation, vibe coding, and responsible AI use.",
+  "startDate": "",
+  "endDate": "",
+  "notes": "",
+  "sections": [
+    {
+      "number": 1,
+      "title": "Introduction to practical AI for work",
+      "slug": "introduction-practical-ai-for-work",
+      "lectures": 8
+    },
+    {
+      "number": 2,
+      "title": "Communication & Collaboration Using AI",
+      "slug": "communication-collaboration-using-ai",
+      "lectures": 10
+    },
+    {
+      "number": 3,
+      "title": "From Data Analysis to Decision Making: Smart Choices in Real Time",
+      "slug": "data-analysis-decision-making",
+      "lectures": 8
+    },
+    {
+      "number": 4,
+      "title": "Unlocking with Automation - Problem-First Approach",
+      "slug": "automation-problem-first-approach",
+      "lectures": 7
+    },
+    {
+      "number": 5,
+      "title": "Building applications using AI - Vibe coding",
+      "slug": "building-applications-vibe-coding",
+      "lectures": 5
+    },
+    {
+      "number": 6,
+      "title": "Closing Video – Sendoff & Reflection",
+      "slug": "closing-video-sendoff-reflection",
+      "lectures": 3
+    }
+  ]
+}

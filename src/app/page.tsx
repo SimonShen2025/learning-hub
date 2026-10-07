@@ -2,6 +2,8 @@ import { getCourses } from "@/lib/content";
 import { HomeCoursesPanel } from "@/components/home-courses-panel";
 import { WorkflowGuide } from "@/components/workflow-guide";
 
+export const dynamic = "force-dynamic";
+
 export default function HomePage() {
   const courses = getCourses();
 
