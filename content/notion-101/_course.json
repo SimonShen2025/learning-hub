@@ -1,0 +1,68 @@
+{
+  "slug": "notion-101",
+  "title": "Notion 101: Organize your personal & work life with ease",
+  "platform": "udemy",
+  "url": "https://aderant.udemy.com/course/notion-masterclass/learn/lecture/32275182",
+  "status": "not-started",
+  "instructor": "Janosch Herrmann",
+  "lastUpdated": "7/2024",
+  "language": "English",
+  "rating": 4.6,
+  "totalStudents": 17805,
+  "totalHours": 4.8,
+  "level": "Unknown",
+  "description": "Learn to organize personal and work life with Notion, including databases, formulas, collaboration, and productivity workflows. Build practical projects and explore automation with Zapier and website creation with Super.",
+  "startDate": "",
+  "endDate": "",
+  "notes": "",
+  "sections": [
+    {
+      "number": 1,
+      "title": "Introduction to Notion",
+      "slug": "introduction-to-notion",
+      "lectures": 8
+    },
+    {
+      "number": 2,
+      "title": "Notion databases",
+      "slug": "notion-databases",
+      "lectures": 10
+    },
+    {
+      "number": 3,
+      "title": "Advanced concepts",
+      "slug": "advanced-concepts",
+      "lectures": 8
+    },
+    {
+      "number": 4,
+      "title": "Collaboration in Notion",
+      "slug": "collaboration-in-notion",
+      "lectures": 2
+    },
+    {
+      "number": 5,
+      "title": "Notion tips & tricks",
+      "slug": "notion-tips-tricks",
+      "lectures": 5
+    },
+    {
+      "number": 6,
+      "title": "Bonus: Automate your Notion workspace",
+      "slug": "bonus-automate-notion-workspace",
+      "lectures": 4
+    },
+    {
+      "number": 7,
+      "title": "Bonus: Notion add-ons & creating a website with Super",
+      "slug": "bonus-notion-add-ons-website-super",
+      "lectures": 6
+    },
+    {
+      "number": 8,
+      "title": "Outro",
+      "slug": "outro",
+      "lectures": 1
+    }
+  ]
+}
