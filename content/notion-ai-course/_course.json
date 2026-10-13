@@ -1,0 +1,92 @@
+{
+  "slug": "notion-ai-course",
+  "title": "Notion: Organize Life, Work Smarter, Master Notion AI (2026)",
+  "platform": "udemy",
+  "url": "https://aderant.udemy.com/course/notion-ai-course/learn/lecture/42171436#overview",
+  "status": "not-started",
+  "instructor": "DFA Course Academy, Krystian Wojtarowicz, AdaptifyAI - Support",
+  "lastUpdated": "3/2026",
+  "language": "English",
+  "rating": 4.6,
+  "totalStudents": 3009,
+  "totalHours": 8,
+  "level": "Beginner to Advanced",
+  "description": "Learn to organize work and personal life with Notion, from basic pages and databases to advanced workflows and Notion AI. Practice real-world AI use cases, team collaboration, automations with Zapier, and productivity templates.",
+  "startDate": "",
+  "endDate": "",
+  "notes": "",
+  "sections": [
+    {
+      "number": 1,
+      "title": "Introduction",
+      "slug": "introduction",
+      "lectures": 9
+    },
+    {
+      "number": 2,
+      "title": "Organize Your Life & Work With Databases",
+      "slug": "organize-life-work-databases",
+      "lectures": 8
+    },
+    {
+      "number": 3,
+      "title": "Notion AI: Maximize Your Work & Save Time With Notion AI-Powered Features",
+      "slug": "notion-ai-powered-features",
+      "lectures": 4
+    },
+    {
+      "number": 4,
+      "title": "Notion AI Use Cases: Discover How To Use AI Features In Many Useful Ways!",
+      "slug": "notion-ai-use-cases",
+      "lectures": 10
+    },
+    {
+      "number": 5,
+      "title": "Notion Advanced: Dive Into More Advanced Concepts Inside Notion",
+      "slug": "notion-advanced-concepts",
+      "lectures": 6
+    },
+    {
+      "number": 6,
+      "title": "Proven Tips & Tricks In Notion",
+      "slug": "proven-tips-tricks-notion",
+      "lectures": 5
+    },
+    {
+      "number": 7,
+      "title": "Discover Buttons in Notion",
+      "slug": "discover-buttons-notion",
+      "lectures": 5
+    },
+    {
+      "number": 8,
+      "title": "Share Your Content & Collaborate With Teams",
+      "slug": "share-content-collaborate-teams",
+      "lectures": 2
+    },
+    {
+      "number": 9,
+      "title": "Use Notion + Zapier to Create Powerful Automations",
+      "slug": "notion-zapier-automations",
+      "lectures": 11
+    },
+    {
+      "number": 10,
+      "title": "Explore How To Use Notion Templates",
+      "slug": "notion-templates",
+      "lectures": 9
+    },
+    {
+      "number": 11,
+      "title": "Conclusion",
+      "slug": "conclusion",
+      "lectures": 1
+    },
+    {
+      "number": 12,
+      "title": "Bonus Lecture",
+      "slug": "bonus-lecture",
+      "lectures": 1
+    }
+  ]
+}
