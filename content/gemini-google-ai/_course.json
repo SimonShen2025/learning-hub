@@ -1,0 +1,62 @@
+{
+  "slug": "gemini-google-ai",
+  "title": "Gemini Google AI: The Only AI That Handles It All",
+  "platform": "udemy",
+  "url": "https://aderant.udemy.com/course/gemini-google-ai-the-only-ai-that-handles-it-all/learn/lecture/55647681?start=315#overview",
+  "status": "not-started",
+  "instructor": "Anna Kolenkina",
+  "lastUpdated": "9/2026",
+  "language": "English",
+  "rating": 4.7,
+  "totalStudents": 404,
+  "totalHours": 4.5,
+  "level": "Unknown",
+  "description": "A practical guide to using Google Gemini for prompting, research, content creation, and no-code app building. Covers Gemini Canvas, Gems, Nano Banana, Deep Research, and techniques for refining outputs and reducing hallucinations.",
+  "startDate": "",
+  "endDate": "",
+  "notes": "",
+  "sections": [
+    {
+      "number": 1,
+      "title": "Introduction",
+      "slug": "introduction",
+      "lectures": 9
+    },
+    {
+      "number": 2,
+      "title": "Prompting Gemini for Better Results",
+      "slug": "prompting-gemini-better-results",
+      "lectures": 11
+    },
+    {
+      "number": 3,
+      "title": "Working with Gemini Canvas and Gems",
+      "slug": "gemini-canvas-and-gems",
+      "lectures": 9
+    },
+    {
+      "number": 4,
+      "title": "Gemini for Visual Creation",
+      "slug": "gemini-visual-creation",
+      "lectures": 9
+    },
+    {
+      "number": 5,
+      "title": "Beyond Chatting: Deep Research and Building with Gemini",
+      "slug": "deep-research-and-building-with-gemini",
+      "lectures": 8
+    },
+    {
+      "number": 6,
+      "title": "Get Your Certificate",
+      "slug": "get-your-certificate",
+      "lectures": 1
+    },
+    {
+      "number": 7,
+      "title": "Bonus Section",
+      "slug": "bonus-section",
+      "lectures": 1
+    }
+  ]
+}
