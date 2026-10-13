@@ -1,0 +1,92 @@
+{
+  "slug": "notion-basics-advanced",
+  "title": "Notion Basics to Advanced 2026: Databases, AI + 31 Templates",
+  "platform": "udemy",
+  "url": "https://aderant.udemy.com/course/notion-workspace-course/learn/lecture/47803141#overview",
+  "status": "not-started",
+  "instructor": "Sumner Hobart, Ali Hobart, Elizabeth Barton",
+  "lastUpdated": "7/2026",
+  "language": "English",
+  "rating": 4.6,
+  "totalStudents": 6472,
+  "totalHours": 7.5,
+  "level": "Beginner to Advanced",
+  "description": "Learn Notion from beginner to advanced, including pages, databases, forms, AI, collaboration, and integrations. The course includes practical workflows and more than 31 templates for organizing work and personal life.",
+  "startDate": "",
+  "endDate": "",
+  "notes": "",
+  "sections": [
+    {
+      "number": 1,
+      "title": "Welcome & Getting Started",
+      "slug": "welcome-getting-started",
+      "lectures": 4
+    },
+    {
+      "number": 2,
+      "title": "Our Gift to You!",
+      "slug": "our-gift-to-you",
+      "lectures": 1
+    },
+    {
+      "number": 3,
+      "title": "Notion Pages",
+      "slug": "notion-pages",
+      "lectures": 4
+    },
+    {
+      "number": 4,
+      "title": "Advanced Page Customization",
+      "slug": "advanced-page-customization",
+      "lectures": 5
+    },
+    {
+      "number": 5,
+      "title": "Notion Databases",
+      "slug": "notion-databases",
+      "lectures": 4
+    },
+    {
+      "number": 6,
+      "title": "Halfway Announcement",
+      "slug": "halfway-announcement",
+      "lectures": 1
+    },
+    {
+      "number": 7,
+      "title": "Advanced Database Features",
+      "slug": "advanced-database-features",
+      "lectures": 5
+    },
+    {
+      "number": 8,
+      "title": "Notion Forms",
+      "slug": "notion-forms",
+      "lectures": 1
+    },
+    {
+      "number": 9,
+      "title": "Advanced Notion Productivity Features",
+      "slug": "advanced-notion-productivity-features",
+      "lectures": 8
+    },
+    {
+      "number": 10,
+      "title": "Notion for Teams & Collaborations",
+      "slug": "notion-teams-collaborations",
+      "lectures": 3
+    },
+    {
+      "number": 11,
+      "title": "Notion Integrations",
+      "slug": "notion-integrations",
+      "lectures": 5
+    },
+    {
+      "number": 12,
+      "title": "Last Step!",
+      "slug": "last-step",
+      "lectures": 1
+    }
+  ]
+}
