@@ -1,0 +1,38 @@
+{
+  "slug": "complete-notion-course",
+  "title": "Complete Notion Course: Organize Tasks and Projects",
+  "platform": "udemy",
+  "url": "https://aderant.udemy.com/course/course-complete-notion/learn/lecture/40459646#overview",
+  "status": "not-started",
+  "instructor": "Matheus Stangherlin, Noba Academy",
+  "lastUpdated": "8/2026",
+  "language": "English",
+  "rating": 4.6,
+  "totalStudents": 4360,
+  "totalHours": 3.5,
+  "level": "Beginner to Advanced",
+  "description": "Learn Notion fundamentals and advanced workflows for organizing tasks, projects, and information. Topics include pages, databases, templates, collaboration, integrations, and the Zettelkasten method.",
+  "startDate": "",
+  "endDate": "",
+  "notes": "",
+  "sections": [
+    {
+      "number": 1,
+      "title": "Introduction to the Course",
+      "slug": "introduction-to-course",
+      "lectures": 3
+    },
+    {
+      "number": 2,
+      "title": "Fundamentals of Notion",
+      "slug": "fundamentals-of-notion",
+      "lectures": 14
+    },
+    {
+      "number": 3,
+      "title": "Zettelkasten Fundamentals",
+      "slug": "zettelkasten-fundamentals",
+      "lectures": 4
+    }
+  ]
+}
