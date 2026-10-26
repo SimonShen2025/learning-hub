@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# secrets and local settings
+*.pfx
+*.key
+local.settings.json
+appsettings.*.json
+*.publishsettings

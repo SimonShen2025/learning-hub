@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Block commits made with a work identity in this personal repo.
+
+blocked_domain="@aderant.com"
+
+email="$(git config user.email)"
+author="$(git var GIT_AUTHOR_IDENT 2>/dev/null)"
+committer="$(git var GIT_COMMITTER_IDENT 2>/dev/null)"
+
+if printf '%s\n%s\n%s\n' "$email" "$author" "$committer" | grep -qi -- "$blocked_domain"; then
+  echo "pre-commit: blocked - work email ($blocked_domain) detected." >&2
+  echo "  user.email: $email" >&2
+  echo "Fix:" >&2
+  echo "  git config user.email simonshen567@gmail.com" >&2
+  echo "  unset GIT_AUTHOR_EMAIL GIT_COMMITTER_EMAIL   # if set" >&2
+  exit 1
+fi
+
+exit 0
