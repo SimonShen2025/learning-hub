@@ -1,0 +1,44 @@
+{
+  "slug": "slack-quick-start-guide",
+  "title": "Slack - The complete Quick-Start Guide",
+  "platform": "udemy",
+  "url": "https://aderant.udemy.com/course/slack-beginner/",
+  "status": "learning",
+  "instructor": "Fred Braun",
+  "lastUpdated": "",
+  "language": "English",
+  "rating": 4.5,
+  "totalStudents": null,
+  "totalHours": 2.5,
+  "level": "Beginner",
+  "description": "Learn Slack from the ground up as a productive alternative to email, covering workspaces, channels, messages, canvases, calls, and admin settings. Boost productivity with Slack apps, chatbots, workflows, and team organization templates.",
+  "startDate": "",
+  "endDate": "",
+  "notes": "",
+  "sections": [
+    {
+      "number": 1,
+      "title": "Introduction",
+      "slug": "introduction",
+      "lectures": 4
+    },
+    {
+      "number": 2,
+      "title": "What you should know!",
+      "slug": "what-you-should-know",
+      "lectures": 8
+    },
+    {
+      "number": 3,
+      "title": "Productivity hacks - Apps",
+      "slug": "productivity-hacks-apps",
+      "lectures": 4
+    },
+    {
+      "number": 4,
+      "title": "Wrap up",
+      "slug": "wrap-up",
+      "lectures": 2
+    }
+  ]
+}
