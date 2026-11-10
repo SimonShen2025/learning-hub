@@ -1,0 +1,62 @@
+{
+  "slug": "complete-claude-code-course",
+  "title": "Complete Claude Code Course: Beginner to Advanced",
+  "platform": "udemy",
+  "url": "https://www.udemy.com/course/complete-claude-code-course-beginner-to-advanced/learn/lecture/57920815#learning-tools",
+  "status": "not-started",
+  "instructor": "Matheus Stangherlin",
+  "lastUpdated": "10/2026",
+  "language": "English",
+  "rating": 4.6,
+  "totalStudents": 1797,
+  "totalHours": 10.02,
+  "level": "All Levels",
+  "description": "Learn Claude Code from the fundamentals to advanced AI-assisted development, including context engineering, testing, automation, and the Skills, Subagents, MCP, Hooks, and Plugins ecosystem.",
+  "startDate": "",
+  "endDate": "",
+  "notes": "",
+  "sections": [
+    {
+      "number": 1,
+      "title": "Claude Code Foundations",
+      "slug": "claude-code-foundations",
+      "lectures": 8
+    },
+    {
+      "number": 2,
+      "title": "Installation & Getting Started",
+      "slug": "installation-getting-started",
+      "lectures": 6
+    },
+    {
+      "number": 3,
+      "title": "Working with Claude Code",
+      "slug": "working-with-claude-code",
+      "lectures": 4
+    },
+    {
+      "number": 4,
+      "title": "Context Engineering & CLAUDE.md",
+      "slug": "context-engineering-claude-md",
+      "lectures": 4
+    },
+    {
+      "number": 5,
+      "title": "Skills, Subagents, MCP, Hooks & Plugins",
+      "slug": "skills-subagents-mcp-hooks-plugins",
+      "lectures": 6
+    },
+    {
+      "number": 6,
+      "title": "Claude Design",
+      "slug": "claude-design",
+      "lectures": 8
+    },
+    {
+      "number": 7,
+      "title": "Terminal, IDEs & Claude Code Environments",
+      "slug": "terminal-ides-claude-code-environments",
+      "lectures": 10
+    }
+  ]
+}
