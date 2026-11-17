@@ -1,0 +1,128 @@
+{
+  "slug": "sharepoint-complete-guide",
+  "title": "SharePoint - Complete Guide to Microsoft SharePoint Online",
+  "platform": "udemy",
+  "url": "https://www.udemy.com/course/the-complete-guide-to-microsoft-sharepoint-online/learn/lecture/27958022#overview",
+  "status": "not-started",
+  "instructor": "Henry Habib",
+  "lastUpdated": "9/2025",
+  "language": "English",
+  "rating": 4.54,
+  "totalStudents": 54332,
+  "totalHours": 15,
+  "level": "All Levels",
+  "description": "Learn to create and manage SharePoint Online team sites, pages, document libraries, and lists. Progress from core concepts to permissions, Power Automate, Power Apps, and integrations.",
+  "startDate": "",
+  "endDate": "",
+  "notes": "",
+  "sections": [
+    {
+      "number": 1,
+      "title": "Introduction",
+      "slug": "introduction",
+      "lectures": 11
+    },
+    {
+      "number": 2,
+      "title": "Environment - Account Creation",
+      "slug": "environment-account-creation",
+      "lectures": 4
+    },
+    {
+      "number": 3,
+      "title": "Environment - Layout",
+      "slug": "environment-layout",
+      "lectures": 4
+    },
+    {
+      "number": 4,
+      "title": "Environment - Reference Material",
+      "slug": "environment-reference-material",
+      "lectures": 2
+    },
+    {
+      "number": 5,
+      "title": "Beginner - Document Libraries",
+      "slug": "beginner-document-libraries",
+      "lectures": 25
+    },
+    {
+      "number": 6,
+      "title": "Beginner - Pages",
+      "slug": "beginner-pages",
+      "lectures": 18
+    },
+    {
+      "number": 7,
+      "title": "Beginner - Design",
+      "slug": "beginner-design",
+      "lectures": 3
+    },
+    {
+      "number": 8,
+      "title": "Beginner - Site Collections",
+      "slug": "beginner-site-collections",
+      "lectures": 7
+    },
+    {
+      "number": 9,
+      "title": "Moderate - Lists",
+      "slug": "moderate-lists",
+      "lectures": 30
+    },
+    {
+      "number": 10,
+      "title": "Moderate - Permissions",
+      "slug": "moderate-permissions",
+      "lectures": 18
+    },
+    {
+      "number": 11,
+      "title": "Moderate - Other Functionality",
+      "slug": "moderate-other-functionality",
+      "lectures": 4
+    },
+    {
+      "number": 12,
+      "title": "Moderate - Social Networking",
+      "slug": "moderate-social-networking",
+      "lectures": 4
+    },
+    {
+      "number": 13,
+      "title": "Expert - Workflows",
+      "slug": "expert-workflows",
+      "lectures": 16
+    },
+    {
+      "number": 14,
+      "title": "Expert - Creating Apps",
+      "slug": "expert-creating-apps",
+      "lectures": 13
+    },
+    {
+      "number": 15,
+      "title": "Expert - Other Integrations",
+      "slug": "expert-other-integrations",
+      "lectures": 8
+    },
+    {
+      "number": 16,
+      "title": "Expert - External Apps",
+      "slug": "expert-external-apps",
+      "lectures": 7
+    },
+    {
+      "number": 17,
+      "title": "Conclusion",
+      "slug": "conclusion",
+      "lectures": 1
+    },
+    {
+      "number": 18,
+      "title": "Bonus - Special Access",
+      "slug": "bonus-special-access",
+      "lectures": 2
+    }
+  ]
+}
