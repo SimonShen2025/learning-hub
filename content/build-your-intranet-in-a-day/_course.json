@@ -1,0 +1,62 @@
+{
+  "slug": "build-your-intranet-in-a-day",
+  "title": "Build Your Intranet in a Day",
+  "platform": "udemy",
+  "url": "https://aderant.udemy.com/course/build-your-intranet-in-a-day/learn/lecture/53542699?start=75#reviews",
+  "status": "not-started",
+  "instructor": "Gerry Brimacombe",
+  "lastUpdated": "3/2026",
+  "language": "English",
+  "rating": 4.7,
+  "totalStudents": 271,
+  "totalHours": 7.5,
+  "level": "Beginner Level",
+  "description": "Build a complete SharePoint intranet from scratch using Microsoft 365, Teams, Power Automate, and realistic business examples. Covers site planning and branding, document libraries, lists, automation, permissions, and go-live.",
+  "startDate": "",
+  "endDate": "",
+  "notes": "",
+  "sections": [
+    {
+      "number": 1,
+      "title": "Introduction",
+      "slug": "introduction",
+      "lectures": 4
+    },
+    {
+      "number": 2,
+      "title": "Your First SharePoint Site: the Intranet Foundation",
+      "slug": "first-sharepoint-site-intranet-foundation",
+      "lectures": 5
+    },
+    {
+      "number": 3,
+      "title": "Power Up Your Intranet: Tools for Connection & Clarity",
+      "slug": "intranet-tools-connection-clarity",
+      "lectures": 3
+    },
+    {
+      "number": 4,
+      "title": "Boost Your Workflow: Information Collection & Automation",
+      "slug": "workflow-information-collection-automation",
+      "lectures": 3
+    },
+    {
+      "number": 5,
+      "title": "Power Up Productivity: Teams & Office Integration",
+      "slug": "teams-office-integration",
+      "lectures": 4
+    },
+    {
+      "number": 6,
+      "title": "Bring in your Files: Migrate, Load, and Organize",
+      "slug": "migrate-load-organize-files",
+      "lectures": 1
+    },
+    {
+      "number": 7,
+      "title": "Permissions and Go-Live",
+      "slug": "permissions-go-live",
+      "lectures": 4
+    }
+  ]
+}
